@@ -1,9 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>Collections.Extensions.ToPyString</PackageId>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <Authors>Nenad Misic</Authors>
     <ReleaseNotes>Enable converting System.Collections to string in Python format</ReleaseNotes>
     <PackageDescription>.NET System.Collections ToString extension for converting collections to a string in the format that is based on the one in Python</PackageDescription>
@@ -12,8 +12,8 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <copyright>Copyright 2020</copyright>
     <PackageTags>system;collections;extensions;tostring;topystring</PackageTags>
-    <RepositoryUrl>https://github.com/misicnenad/collections-extensions-topystring</RepositoryUrl>
-    <PackageIconUrl>https://raw.githubusercontent.com/misicnenad/collections-extensions-topystring/master/images/string.png</PackageIconUrl>
+    <RepositoryUrl>https://github.com/misicnenad/dotnet-collections-extensions-topystring</RepositoryUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/misicnenad/dotnet-collections-extensions-topystring/master/images/string.png</PackageIconUrl>
   </PropertyGroup>
 
 </Project>
