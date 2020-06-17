@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 
 namespace Collections.Extensions.ToPyString
@@ -8,15 +7,9 @@ namespace Collections.Extensions.ToPyString
     {
         internal static IStringConverter Create(object source, IEnumerable<object> sourceContainers = default, string prefix = "")
         {
-            if (source != null && source.GetType().IsGenericType)
+            if (TryCastToDictionaryEntry(source, out var dictionaryEntry))
             {
-                if (source.GetType().GetGenericTypeDefinition() == typeof(KeyValuePair<,>))
-                {
-                    var key = source.GetType().GetProperty(nameof(KeyValuePair<object,object>.Key)).GetValue(source, null);
-                    var value = source.GetType().GetProperty(nameof(KeyValuePair<object,object>.Value)).GetValue(source, null);
-                    var dictionaryEntry = new DictionaryEntry(key, value);
-                    return new DictionaryEntryPyStringConverter(dictionaryEntry, sourceContainers, prefix);
-                }
+                return new DictionaryEntryPyStringConverter(dictionaryEntry, sourceContainers, prefix);
             }
 
             switch (source)
@@ -27,9 +20,6 @@ namespace Collections.Extensions.ToPyString
                     return new StringPyStringConverter(str, prefix);
                 case DictionaryEntry dictEntry:
                     return new DictionaryEntryPyStringConverter(dictEntry, sourceContainers, prefix);
-                case KeyValuePair<object, object> keyValuePair:
-                    var dictionaryEntry = new DictionaryEntry(keyValuePair.Key, keyValuePair.Value);
-                    return new DictionaryEntryPyStringConverter(dictionaryEntry, sourceContainers, prefix);
                 case IDictionary dictionary:
                     return new DictionaryPyStringConverter(dictionary, sourceContainers, prefix);
                 case IEnumerable enumerable:
@@ -37,6 +27,24 @@ namespace Collections.Extensions.ToPyString
                 default:
                     return new ObjectPyStringConverter(source, prefix);
             };
+        }
+
+        private static bool TryCastToDictionaryEntry(object source, out DictionaryEntry dictionaryEntry)
+        {
+            var sourceType = source?.GetType();
+
+            if (source != null 
+                && sourceType.IsGenericType 
+                && sourceType.GetGenericTypeDefinition() == typeof(KeyValuePair<,>))
+            {
+                var key = sourceType.GetProperty(nameof(KeyValuePair<object, object>.Key)).GetValue(source, null);
+                var value = sourceType.GetProperty(nameof(KeyValuePair<object, object>.Value)).GetValue(source, null);
+                dictionaryEntry = new DictionaryEntry(key, value);
+
+                return true;
+            }
+
+            return false;
         }
     }
 }

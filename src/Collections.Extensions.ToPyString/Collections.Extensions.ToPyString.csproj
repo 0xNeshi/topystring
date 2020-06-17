@@ -15,9 +15,7 @@
     <RepositoryUrl>https://github.com/misicnenad/dotnet-collections-extensions-topystring</RepositoryUrl>
     <PackageIconUrl>https://raw.githubusercontent.com/misicnenad/dotnet-collections-extensions-topystring/master/src/Collections.Extensions.ToPyString/images/string.png</PackageIconUrl>
     <PackageIcon>string.png</PackageIcon>
-    <PackageReleaseNotes>Sign the package</PackageReleaseNotes>
-    <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>ToPyStringKey.snk</AssemblyOriginatorKeyFile>
+    <PackageReleaseNotes>Minor optimizations</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
