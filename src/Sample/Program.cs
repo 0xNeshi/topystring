@@ -9,23 +9,32 @@ namespace Sample
     {
         static void Main()
         {
-            var dic = new Dictionary<object, object>
+            var dict1 = new Dictionary<object, object>
             {
                 [2] = 1,
                 ["dic2"] = 1,
             };
-            dic["dicself"] = dic;
-            var filtered = new List<object> { "list1", null, new List<string> { "sublist1" } };
-            filtered.Add(filtered);
-            var t = new List<object> { "list2", filtered, dic };
-            t.Add(t);
+            dict1["dicself"] = dict1;
 
-            var gg = new Program();
+            var dicInts = new Dictionary<int, int>
+            {
+                [1] = 1,
+                [2] = 3
+            };
 
-            Console.WriteLine(dic.ToPyString());
-            Console.WriteLine(filtered.ToPyString());
-            Console.WriteLine(t.ToPyString());
-            Console.WriteLine(gg.ToPyString());
+            var list = new List<object> { "list1", null, new List<string> { "sublist1" } };
+            list.Add(list);
+            
+            var containerList = new List<object> { "list2", list, dict1 };
+            containerList.Add(containerList);
+
+            var obj = new Program();
+
+            Console.WriteLine(dict1.ToPyString());
+            Console.WriteLine(dicInts.ToPyString());
+            Console.WriteLine(list.ToPyString());
+            Console.WriteLine(containerList.ToPyString());
+            Console.WriteLine(obj.ToPyString());
         }
     }
 }
