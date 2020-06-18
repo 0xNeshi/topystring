@@ -6,6 +6,7 @@
 appsettings.Development.json
 appsettings.Staging.json
 TODO.docx
+nuget_publish.txt
 
 # User-specific files
 *.rsuser
