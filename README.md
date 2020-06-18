@@ -1,10 +1,10 @@
-# Collections.Extensions.ToPyString
+# ToPyString
 
 ToPyString is a .NET System.Collections extension for converting collections to a string in Python format. 
 
 The reason this small project exists is because it's a shame that C# doesn't have an in-built way of stringifying collections (like many other languages do) and although created a quick ToString method for your collections isn't big work, you shouldn't be spending time reinventing the wheel on every project... especially on ones you want to quickly try something and Console.WriteLine the output.
 
-The extension is covered with unit tests, so you can be sure it will perform acceptably in 99.9% of cases. If you stumble upon the .1% when it behaves strangely, please let me know either directly or by creating an issue.
+The extension is covered with unit tests, so you can be sure it will perform acceptably in 99.9% of cases. If you stumble upon the 0.1% when it behaves strangely, please let me know either directly or by creating an issue.
 
 ## Summary
 
