@@ -1,9 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace Collections.Extensions.ToPyString
 {
-    internal static class PyStringConverterFactory
+    static class PyStringConverterFactory
     {
         internal static IStringConverter Create(object source, IEnumerable<object> sourceContainers = default, string prefix = "")
         {
@@ -16,8 +17,13 @@ namespace Collections.Extensions.ToPyString
             {
                 case null:
                     return new NullPyStringConverter(prefix);
-                case string str:
-                    return new StringPyStringConverter(str, prefix);
+                case char _:
+                case string _:
+                    return new StringPyStringConverter(source.ToString(), prefix);
+                case decimal _:
+                case float _:
+                case double _:
+                    return new DecimalPyStringConverter(Convert.ToDecimal(source), prefix);
                 case DictionaryEntry dictEntry:
                     return new DictionaryEntryPyStringConverter(dictEntry, sourceContainers, prefix);
                 case IDictionary dictionary:

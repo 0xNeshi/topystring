@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Collections.Extensions.ToPyString
 {
-    internal class DictionaryEntryPyStringConverter : BaseStringConverter<DictionaryEntry>
+    class DictionaryEntryPyStringConverter : BaseStringConverter<DictionaryEntry>
     {
         internal DictionaryEntryPyStringConverter(DictionaryEntry source, IEnumerable<object> sourceContainers, string prefix)
             : base(source, sourceContainers, prefix)

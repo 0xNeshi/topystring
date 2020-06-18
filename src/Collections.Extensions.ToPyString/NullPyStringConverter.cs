@@ -2,7 +2,7 @@
 
 namespace Collections.Extensions.ToPyString
 {
-    internal class NullPyStringConverter : BaseStringConverter
+    class NullPyStringConverter : BaseStringConverter
     {
         internal NullPyStringConverter(string prefix) : base(prefix)
         {

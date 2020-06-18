@@ -1,6 +1,6 @@
 ﻿namespace Collections.Extensions.ToPyString
 {
-    internal class StringPyStringConverter : BaseStringConverter<string>
+    class StringPyStringConverter : BaseStringConverter<string>
     {
         internal StringPyStringConverter(string source, string prefix) : base(source, prefix)
         {
