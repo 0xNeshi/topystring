@@ -9,12 +9,12 @@ The extension is covered with unit tests, so you can be sure it will perform acc
 ## Summary
 
   - [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installing](#installing)
+    - [Prerequisites](#prerequisites)
+    - [Installing](#installing)
   - [Using ToPyString](#using-topystring)
-  - [Using ToPyString on dynamic type](#using-topystring-on-dynamic-type)
+    - [Using ToPyString on dynamic type](#using-topystring-on-dynamic-type)
   - [Runing the tests](#running-the-tests)
-  - [Break down of unit tests](#break-down-of-unit-tests)
+    - [Break down of unit tests](#break-down-of-unit-tests)
   - [Contributing](#contributing)
   - [Versioning](#versioning)
   - [Authors](#authors)
@@ -78,7 +78,7 @@ Console.WriteLine(Extensions.ToPyString(list));
 
 The output will be:
 
-```csharp
+```
 { SomeField = 1 }
 [11, 'some string', { SomeField = 1 }]
 ```
