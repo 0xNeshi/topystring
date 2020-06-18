@@ -73,7 +73,7 @@ namespace Collections.Extensions.ToPyString.Tests
         [Fact]
         public void Prints_Dynamic()
         {
-            dynamic dyn = new { field1 = 1};
+            dynamic dyn = new { field1 = 1 };
             var expectedResult = "{ field1 = 1 }";
 
             var result = Extensions.ToPyString(dyn);

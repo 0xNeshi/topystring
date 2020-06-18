@@ -17,6 +17,8 @@ namespace Sample
             var complexList = InitializeSelfContainingListWithSubcollections(selfContainingDict, selfContainingList);
             var objWithoutToString = new object();
             var objWithToString = new Program();
+            dynamic dynObject = new { SomeField = 1 };
+            var listWithDynamicObject = new List<object> { 11, "some string", dynObject };
 
             Console.WriteLine("Regular array: " + regularArray.ToPyString());
             Console.WriteLine("Regular dictionary: " + regularDict.ToPyString());
@@ -26,6 +28,8 @@ namespace Sample
             Console.WriteLine("Self-containing list with subcollections: " + complexList.ToPyString());
             Console.WriteLine("Regular object without ToString override: " + objWithoutToString.ToPyString());
             Console.WriteLine("Object with ToString override: " + objWithToString.ToPyString());
+            Console.WriteLine("Dynamic object: " + Extensions.ToPyString(dynObject));
+            Console.WriteLine("List containing a dynamic object: " + Extensions.ToPyString(listWithDynamicObject));
         }
 
         public override string ToString()
