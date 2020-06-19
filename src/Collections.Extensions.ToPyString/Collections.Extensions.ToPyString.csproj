@@ -3,11 +3,11 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>Collections.Extensions.ToPyString</PackageId>
-    <Version>1.1.1</Version>
+    <Version>1.1.1.1</Version>
     <Authors>Nenad Misic</Authors>
     <ReleaseNotes>Fix string format when ToPyString() method called directly on a string or character</ReleaseNotes>
-    <PackageDescription>.NET System.Collections ToString extension for converting collections to a string in the format that is based on the one in Python</PackageDescription>
-    <Description>.NET System.Collections ToString extension for converting collections to a string in the format that is based on the one in Python</Description>
+    <PackageDescription>.NET System.Collections ToString extension for converting collections (and other types!) to a string in the format that is based on the one in Python</PackageDescription>
+    <Description>.NET System.Collections ToString extension for converting collections (and other types!) to a string in the format that is based on the one in Python</Description>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <copyright>Copyright 2020</copyright>
