@@ -1,9 +1,12 @@
 # ToPyString
+
+<a href="https://github.com/misicnenad/topystring/actions?query=workflow%3ABuild" target="_blank"><img src="https://img.shields.io/github/workflow/status/misicnenad/topystring/Build" alt="download" /></a>
 <a href="https://github.com/misicnenad/topystring/actions?query=workflow%3ATests" target="_blank"><img src="https://img.shields.io/github/workflow/status/misicnenad/topystring/Test?label=Tests&logo=github" alt="download" /></a>
 <a href="https://www.nuget.org/packages/Collections.Extensions.ToPyString" target="_blank"><img src="https://img.shields.io/nuget/v/Collections.Extensions.ToPyString?logo=nuget" alt="download" /></a>
 <a href="https://opensource.org/licenses/MIT" target="_blank"><img src="https://img.shields.io/github/license/misicnenad/topystring?color=yellow" alt="download" /></a>
+<a href="https://github.com/misicnenad/topystring/issues" target="_blank"><img src="assets/contributions.svg" alt="contributions" /></a>
 
-ToPyString is a .NET System.Collections extension for converting collections to a string in Python format. 
+ToPyString is a .NET System.Collections extension for converting collections to a string in Python format. Actually you can use the extension to turn any .NET type into a Python format!
 
 The reason this small project exists is because it's a shame that C# doesn't have an in-built way of stringifying collections (like many other languages do). Although creating a ToString method for your collections isn't difficult, you shouldn't be wasting time implementing rudimentary things on every project... especially on projects you're using to just quickly try something out and Console.WriteLine the output.
 
@@ -11,21 +14,21 @@ The extension is covered with unit tests, so you can be sure it will perform acc
 
 ## Summary
 
-  - [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installing](#installing)
-  - [Using ToPyString](#using-topystring)
-  - [Runing the tests](#running-the-tests)
-  - [Break down of unit tests](#break-down-of-unit-tests)
-  - [Contact](#contact)
-  - [Contributing](#contributing)
-  - [Versioning](#versioning)
-  - [Authors](#authors)
-  - [License](#license)
+- [Getting Started](#getting-started)
+- [Prerequisites](#prerequisites)
+- [Installing](#installing)
+- [Using ToPyString](#using-topystring)
+- [Runing the tests](#running-the-tests)
+- [Break down of unit tests](#break-down-of-unit-tests)
+- [Contact](#contact)
+- [Contributing](#contributing)
+- [Versioning](#versioning)
+- [Authors](#authors)
+- [License](#license)
 
 ## Getting Started
 
-Follow these instructions to see how simple it is to use ToPyString. 
+Follow these instructions to see how simple it is to use ToPyString.
 
 ### Prerequisites
 
@@ -33,7 +36,7 @@ This package supports the .NET Standard 2.0, so you will need any of the .NET Co
 
 You can find the .NET download page [here](https://dotnet.microsoft.com/download).
 
-These are prerequisistes to using ToPyString whether you want to simply use the package in you projects or you want to download ToPyString on your local machine for development and testing purposes. 
+These are prerequisistes to using ToPyString whether you want to simply use the package in you projects or you want to download ToPyString on your local machine for development and testing purposes.
 
 ### Installing
 
@@ -61,12 +64,13 @@ Console.WriteLine(list.ToPyString()); // Output: [11, 'john', 'doe']
 
 The extension method works for every C# type.
 
-------------------------------------------------------
+---
+
 ### Be careful when using ToPyString with `dynamic` type
 
 Because of the way `dynamic` type is implemented the CLR will throw a RuntimeBinderException if you try to call the ToPyString extensions method directly on a `dynamic` object. To get around this issue simply use `ToPyString` as a regular static method.
 
-**_Wrong use with `dynamic`_**:
+**_Wrong use with `dynamic`:_**
 
 ```csharp
 dynamic dynObject = new { SomeField = 1 };
@@ -74,12 +78,21 @@ dynamic dynObject = new { SomeField = 1 };
 Console.WriteLine(dynObject.ToPyString()); // --> will throw a RuntimeBinderException
 ```
 
-**_Correct use_**:
+**_Correct use:_**
 
 ```csharp
 dynamic dynObject = new { SomeField = 1 };
 
 Console.WriteLine(Extensions.ToPyString(dynObject)); // Output: { SomeField = 1 }
+```
+
+If you have a collection that contains a `dynamic` object, you can use the ToPyString as usual:
+
+```csharp
+dynamic dynObject = new { SomeField = 1 };
+var list = new List<object> { dynObject };
+
+Console.WriteLine(list.ToPyString()); // Output: [{ SomeField = 1 }]
 ```
 
 ## Running the tests
@@ -117,13 +130,11 @@ Have a question or an issue about ToPyString? Create an [issue](https://github.c
 
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to the project.
 
-## Versioning
-
-[SemVer](http://semver.org/) is used for versioning. For the versions available, see the [tags on this repository](https://github.com/misicnenad/dotnet-collections-extensions-topystring/tags).
+If you found this extension helpfull then do give it a star and share it with others!
 
 ## Authors
 
-* **Nenad Misic** - [misicnenad](https://github.com/misicnenad)
+- **Nenad Misic** - [misicnenad](https://github.com/misicnenad)
 
 ## License
 
