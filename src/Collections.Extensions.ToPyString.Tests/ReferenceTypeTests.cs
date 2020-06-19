@@ -45,7 +45,7 @@ namespace Collections.Extensions.ToPyString.Tests
         public void Prints_String()
         {
             var value = "some string";
-            var expectedResult = "'some string'";
+            var expectedResult = "some string";
 
             var result = value.ToPyString();
 
@@ -56,7 +56,7 @@ namespace Collections.Extensions.ToPyString.Tests
         public void Prints_Empty_String()
         {
             var value = string.Empty;
-            var expectedResult = "''";
+            var expectedResult = string.Empty;
 
             var result = value.ToPyString();
 
@@ -67,7 +67,7 @@ namespace Collections.Extensions.ToPyString.Tests
         public void Prints_Non_ASCII_String()
         {
             var value = "ciào";
-            var expectedResult = "'ciào'";
+            var expectedResult = "ciào";
 
             var result = value.ToPyString();
 

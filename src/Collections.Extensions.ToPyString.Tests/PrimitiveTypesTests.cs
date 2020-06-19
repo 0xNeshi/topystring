@@ -32,18 +32,7 @@ namespace Collections.Extensions.ToPyString.Tests
         public void Prints_Char()
         {
             var value = 'b';
-            var expectedResult = "'b'";
-
-            var result = value.ToPyString();
-
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public void Prints_String()
-        {
-            var value = "some string";
-            var expectedResult = "'some string'";
+            var expectedResult = "b";
 
             var result = value.ToPyString();
 

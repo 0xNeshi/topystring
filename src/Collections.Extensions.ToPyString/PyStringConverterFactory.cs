@@ -19,7 +19,7 @@ namespace Collections.Extensions.ToPyString
                     return new NullPyStringConverter(prefix);
                 case char _:
                 case string _:
-                    return new StringPyStringConverter(source.ToString(), prefix);
+                    return new StringPyStringConverter(source.ToString(), sourceContainers, prefix);
                 case decimal _:
                 case float _:
                 case double _:
