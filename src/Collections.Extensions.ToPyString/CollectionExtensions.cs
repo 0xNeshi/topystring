@@ -1,6 +1,6 @@
 ﻿namespace Collections.Extensions.ToPyString
 {
-    public static class Extensions
+    public static class CollectionExtensions
     {
         public static string ToPyString(this object source)
         {

@@ -3,9 +3,9 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>Collections.Extensions.ToPyString</PackageId>
-    <Version>1.1.1.1</Version>
+    <Version>1.1.2</Version>
     <Authors>Nenad Misic</Authors>
-    <ReleaseNotes>Fix string format when ToPyString() method called directly on a string or character</ReleaseNotes>
+    <ReleaseNotes>Rename Extensions.cs to CollectionExtensions.cs</ReleaseNotes>
     <PackageDescription>.NET System.Collections ToString extension for converting collections (and other types!) to a string in the format that is based on the one in Python</PackageDescription>
     <Description>.NET System.Collections ToString extension for converting collections (and other types!) to a string in the format that is based on the one in Python</Description>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
@@ -16,7 +16,7 @@
     <PackageProjectUrl>https://misicnenad.github.io/topystring/</PackageProjectUrl>
     <PackageIconUrl>https://raw.githubusercontent.com/misicnenad/topystring/master/src/Collections.Extensions.ToPyString/images/string.png</PackageIconUrl>
     <PackageIcon>string.png</PackageIcon>
-    <PackageReleaseNotes>Fix string format when ToPyString() method called directly on a string or character</PackageReleaseNotes>
+    <PackageReleaseNotes>Rename Extensions.cs to CollectionExtensions.cs</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

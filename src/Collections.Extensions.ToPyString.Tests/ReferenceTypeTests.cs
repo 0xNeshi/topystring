@@ -91,7 +91,7 @@ namespace Collections.Extensions.ToPyString.Tests
             dynamic dynObject = new { SomeField = 1 };
             var expectedResult = "{ SomeField = 1 }";
 
-            var result = Extensions.ToPyString(dynObject);
+            var result = CollectionExtensions.ToPyString(dynObject);
 
             Assert.Equal(expectedResult, result);
         }

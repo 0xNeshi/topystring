@@ -119,7 +119,7 @@ Console.WriteLine(dynObject.ToPyString()); // --> will throw a RuntimeBinderExce
 ```csharp
 dynamic dynObject = new { SomeField = 1 };
 
-Console.WriteLine(Extensions.ToPyString(dynObject)); // Output: { SomeField = 1 }
+Console.WriteLine(CollectionExtensions.ToPyString(dynObject)); // Output: { SomeField = 1 }
 ```
 
 If you have a collection that contains a `dynamic` object, you can use the ToPyString as usual:
