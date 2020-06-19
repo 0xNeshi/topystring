@@ -35,8 +35,6 @@ This package supports the .NET Standard 2.0, so you will need any of the .NET Co
 
 You can find the .NET download page [here](https://dotnet.microsoft.com/download).
 
-These are prerequisistes to using ToPyString whether you want to simply use the package in you projects or you want to download ToPyString on your local machine for development and testing purposes.
-
 ### Installing
 
 You can get ToPyString by installing the [Collections.Extensions.ToPyString](https://www.nuget.org/packages/Collections.Extensions.ToPyString) NuGet package:
