@@ -104,7 +104,7 @@ Console.WriteLine(doubleNum.ToPyString()); // Output: 1.012
 
 ### Be careful when using ToPyString with `dynamic` type
 
-Because of the way `dynamic` type is implemented the CLR will throw a RuntimeBinderException if you try to call the ToPyString extensions method directly on a `dynamic` object. To get around this issue simply use `ToPyString` as a regular static method.
+Because of the way `dynamic` type is implemented the CLR will throw a RuntimeBinderException if you try to call the ToPyString extension method directly on a `dynamic` object. To get around this issue simply use `ToPyString` as a regular static method.
 
 **_Wrong use with `dynamic`:_**
 
