@@ -53,7 +53,7 @@ dotnet add package Collections.Extensions.ToPyString
 
 ## Using ToPyString
 
-ToPyString is an extension method that can be used on all .NET types.
+_ToPyString_ is an extension method that can be used on all .NET types.
 
 _List:_
 
@@ -102,11 +102,11 @@ Console.WriteLine(doubleNum.ToPyString()); // Output: 1.012
 ```
 ---
 
-### Be careful when using ToPyString with `dynamic` type
+### Be careful when using ToPyString with _dynamic_ type
 
-Because of the way `dynamic` type is implemented the CLR will throw a RuntimeBinderException if you try to call the ToPyString extension method directly on a `dynamic` object. To get around this issue simply use `ToPyString` as a regular static method.
+Because of the way _dynamic_ type is implemented the CLR will throw a _RuntimeBinderException_ if you try to call the _ToPyString_ extension method directly on a _dynamic_ object. To get around this issue simply use _ToPyString_ as a regular static method.
 
-**_Wrong use with `dynamic`:_**
+**_Wrong use with _dynamic_:_**
 
 ```csharp
 dynamic dynObject = new { SomeField = 1 };
@@ -122,7 +122,7 @@ dynamic dynObject = new { SomeField = 1 };
 Console.WriteLine(Extensions.ToPyString(dynObject)); // Output: { SomeField = 1 }
 ```
 
-If you have a collection that contains a `dynamic` object, you can use the ToPyString as usual:
+If you have a collection that contains a _dynamic_ object, you can use the _ToPyString_ as usual:
 
 ```csharp
 dynamic dynObject = new { SomeField = 1 };
