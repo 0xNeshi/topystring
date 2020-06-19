@@ -46,7 +46,7 @@ advances
 * Other conduct which could reasonably be considered inappropriate in a
   professional setting
 
-### Our Responsibilities
+### Project owner's Responsibilities
 
 Project owner is responsible for clarifying the standards of acceptable
 behavior and is expected to take appropriate and fair corrective action in
