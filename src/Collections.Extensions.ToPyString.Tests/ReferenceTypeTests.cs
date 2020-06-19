@@ -1,4 +1,8 @@
-﻿using Xunit;
+﻿using System.Collections.Generic;
+
+using Microsoft.CSharp.RuntimeBinder;
+
+using Xunit;
 
 namespace Collections.Extensions.ToPyString.Tests
 {
@@ -71,12 +75,35 @@ namespace Collections.Extensions.ToPyString.Tests
         }
 
         [Fact]
+        public void Extension_On_Dynamic_Throws()
+        {
+            dynamic dynObject = new { SomeField = 1 };
+
+            var result = Record.Exception(() => dynObject.ToPyString());
+
+            Assert.NotNull(result);
+            Assert.IsType<RuntimeBinderException>(result);
+        }
+
+        [Fact]
         public void Prints_Dynamic()
         {
-            dynamic dyn = new { field1 = 1 };
-            var expectedResult = "{ field1 = 1 }";
+            dynamic dynObject = new { SomeField = 1 };
+            var expectedResult = "{ SomeField = 1 }";
 
-            var result = Extensions.ToPyString(dyn);
+            var result = Extensions.ToPyString(dynObject);
+
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public void Prints_List_Containing_Dynamic()
+        {
+            dynamic dynObject = new { SomeField = 1 };
+            var list = new List<object> { 11, "some string", dynObject };
+            var expectedResult = "[11, 'some string', { SomeField = 1 }]";
+
+            var result = list.ToPyString();
 
             Assert.Equal(expectedResult, result);
         }

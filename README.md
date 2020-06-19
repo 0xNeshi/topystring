@@ -1,6 +1,7 @@
 # ToPyString
 <a href="https://github.com/misicnenad/topystring/actions?query=workflow%3ATests" target="_blank"><img src="https://img.shields.io/github/workflow/status/misicnenad/topystring/Test?label=Tests&logo=github" alt="download" /></a>
-<a href="https://www.nuget.org/packages/Collections.Extensions.ToPyString" target="_blank"><img src="https://img.shields.io/nuget/v/Collections.Extensions.ToPyString?color=g&logo=nuget" alt="download" /></a>
+<a href="https://www.nuget.org/packages/Collections.Extensions.ToPyString" target="_blank"><img src="https://img.shields.io/nuget/v/Collections.Extensions.ToPyString?logo=nuget" alt="download" /></a>
+<a href="https://opensource.org/licenses/MIT" target="_blank"><img src="https://img.shields.io/github/license/misicnenad/topystring?color=yellow" alt="download" /></a>
 
 ToPyString is a .NET System.Collections extension for converting collections to a string in Python format. 
 
@@ -16,6 +17,7 @@ The extension is covered with unit tests, so you can be sure it will perform acc
   - [Using ToPyString](#using-topystring)
   - [Runing the tests](#running-the-tests)
   - [Break down of unit tests](#break-down-of-unit-tests)
+  - [Contact](#contact)
   - [Contributing](#contributing)
   - [Versioning](#versioning)
   - [Authors](#authors)
@@ -59,24 +61,17 @@ Console.WriteLine(list.ToPyString()); // Output: [11, 'john', 'doe']
 
 The extension method works for every C# type.
 
-**Be careful when using ToPyString with `dynamic` type**
+------------------------------------------------------
+### Be careful when using ToPyString with `dynamic` type
 
-Because of the way `dynamic` type is implemented the CLR will throw a RuntimeBinderException if you try to call the ToPyString extensions method on an `dynamic` object or a collection that contains an object of the `dynamic` type. To get around this issue simply use `ToPyString` as a regular static method.
+Because of the way `dynamic` type is implemented the CLR will throw a RuntimeBinderException if you try to call the ToPyString extensions method directly on a `dynamic` object. To get around this issue simply use `ToPyString` as a regular static method.
 
-Example with a `dynamic`:
+**_Wrong use with `dynamic`_**:
 
 ```csharp
 dynamic dynObject = new { SomeField = 1 };
 
 Console.WriteLine(dynObject.ToPyString()); // --> will throw a RuntimeBinderException
-```
-
-Example with a list containing a `dynamic`:
-
-```csharp
-var list = new List<object> { 11, "some string", dynObject };
-
-Console.WriteLine(list.ToPyString()); // --> will throw a RuntimeBinderException
 ```
 
 **_Correct use_**:
@@ -85,10 +80,6 @@ Console.WriteLine(list.ToPyString()); // --> will throw a RuntimeBinderException
 dynamic dynObject = new { SomeField = 1 };
 
 Console.WriteLine(Extensions.ToPyString(dynObject)); // Output: { SomeField = 1 }
-
-var list = new List<object> { 11, "some string", dynObject };
-
-Console.WriteLine(Extensions.ToPyString(list)); // Output: [11, 'some string', { SomeField = 1 }]
 ```
 
 ## Running the tests
@@ -118,6 +109,10 @@ public void Prints_List_Of_Ints()
 }
 ```
 
+## Contact
+
+Have a question or an issue about ToPyString? Create an [issue](https://github.com/misicnenad/topystring/issues/new)!
+
 ## Contributing
 
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to the project.
@@ -128,7 +123,7 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduc
 
 ## Authors
 
-* **Nenad Misic** - *Initial work* - [misicnenad](https://github.com/misicnenad)
+* **Nenad Misic** - [misicnenad](https://github.com/misicnenad)
 
 ## License
 
