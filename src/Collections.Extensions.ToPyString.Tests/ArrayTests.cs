@@ -10,7 +10,7 @@ namespace Collections.Extensions.ToPyString.Tests
         public void Prints_Array_Of_Ints()
         {
             var array = new int[] { 1, 2, -3, 100 };
-            var expectedResult = "[1, 2, -3, 100a]";
+            var expectedResult = "[1, 2, -3, 100]";
 
             var result = array.ToPyString();
 
