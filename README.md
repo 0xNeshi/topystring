@@ -22,7 +22,6 @@ The extension is covered with unit tests, so you can be sure it will perform acc
 - [Break down of unit tests](#break-down-of-unit-tests)
 - [Contact](#contact)
 - [Contributing](#contributing)
-- [Versioning](#versioning)
 - [Authors](#authors)
 - [License](#license)
 
