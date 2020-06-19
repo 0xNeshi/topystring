@@ -53,7 +53,9 @@ dotnet add package Collections.Extensions.ToPyString
 
 ## Using ToPyString
 
-ToPyString is an extension method so you should use it as such:
+ToPyString is an extension method that can be used on all .NET types.
+
+_List:_
 
 ```csharp
 var list = new List<object> { 11, "john", "doe" };
@@ -61,8 +63,43 @@ var list = new List<object> { 11, "john", "doe" };
 Console.WriteLine(list.ToPyString()); // Output: [11, 'john', 'doe']
 ```
 
-The extension method works for every C# type.
+_Self-containing List:_
 
+```csharp
+var list = new List<object> { 11 };
+list.Add(list);
+
+Console.WriteLine(list.ToPyString()); // Output: [11, [...]]
+```
+
+_Dictionary:_
+
+```csharp
+var dictionary = new Dictionary<object, object> { [1] = "key1", ["key2"] = 2, [new object()] = null };
+
+Console.WriteLine(dictionary.ToPyString()); // Output: {1: 'key1', 'key2': 2, System.Object: null}
+```
+
+_Self-containing Dictionary:_
+
+```csharp
+var dictionary = new Dictionary<object, object> { [1] = "key1" };
+dictionary.Add("self", dictionary);
+
+Console.WriteLine(dictionary.ToPyString()); // Output: {1: 'key1', 'self': {...}}
+```
+
+_String and primitive types:_
+
+```csharp
+var str = "some string";
+var intNum = 11;
+var doubleNum = 1.012d;
+
+Console.WriteLine(str.ToPyString()); // Output: some string
+Console.WriteLine(intNum.ToPyString()); // Output: 11
+Console.WriteLine(doubleNum.ToPyString()); // Output: 1.012
+```
 ---
 
 ### Be careful when using ToPyString with `dynamic` type
