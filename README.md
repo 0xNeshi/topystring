@@ -14,7 +14,6 @@ The extension is covered with unit tests, so you can be sure it will perform acc
   - [Prerequisites](#prerequisites)
   - [Installing](#installing)
   - [Using ToPyString](#using-topystring)
-  - [Using ToPyString with dynamic type](#using-topystring-with-dynamic-type)
   - [Runing the tests](#running-the-tests)
   - [Break down of unit tests](#break-down-of-unit-tests)
   - [Contributing](#contributing)
@@ -58,11 +57,11 @@ var list = new List<object> { 11, "john", "doe" };
 Console.WriteLine(list.ToPyString()); // Output: [11, 'john', 'doe']
 ```
 
-The extension mthod works for every C# type.
+The extension method works for every C# type.
 
-### Using ToPyString with `dynamic` type
+**Be careful when using ToPyString with `dynamic` type**
 
-If you are trying to print out an object of type `dynamic` or a collection that contains an object of the `dynamic` type then use `ToPyString` as a regular static method, otherwise the CLR will throw a RuntimeBinderException.
+Because of the way `dynamic` type is implemented the CLR will throw a RuntimeBinderException if you try to call the ToPyString extensions method on an `dynamic` object or a collection that contains an object of the `dynamic` type. To get around this issue simply use `ToPyString` as a regular static method.
 
 Example with a `dynamic`:
 
