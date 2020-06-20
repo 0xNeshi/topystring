@@ -1,7 +1,7 @@
 # ToPyString
 
-<a href="https://github.com/misicnenad/topystring/actions?query=workflow%3ABuild" target="_blank"><img src="https://img.shields.io/github/workflow/status/misicnenad/topystring/Build" alt="download" /></a>
-<a href="https://github.com/misicnenad/topystring/actions?query=workflow%3ATests" target="_blank"><img src="https://img.shields.io/github/workflow/status/misicnenad/topystring/Test?label=Tests&logo=github" alt="download" /></a>
+<a href="https://github.com/misicnenad/topystring/actions?query=workflow%3ABuild" target="_blank">![Build](https://github.com/misicnenad/topystring/workflows/Build/badge.svg)</a>
+<a href="https://github.com/misicnenad/topystring/actions?query=workflow%3ATests" target="_blank">![Tests](https://github.com/misicnenad/topystring/workflows/Tests/badge.svg)</a>
 <a href="https://www.nuget.org/packages/Collections.Extensions.ToPyString" target="_blank"><img src="https://img.shields.io/nuget/v/Collections.Extensions.ToPyString?logo=nuget" alt="download" /></a>
 <a href="https://opensource.org/licenses/MIT" target="_blank"><img src="https://img.shields.io/github/license/misicnenad/topystring?color=yellow" alt="download" /></a>
 <a href="https://github.com/misicnenad/topystring/issues" target="_blank"><img src="assets/contributions.svg" alt="contributions" /></a>
