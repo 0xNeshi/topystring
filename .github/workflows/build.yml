@@ -1,4 +1,4 @@
-name: Build and test the project
+name: Build
 
 on:
   push:
@@ -25,20 +25,3 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --configuration Release --no-restore
-      
-  test:
-
-    runs-on: ubuntu-latest
-    
-    defaults:
-      run:
-        working-directory: src
-        
-    steps:
-    - uses: actions/checkout@v2
-    - name: Tun tests
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 3.1.101
-    - name: Test
-      run: dotnet test --no-restore --verbosity normal
