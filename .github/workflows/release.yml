@@ -1,4 +1,4 @@
-name: Publish to NuGet
+name: Release
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
       - 'src/Collections.Extensions.ToPyString/**'
 
 jobs:
-  publish:
+  release:
 
     runs-on: windows-latest
     
