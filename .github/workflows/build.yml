@@ -7,7 +7,7 @@ on:
     branches: [ master ]
   
 jobs:
-  build on .net core 3:
+  build:
 
     runs-on: ubuntu-latest
     
@@ -17,10 +17,26 @@ jobs:
         
     steps:
     - uses: actions/checkout@v2
-    - name: Build and test project
+    - name: 🔨 Use .NET Core 2.1 SDK
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 3.1.101
+        dotnet-version: '2.1.x'
+    - name: 🔨 Use .NET Core 3.1 SDK
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '3.1.x'
+    - name: 🪓 **DOTNET HACK** 🪓
+      shell: pwsh
+      run: |
+        $version = Split-Path (Split-Path $ENV:DOTNET_ROOT -Parent) -Leaf;
+        $root = Split-Path (Split-Path $ENV:DOTNET_ROOT -Parent) -Parent;
+        $directories = Get-ChildItem $root | Where-Object { $_.Name -ne $version };
+        foreach ($dir in $directories) {
+          $from = $dir.FullName;
+          $to = "$root/$version";
+          Write-Host Copying from $from to $to;
+          Copy-Item "$from\*" $to -Recurse -Force;
+        }
     - name: Install dependencies
       run: dotnet restore
     - name: Build
