@@ -1,4 +1,4 @@
-name: Tests
+name: Build and test the project
 
 on:
   push:
@@ -7,6 +7,25 @@ on:
     branches: [ master ]
 
 jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        working-directory: src
+        
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build project
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.101
+    - name: Install dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+      
   test:
 
     runs-on: ubuntu-latest
@@ -17,13 +36,9 @@ jobs:
         
     steps:
     - uses: actions/checkout@v2
-    - name: Build and run tests
+    - name: Tun tests
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.101
-    - name: Install dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build --configuration Release --no-restore
     - name: Test
       run: dotnet test --no-restore --verbosity normal
