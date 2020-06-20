@@ -163,8 +163,6 @@ Have a question or an issue about ToPyString? Create an [issue](https://github.c
 
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to the project.
 
-If you found this extension helpfull then do give it a star :star2: and share it with others!
-
 ## Authors
 
 - **Nenad Misic** - [misicnenad](https://github.com/misicnenad)
