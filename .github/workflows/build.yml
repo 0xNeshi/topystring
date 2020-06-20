@@ -17,10 +17,10 @@ jobs:
         
     steps:
     - uses: actions/checkout@v2
-    - name: 🔨 Use .NET Core 2.0 SDK
+    - name: 🔨 Use .NET Core 2.1 SDK
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: '2.0.x'
+        dotnet-version: '2.1.x'
     - name: 🔨 Use .NET Core 3.1 SDK
       uses: actions/setup-dotnet@v1
       with:
