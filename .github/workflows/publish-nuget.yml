@@ -47,4 +47,4 @@ jobs:
         cd Collections.Extensions.ToPyString
         dotnet pack -c Release -o out --no-restore --no-build
     - name: Push generated package to NuGet registry
-      run: dotnet nuget push out\*.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json --no-symbols true
+      run: dotnet nuget push Collections.Extensions.ToPyString\out\*.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json --no-symbols true
