@@ -172,3 +172,9 @@ If you found this extension helpfull then do give it a star :star2: and share it
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+## Final thoughts
+
+If you found this extension helpfull then do give it a star 🌟 and share it with others, help then NOT waste time on stringifying collections.
+
+Also, if you have any suggestions on refactoring the codebase to make it simpler, more extensible, more elegant - please let me know, I LOVE refactoring! 
