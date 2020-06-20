@@ -2,8 +2,11 @@ name: Publish to NuGet
 
 on:
   push:
-    tags:
-      - 'v*.*.*'
+    paths:
+      - 'src/Collections.Extensions.ToPyString/**'
+  pull_request:
+    paths:
+      - 'src/Collections.Extensions.ToPyString/**'
 
 jobs:
   publish:
@@ -44,4 +47,4 @@ jobs:
         cd Collections.Extensions.ToPyString
         dotnet pack -c Release -o out
     - name: Push generated package to NuGet registry
-      run: dotnet nuget push ./Collections.Extensions.ToPyString/out/*.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json --skip-duplicate --no-symbols true
+      run: dotnet nuget push ./Collections.Extensions.ToPyString/out/*.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json --no-symbols true
