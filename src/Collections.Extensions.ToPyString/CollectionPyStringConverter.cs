@@ -16,7 +16,8 @@ namespace Collections.Extensions.ToPyString
 
         private readonly BracketPair _bracketPair;
 
-        public CollectionPyStringConverter(IEnumerable source, IEnumerable<object> sourceContainers, string prefix, BracketType bracketType) : base(source, sourceContainers, prefix)
+        public CollectionPyStringConverter(IEnumerable source, IEnumerable<object> sourceContainers, string prefix, BracketType bracketType)
+            : base(source, sourceContainers, prefix)
         {
             _bracketPair = _bracketPairsDictionary[bracketType];
         }

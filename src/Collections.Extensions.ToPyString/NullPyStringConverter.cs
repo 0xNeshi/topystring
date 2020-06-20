@@ -2,7 +2,7 @@
 {
     class NullPyStringConverter : BasePyStringConverter
     {
-        internal NullPyStringConverter(string prefix) : base(prefix)
+        internal NullPyStringConverter(string prefix) : base(null, prefix)
         {
         }
 
