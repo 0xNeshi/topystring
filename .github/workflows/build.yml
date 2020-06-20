@@ -1,4 +1,4 @@
-name: Build and test the project
+name: Build project
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     
     defaults:
       run:
@@ -29,14 +29,19 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: '2.2.x'
-    - name: 🔨 Use .NET Core 3.1 SDK
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: '3.1.x'
     - name: 🔨 Use .NET Core 3.0 SDK
       uses: actions/setup-dotnet@v1
       with:
+        dotnet-version: '3.0.x'
+    - name: Use .NET Core 3.1 SDK
+      uses: actions/setup-dotnet@v1
+      with:
         dotnet-version: '3.1.x'
+    - name: Use .NET Framework 3.1 SDK
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '3.1.x'
+    # for explanation of the hack see: https://github.com/actions/setup-dotnet/issues/25#issuecomment-646925506  
     - name: 🪓 **DOTNET HACK** 🪓
       shell: pwsh
       run: |
