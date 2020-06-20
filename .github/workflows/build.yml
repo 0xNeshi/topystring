@@ -1,13 +1,13 @@
-name: Build
+name: Build and test the project
 
 on:
   push:
     branches: [ master ]
   pull_request:
     branches: [ master ]
-
+  
 jobs:
-  build:
+  build on .net core 3:
 
     runs-on: ubuntu-latest
     
@@ -17,7 +17,7 @@ jobs:
         
     steps:
     - uses: actions/checkout@v2
-    - name: Build project
+    - name: Build and test project
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.101
@@ -25,3 +25,5 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --configuration Release --no-restore
+    - name: Run tests
+      run: dotnet test --no-restore --verbosity normal
