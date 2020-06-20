@@ -2,20 +2,20 @@
 
 namespace Collections.Extensions.ToPyString
 {
-    internal abstract class BaseStringConverter : IStringConverter
+    internal abstract class BasePyStringConverter : IPyStringConverter
     {
-        protected BaseStringConverter(string prefix)
+        protected BasePyStringConverter(string prefix)
         {
             Prefix = prefix;
         }
 
-        protected BaseStringConverter(object source, string prefix)
+        protected BasePyStringConverter(object source, string prefix)
         {
             Source = source;
             Prefix = prefix;
         }
 
-        protected BaseStringConverter(object source, IEnumerable<object> sourceContainers, string prefix)
+        protected BasePyStringConverter(object source, IEnumerable<object> sourceContainers, string prefix)
         {
             Source = source;
             SourceContainers = sourceContainers ?? new List<object>();

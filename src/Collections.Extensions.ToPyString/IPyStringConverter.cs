@@ -1,6 +1,6 @@
 ﻿namespace Collections.Extensions.ToPyString
 {
-    internal interface IStringConverter
+    internal interface IPyStringConverter
     {
         string Convert();
     }

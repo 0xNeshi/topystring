@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace Collections.Extensions.ToPyString
+﻿namespace Collections.Extensions.ToPyString
 {
-    class NullPyStringConverter : BaseStringConverter
+    class NullPyStringConverter : BasePyStringConverter
     {
         internal NullPyStringConverter(string prefix) : base(prefix)
         {

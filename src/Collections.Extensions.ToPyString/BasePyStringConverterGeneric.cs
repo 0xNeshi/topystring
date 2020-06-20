@@ -2,7 +2,7 @@
 
 namespace Collections.Extensions.ToPyString
 {
-    internal abstract class BaseStringConverter<T> : BaseStringConverter
+    internal abstract class BaseStringConverter<T> : BasePyStringConverter
     {
         protected BaseStringConverter(string prefix)
             : base(prefix)
