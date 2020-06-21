@@ -31,7 +31,7 @@ Follow these instructions to see how simple it is to use ToPyString.
 
 ### Prerequisites
 
-This package supports the .NET Standard 2.0, so you will need any of the .NET Core or .NET Framework versions that support the standard ([here](https://docs.microsoft.com/en-us/dotnet/standard/net-standard#net-implementation-support) is a table of supported versions).
+This package supports the .NET Standard 2.0, so you will need any of the .NET Core or .NET Framework [versions](https://docs.microsoft.com/en-us/dotnet/standard/net-standard#net-implementation-support) that support the standard.
 
 You can find the .NET download page [here](https://dotnet.microsoft.com/download).
 
