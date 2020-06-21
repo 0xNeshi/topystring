@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Collections.Extensions.ToPyString
 {
-    abstract class BaseCollectionPyStringConverter : BasePyStringConverter<IEnumerable>
+    abstract class BaseCollectionPyStringConverter<T> : BasePyStringConverter<T> where T : IEnumerable
     {
         private readonly IDictionary<BracketType, BracketPair> _bracketPairsDictionary = new Dictionary<BracketType, BracketPair>
         {
@@ -16,7 +16,7 @@ namespace Collections.Extensions.ToPyString
 
         private readonly BracketPair _bracketPair;
 
-        protected BaseCollectionPyStringConverter(IEnumerable source, IEnumerable<object> sourceContainers, string prefix, BracketType bracketType)
+        protected BaseCollectionPyStringConverter(T source, IEnumerable<object> sourceContainers, string prefix, BracketType bracketType)
             : base(source, sourceContainers, prefix)
         {
             _bracketPair = _bracketPairsDictionary[bracketType];
