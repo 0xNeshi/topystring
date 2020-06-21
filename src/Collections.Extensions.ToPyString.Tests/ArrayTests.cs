@@ -54,10 +54,54 @@ namespace Collections.Extensions.ToPyString.Tests
         }
 
         [Fact]
-        public void Prints_Array_Of_Arrays()
+        public void Prints_Twodimensional_Arrays()
         {
-            var array = new int[][] { new int[] { 1, 2, 3 }, new int[] { 88, -1, -4 } };
+            var array = new int[,] { { 1, 2, 3 }, { 88, -1, -4 } };
             var expectedResult = "[[1, 2, 3], [88, -1, -4]]";
+
+            var result = array.ToPyString();
+
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public void Prints_Threedimensional_Arrays()
+        {
+            var array = new int[,,] { { { 1, 2, 3 }, { 88, -1, -4 } }, { { 1, 2, 3 }, { -88, 90, -1 } } };
+            var expectedResult = "[[[1, 2, 3], [88, -1, -4]], [[1, 2, 3], [-88, 90, -1]]]";
+
+            var result = array.ToPyString();
+
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public void Prints_Fourdimensional_Arrays()
+        {
+            var array = new int[,,,] { { { { 1, 2, 3 } } } };
+            var expectedResult = "[[[[1, 2, 3]]]]";
+
+            var result = array.ToPyString();
+
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public void Prints_Empty_Multidimensional_Arrays()
+        {
+            var array = new int[,,] { };
+            var expectedResult = "[]";
+
+            var result = array.ToPyString();
+
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public void Prints_Jagged_Arrays()
+        {
+            var array = new int[][] { new int[] { 1, 2, 3, -2 }, new int[] { 88, -1, -4 }, Array.Empty<int>(), new int[] { -100 } };
+            var expectedResult = "[[1, 2, 3, -2], [88, -1, -4], [], [-100]]";
 
             var result = array.ToPyString();
 

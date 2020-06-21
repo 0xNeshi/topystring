@@ -11,7 +11,7 @@ namespace Collections.Extensions.ToPyString
             Prefix = prefix;
         }
 
-        internal virtual T Source { get; }
+        internal virtual T Source { get; set; }
         internal IEnumerable<object> SourceContainers { get; }
         internal string Prefix { get; }
 
