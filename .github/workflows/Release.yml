@@ -1,4 +1,4 @@
-name: Build
+name: Release
 
 on:
   push:
@@ -13,7 +13,7 @@ on:
       - '!src/Collections.Extensions.ToPyString/**'
 
 jobs:
-  build:
+  release:
 
     runs-on: windows-latest
     
