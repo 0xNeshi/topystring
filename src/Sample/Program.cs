@@ -18,7 +18,7 @@ namespace Sample
             var objWithoutToString = new object();
             var objWithToString = new Program();
             dynamic dynObject = new { SomeField = 1 };
-            var listWithDynamicObject = new List<object> { 11, "some string", dynObject };
+            var listWithDynamicObject = new List<object> { 11, "sample", dynObject };
 
             Console.WriteLine("Regular array: " + regularArray.ToPyString());
             Console.WriteLine("Regular dictionary: " + regularDict.ToPyString());
