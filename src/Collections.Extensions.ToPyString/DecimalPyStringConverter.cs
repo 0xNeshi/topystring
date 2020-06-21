@@ -1,10 +1,12 @@
-﻿using System.Globalization;
+﻿using System.Collections.Generic;
+using System.Globalization;
 
 namespace Collections.Extensions.ToPyString
 {
     class DecimalPyStringConverter : BasePyStringConverter<decimal>
     {
-        internal DecimalPyStringConverter(decimal source, string prefix) : base(source, prefix)
+        internal DecimalPyStringConverter(decimal source, IEnumerable<object> sourceContainers, string prefix)
+            : base(source, sourceContainers, prefix)
         {
         }
 

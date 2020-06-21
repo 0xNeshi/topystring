@@ -16,14 +16,14 @@ namespace Collections.Extensions.ToPyString
             switch (source)
             {
                 case null:
-                    return new NullPyStringConverter(prefix);
+                    return new NullPyStringConverter(source, sourceContainers, prefix);
                 case char _:
                 case string _:
                     return new StringPyStringConverter(source.ToString(), sourceContainers, prefix);
                 case decimal _:
                 case float _:
                 case double _:
-                    return new DecimalPyStringConverter(Convert.ToDecimal(source), prefix);
+                    return new DecimalPyStringConverter(Convert.ToDecimal(source), sourceContainers, prefix);
                 case DictionaryEntry dictEntry:
                     return new DictionaryEntryPyStringConverter(dictEntry, sourceContainers, prefix);
                 case IDictionary dictionary:
@@ -31,7 +31,7 @@ namespace Collections.Extensions.ToPyString
                 case IEnumerable enumerable:
                     return new EnumerablePyStringConverter(enumerable, sourceContainers, prefix);
                 default:
-                    return new ObjectPyStringConverter(source, prefix);
+                    return new ObjectPyStringConverter(source, sourceContainers, prefix);
             };
         }
 

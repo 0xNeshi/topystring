@@ -4,13 +4,6 @@ namespace Collections.Extensions.ToPyString
 {
     abstract class BasePyStringConverter<T> : IPyStringConverter
     {
-        protected BasePyStringConverter(T source, string prefix)
-        {
-            Source = source;
-            SourceContainers = new List<object>();
-            Prefix = prefix;
-        }
-
         protected BasePyStringConverter(T source, IEnumerable<object> sourceContainers, string prefix)
         {
             Source = source;
