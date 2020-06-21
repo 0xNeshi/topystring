@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Collections.Extensions.ToPyString
 {
-    internal class CollectionPyStringConverter : BasePyStringConverter<IEnumerable>
+    class CollectionPyStringConverter : BasePyStringConverter<IEnumerable>
     {
         private readonly IDictionary<BracketType, BracketPair> _bracketPairsDictionary = new Dictionary<BracketType, BracketPair>
         {
@@ -16,17 +16,17 @@ namespace Collections.Extensions.ToPyString
 
         private readonly BracketPair _bracketPair;
 
-        public CollectionPyStringConverter(IEnumerable source, IEnumerable<object> sourceContainers, string prefix, BracketType bracketType)
+        internal CollectionPyStringConverter(IEnumerable source, IEnumerable<object> sourceContainers, string prefix, BracketType bracketType)
             : base(source, sourceContainers, prefix)
         {
             _bracketPair = _bracketPairsDictionary[bracketType];
         }
 
-        public override string Convert()
+        public override string GetConvertedValue()
         {
             if (SourceContainers.Contains(Source))
             {
-                return Prefix + _bracketPair.OpeningBracket + "..." + _bracketPair.ClosingBracket;
+                return Prefix + CollectionReferenceLoopToString();
             }
 
             var en = Source.GetEnumerator();
@@ -35,17 +35,22 @@ namespace Collections.Extensions.ToPyString
             {
                 var newSourceContainers = SourceContainers.Append(Source);
                 var converter = PyStringConverterFactory.Create(en.Current, newSourceContainers);
-                sb.Append(converter.Convert());
+                sb.Append(converter.GetConvertedValue());
                 while (en.MoveNext())
                 {
                     converter = PyStringConverterFactory.Create(en.Current, newSourceContainers, ", ");
-                    sb.Append(converter.Convert());
+                    sb.Append(converter.GetConvertedValue());
                 }
             }
 
             sb.Append(_bracketPair.ClosingBracket);
 
             return Prefix + sb.ToString();
+        }
+
+        private string CollectionReferenceLoopToString()
+        {
+            return _bracketPair.OpeningBracket + "..." + _bracketPair.ClosingBracket;
         }
 
         private class BracketPair

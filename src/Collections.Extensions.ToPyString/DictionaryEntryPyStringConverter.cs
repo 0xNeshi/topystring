@@ -11,12 +11,16 @@ namespace Collections.Extensions.ToPyString
         {
         }
 
-        public override string Convert()
+        public override string GetConvertedValue()
         {
             var newSourceContainers = SourceContainers.Append(Source);
             var keyConverter = PyStringConverterFactory.Create(Source.Key, newSourceContainers);
             var valueConverter = PyStringConverterFactory.Create(Source.Value, newSourceContainers);
-            return $"{Prefix}{keyConverter.Convert()}: {valueConverter.Convert()}";
+
+            var key = keyConverter.GetConvertedValue();
+            var value = valueConverter.GetConvertedValue();
+
+            return $"{Prefix}{key}: {value}";
         }
     }
 }

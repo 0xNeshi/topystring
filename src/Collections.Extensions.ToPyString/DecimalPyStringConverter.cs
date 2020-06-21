@@ -8,10 +8,10 @@ namespace Collections.Extensions.ToPyString
         {
         }
 
-        public override string Convert()
+        public override string GetConvertedValue()
         {
-            string v = Source.ToString(CultureInfo.InvariantCulture);
-            return Prefix + v;
+            var value = Source.ToString(CultureInfo.InvariantCulture);
+            return Prefix + value;
         }
     }
 }

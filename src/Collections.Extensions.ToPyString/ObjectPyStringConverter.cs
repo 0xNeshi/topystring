@@ -6,7 +6,7 @@
         {
         }
 
-        public override string Convert()
+        public override string GetConvertedValue()
         {
             return Prefix + Source.ToString();
         }

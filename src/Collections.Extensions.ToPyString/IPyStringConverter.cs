@@ -2,6 +2,6 @@
 {
     internal interface IPyStringConverter
     {
-        string Convert();
+        string GetConvertedValue();
     }
 }

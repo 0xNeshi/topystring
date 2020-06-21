@@ -6,7 +6,7 @@
         {
             var stringConverter = PyStringConverterFactory.Create(source);
 
-            return stringConverter.Convert();
+            return stringConverter.GetConvertedValue();
         }
     }
 }

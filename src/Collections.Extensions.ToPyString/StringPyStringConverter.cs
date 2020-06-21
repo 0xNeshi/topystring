@@ -5,12 +5,12 @@ namespace Collections.Extensions.ToPyString
 {
     class StringPyStringConverter : BasePyStringConverter<string>
     {
-        public StringPyStringConverter(string source, IEnumerable<object> sourceContainers, string prefix)
+        internal StringPyStringConverter(string source, IEnumerable<object> sourceContainers, string prefix)
             : base(source, sourceContainers, prefix)
         {
         }
 
-        public override string Convert()
+        public override string GetConvertedValue()
         {
             return Prefix + (SourceContainers.Any() ? $"'{Source}'" : Source);
         }
