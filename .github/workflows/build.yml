@@ -1,0 +1,46 @@
+name: Build
+
+on:
+  push:
+    branches-ignore: [ master ]
+    paths:
+      - 'src/Collections.Extensions.ToPyString**'
+  pull_request:
+    branches-ignore: [ master ]
+    paths:
+      - 'src/Collections.Extensions.ToPyString**'
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+    
+    defaults:
+      run:
+        working-directory: src
+        
+    steps:
+    - uses: actions/checkout@v2
+    - name: 🔨 Use .NET Core 2.0 SDK
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '2.0.x'        
+    # for explanation of the hack see: https://github.com/actions/setup-dotnet/issues/25#issuecomment-646925506  
+    - name: 🪓 **DOTNET HACK** 🪓
+      shell: pwsh
+      run: |
+        $version = Split-Path (Split-Path $ENV:DOTNET_ROOT -Parent) -Leaf;
+        $root = Split-Path (Split-Path $ENV:DOTNET_ROOT -Parent) -Parent;
+        $directories = Get-ChildItem $root | Where-Object { $_.Name -ne $version };
+        foreach ($dir in $directories) {
+          $from = $dir.FullName;
+          $to = "$root/$version";
+          Write-Host Copying from $from to $to;
+          Copy-Item "$from\*" $to -Recurse -Force;
+        }
+    - name: Install dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+    - name: Run tests
+      run: dotnet test --no-restore --verbosity normal
