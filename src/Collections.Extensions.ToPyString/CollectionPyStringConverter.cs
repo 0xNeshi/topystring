@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Collections.Extensions.ToPyString
 {
-    internal class CollectionPyStringConverter : BaseStringConverter<IEnumerable>
+    internal class CollectionPyStringConverter : BasePyStringConverter<IEnumerable>
     {
         private readonly IDictionary<BracketType, BracketPair> _bracketPairsDictionary = new Dictionary<BracketType, BracketPair>
         {

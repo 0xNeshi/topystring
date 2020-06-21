@@ -2,7 +2,7 @@
 
 namespace Collections.Extensions.ToPyString
 {
-    class DecimalPyStringConverter : BaseStringConverter<decimal>
+    class DecimalPyStringConverter : BasePyStringConverter<decimal>
     {
         internal DecimalPyStringConverter(decimal source, string prefix) : base(source, prefix)
         {

@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Collections.Extensions.ToPyString
 {
-    class StringPyStringConverter : BaseStringConverter<string>
+    class StringPyStringConverter : BasePyStringConverter<string>
     {
         public StringPyStringConverter(string source, IEnumerable<object> sourceContainers, string prefix)
             : base(source, sourceContainers, prefix)
