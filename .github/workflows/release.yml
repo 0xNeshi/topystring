@@ -8,18 +8,18 @@ jobs:
   release:
 
     runs-on: windows-latest
-    
+
     defaults:
       run:
         working-directory: src
-        
+
     steps:
     - uses: actions/checkout@v2
     - name: 🔨 Use .NET Core 2.0 SDK
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: '2.0.x'        
-    # for explanation of the hack see: https://github.com/actions/setup-dotnet/issues/25#issuecomment-646925506  
+        dotnet-version: '2.0.x'
+    # for explanation of the hack see: https://github.com/actions/setup-dotnet/issues/25#issuecomment-646925506
     - name: 🪓 **DOTNET HACK** 🪓
       shell: pwsh
       run: |
@@ -39,7 +39,7 @@ jobs:
     - name: Run tests
       run: dotnet test --no-restore --verbosity normal
     - name: Generate NuGet package
-      run: |  
+      run: |
         cd Collections.Extensions.ToPyString
         dotnet pack -c Release -o out --no-restore --no-build
     - name: Push generated package to NuGet registry
