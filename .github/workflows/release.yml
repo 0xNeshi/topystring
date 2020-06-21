@@ -1,7 +1,9 @@
 name: Release
 
 on:
-  release
+  release:
+    # Only use the types keyword to narrow down the activity types that will trigger your workflow.
+    types: [published, created, edited]
 
 jobs:
   release:
