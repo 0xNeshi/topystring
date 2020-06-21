@@ -1,12 +1,8 @@
 name: Build
 
 on:
-  push:
-    branches-ignore: [ master ]
-    paths:
-      - 'src/**'
   pull_request:
-    branches-ignore: [ master ]
+    branches: [ master, develop ]
     paths:
       - 'src/**'
 
