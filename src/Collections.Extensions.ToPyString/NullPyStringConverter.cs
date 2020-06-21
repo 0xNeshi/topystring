@@ -1,12 +1,15 @@
-﻿namespace Collections.Extensions.ToPyString
+﻿using System.Collections.Generic;
+
+namespace Collections.Extensions.ToPyString
 {
-    class NullPyStringConverter : BasePyStringConverter
+    class NullPyStringConverter : BasePyStringConverter<object>
     {
-        internal NullPyStringConverter(string prefix) : base(null, prefix)
+        internal NullPyStringConverter(object source, IEnumerable<object> sourceContainers, string prefix)
+            : base(source, sourceContainers, prefix)
         {
         }
 
-        public override string Convert()
+        public override string GetConvertedValue()
         {
             return Prefix + "null";
         }

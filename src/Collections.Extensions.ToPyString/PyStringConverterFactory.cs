@@ -6,32 +6,25 @@ namespace Collections.Extensions.ToPyString
 {
     static class PyStringConverterFactory
     {
-        internal static IPyStringConverter Create(object source, IEnumerable<object> sourceContainers = default, string prefix = "")
+        internal static IPyStringConverter Create<T>(T source, IEnumerable<object> sourceContainers = default, string prefix = "")
         {
             if (TryCastToDictionaryEntry(source, out var dictionaryEntry))
             {
                 return new DictionaryEntryPyStringConverter(dictionaryEntry, sourceContainers, prefix);
             }
 
-            switch (source)
+            return source switch
             {
-                case null:
-                    return new NullPyStringConverter(prefix);
-                case char _:
-                case string _:
-                    return new StringPyStringConverter(source.ToString(), sourceContainers, prefix);
-                case decimal _:
-                case float _:
-                case double _:
-                    return new DecimalPyStringConverter(Convert.ToDecimal(source), prefix);
-                case DictionaryEntry dictEntry:
-                    return new DictionaryEntryPyStringConverter(dictEntry, sourceContainers, prefix);
-                case IDictionary dictionary:
-                    return new CollectionPyStringConverter(dictionary, sourceContainers, prefix, BracketType.Braces);
-                case IEnumerable enumerable:
-                    return new CollectionPyStringConverter(enumerable, sourceContainers, prefix, BracketType.Square);
-                default:
-                    return new ObjectPyStringConverter(source, prefix);
+                null => new NullPyStringConverter(source, sourceContainers, prefix),
+                char ch => new StringPyStringConverter(ch, sourceContainers, prefix),
+                string str => new StringPyStringConverter(str, sourceContainers, prefix),
+                decimal dec => new DecimalPyStringConverter(dec, sourceContainers, prefix),
+                float fl => new DecimalPyStringConverter(fl, sourceContainers, prefix),
+                double doub => new DecimalPyStringConverter(doub, sourceContainers, prefix),
+                DictionaryEntry dictEntry => new DictionaryEntryPyStringConverter(dictEntry, sourceContainers, prefix),
+                IDictionary dictionary => new DictionaryPyStringConverter(dictionary, sourceContainers, prefix),
+                IEnumerable enumerable => new EnumerablePyStringConverter(enumerable, sourceContainers, prefix),
+                _ => new ObjectPyStringConverter(source, sourceContainers, prefix),
             };
         }
 

@@ -3,14 +3,19 @@ using System.Linq;
 
 namespace Collections.Extensions.ToPyString
 {
-    class StringPyStringConverter : BaseStringConverter<string>
+    class StringPyStringConverter : BasePyStringConverter<string>
     {
-        public StringPyStringConverter(string source, IEnumerable<object> sourceContainers, string prefix)
+        internal StringPyStringConverter(string source, IEnumerable<object> sourceContainers, string prefix)
             : base(source, sourceContainers, prefix)
         {
         }
 
-        public override string Convert()
+        internal StringPyStringConverter(char source, IEnumerable<object> sourceContainers, string prefix)
+            : base(source.ToString(), sourceContainers, prefix)
+        {
+        }
+
+        public override string GetConvertedValue()
         {
             return Prefix + (SourceContainers.Any() ? $"'{Source}'" : Source);
         }
