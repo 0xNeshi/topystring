@@ -13,25 +13,18 @@ namespace Collections.Extensions.ToPyString
                 return new DictionaryEntryPyStringConverter(dictionaryEntry, sourceContainers, prefix);
             }
 
-            switch (source)
+            return source switch
             {
-                case null:
-                    return new NullPyStringConverter(source, sourceContainers, prefix);
-                case char _:
-                case string _:
-                    return new StringPyStringConverter(source.ToString(), sourceContainers, prefix);
-                case decimal _:
-                case float _:
-                case double _:
-                    return new DecimalPyStringConverter(Convert.ToDecimal(source), sourceContainers, prefix);
-                case DictionaryEntry dictEntry:
-                    return new DictionaryEntryPyStringConverter(dictEntry, sourceContainers, prefix);
-                case IDictionary dictionary:
-                    return new DictionaryPyStringConverter(dictionary, sourceContainers, prefix);
-                case IEnumerable enumerable:
-                    return new EnumerablePyStringConverter(enumerable, sourceContainers, prefix);
-                default:
-                    return new ObjectPyStringConverter(source, sourceContainers, prefix);
+                null => new NullPyStringConverter(source, sourceContainers, prefix),
+                char ch => new StringPyStringConverter(ch, sourceContainers, prefix),
+                string str => new StringPyStringConverter(str, sourceContainers, prefix),
+                decimal dec => new DecimalPyStringConverter(dec, sourceContainers, prefix),
+                float fl => new DecimalPyStringConverter(fl, sourceContainers, prefix),
+                double doub => new DecimalPyStringConverter(doub, sourceContainers, prefix),
+                DictionaryEntry dictEntry => new DictionaryEntryPyStringConverter(dictEntry, sourceContainers, prefix),
+                IDictionary dictionary => new DictionaryPyStringConverter(dictionary, sourceContainers, prefix),
+                IEnumerable enumerable => new EnumerablePyStringConverter(enumerable, sourceContainers, prefix),
+                _ => new ObjectPyStringConverter(source, sourceContainers, prefix),
             };
         }
 

@@ -10,6 +10,11 @@ namespace Collections.Extensions.ToPyString
         {
         }
 
+        internal StringPyStringConverter(char source, IEnumerable<object> sourceContainers, string prefix)
+            : base(source.ToString(), sourceContainers, prefix)
+        {
+        }
+
         public override string GetConvertedValue()
         {
             return Prefix + (SourceContainers.Any() ? $"'{Source}'" : Source);
