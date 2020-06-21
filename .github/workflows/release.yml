@@ -1,16 +1,8 @@
 name: Release
 
 on:
-  push:
-    branches: [ master ]
-    paths-ignore:
-      - '**'
-      - '!src/Collections.Extensions.ToPyString/**'
-  pull_request:
-    branches: [ master ]
-    paths-ignore:
-      - '**'
-      - '!src/Collections.Extensions.ToPyString/**'
+  release:
+    types: [ published ]
 
 jobs:
   release:
