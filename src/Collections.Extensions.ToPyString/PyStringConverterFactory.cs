@@ -6,7 +6,7 @@ namespace Collections.Extensions.ToPyString
 {
     static class PyStringConverterFactory
     {
-        internal static IPyStringConverter Create(object source, IEnumerable<object> sourceContainers = default, string prefix = "")
+        internal static IPyStringConverter Create<T>(T source, IEnumerable<object> sourceContainers = default, string prefix = "")
         {
             if (TryCastToDictionaryEntry(source, out var dictionaryEntry))
             {
@@ -27,9 +27,9 @@ namespace Collections.Extensions.ToPyString
                 case DictionaryEntry dictEntry:
                     return new DictionaryEntryPyStringConverter(dictEntry, sourceContainers, prefix);
                 case IDictionary dictionary:
-                    return new CollectionPyStringConverter(dictionary, sourceContainers, prefix, BracketType.Braces);
+                    return new DictionaryPyStringConverter(dictionary, sourceContainers, prefix);
                 case IEnumerable enumerable:
-                    return new CollectionPyStringConverter(enumerable, sourceContainers, prefix, BracketType.Square);
+                    return new EnumerablePyStringConverter(enumerable, sourceContainers, prefix);
                 default:
                     return new ObjectPyStringConverter(source, prefix);
             };
