@@ -68,7 +68,8 @@ namespace Collections.Extensions.ToPyString
 
     internal enum BracketType
     {
-        Parantheses = 0,
+        None = 0,
+        Parantheses,
         Square,
         Braces
     }
