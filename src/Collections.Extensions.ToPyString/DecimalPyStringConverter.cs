@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 
 namespace Collections.Extensions.ToPyString
@@ -7,6 +8,16 @@ namespace Collections.Extensions.ToPyString
     {
         internal DecimalPyStringConverter(decimal source, IEnumerable<object> sourceContainers, string prefix)
             : base(source, sourceContainers, prefix)
+        {
+        }
+
+        internal DecimalPyStringConverter(float source, IEnumerable<object> sourceContainers, string prefix)
+            : base(Convert.ToDecimal(source), sourceContainers, prefix)
+        {
+        }
+
+        internal DecimalPyStringConverter(double source, IEnumerable<object> sourceContainers, string prefix)
+            : base(Convert.ToDecimal(source), sourceContainers, prefix)
         {
         }
 
