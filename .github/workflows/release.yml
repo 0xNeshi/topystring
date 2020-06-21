@@ -1,9 +1,8 @@
 name: Release
 
 on:
-  release:
-    # Only use the types keyword to narrow down the activity types that will trigger your workflow.
-    types: [published, unpublished, created, edited, deleted]
+  pull_request:
+    branches: [ master ]
 
 jobs:
   release:
