@@ -15,7 +15,6 @@ namespace Collections.Extensions.ToPyString
 
             return source switch
             {
-                null => new NullPyStringConverter(source, sourceContainers, prefix),
                 char ch => new StringPyStringConverter(ch, sourceContainers, prefix),
                 string str => new StringPyStringConverter(str, sourceContainers, prefix),
                 decimal dec => new DecimalPyStringConverter(dec, sourceContainers, prefix),

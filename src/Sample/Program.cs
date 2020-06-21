@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 using Collections.Extensions.ToPyString;
+using CollectionExtensions = Collections.Extensions.ToPyString.CollectionExtensions;
 
 namespace Sample
 {
@@ -28,7 +29,7 @@ namespace Sample
             Console.WriteLine("Self-containing list with subcollections: " + complexList.ToPyString());
             Console.WriteLine("Regular object without ToString override: " + objWithoutToString.ToPyString());
             Console.WriteLine("Object with ToString override: " + objWithToString.ToPyString());
-            Console.WriteLine("Dynamic object: " + Collections.Extensions.ToPyString.CollectionExtensions.ToPyString(dynObject));
+            Console.WriteLine("Dynamic object: " + CollectionExtensions.ToPyString(dynObject));
             Console.WriteLine("List containing a dynamic object: " + listWithDynamicObject.ToPyString());
         }
 
