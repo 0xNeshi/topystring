@@ -1,14 +1,10 @@
 name: Build
 
 on:
-  push:
-    branches-ignore: [ master ]
-    paths:
-      - 'src/Collections.Extensions.ToPyString**'
   pull_request:
-    branches-ignore: [ master ]
+    branches: [ master, develop ]
     paths:
-      - 'src/Collections.Extensions.ToPyString**'
+      - 'src/**'
 
 jobs:
   build:

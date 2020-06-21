@@ -23,6 +23,7 @@ namespace Collections.Extensions.ToPyString
                 double doub => new DecimalPyStringConverter(doub, sourceContainers, prefix),
                 DictionaryEntry dictEntry => new DictionaryEntryPyStringConverter(dictEntry, sourceContainers, prefix),
                 IDictionary dictionary => new DictionaryPyStringConverter(dictionary, sourceContainers, prefix),
+                Array array when array.Rank > 1 => new MultidimensionalArrayPyStringConverter(array, sourceContainers, prefix),
                 IEnumerable enumerable => new EnumerablePyStringConverter(enumerable, sourceContainers, prefix),
                 _ => new ObjectPyStringConverter(source, sourceContainers, prefix),
             };
