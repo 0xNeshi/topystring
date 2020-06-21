@@ -2,11 +2,15 @@ name: Build
 
 on:
   push:
-    paths:
-      - 'src/Collections.Extensions.ToPyString/**'
+    branches: [ master ]
+    paths-ignore:
+      - '**'
+      - '!src/Collections.Extensions.ToPyString/**'
   pull_request:
-    paths:
-      - 'src/Collections.Extensions.ToPyString/**'
+    branches: [ master ]
+    paths-ignore:
+      - '**'
+      - '!src/Collections.Extensions.ToPyString/**'
 
 jobs:
   build:
