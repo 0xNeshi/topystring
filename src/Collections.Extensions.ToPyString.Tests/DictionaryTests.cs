@@ -42,6 +42,7 @@ namespace Collections.Extensions.ToPyString.Tests
                 ["key for object with ToString override"] = someClassWithToString,
                 [someClassNoToString] = "value for object with no ToString",
                 [someClassWithToString] = "value for object with ToString override",
+                ['c'] = new List<object> { null, 1, 'a', "str", new object() },
                 [1.02] = new Dictionary<string, string> { ["subdict key1"] = "subdict value1" }
             };
             var expectedResult = $"" +
@@ -52,6 +53,7 @@ namespace Collections.Extensions.ToPyString.Tests
                     $"'key for object with ToString override': {someClassWithToString}, " +
                     $"{typeof(SomeClassNoToString).FullName}: 'value for object with no ToString', " +
                     $"{someClassWithToString}: 'value for object with ToString override', " +
+                    $"'c': [null, 1, 'a', 'str', System.Object], " +
                     $"1.02: {{'subdict key1': 'subdict value1'}}" +
                 $"}}";
 
@@ -79,6 +81,34 @@ namespace Collections.Extensions.ToPyString.Tests
             var expectedResult = "{1: 1, 'self': {...}}";
 
             var result = dictionary.ToPyString();
+
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public void Prints_Dictionary_Containing_List()
+        {
+            var list = new List<object> { 1, 'a', "str" };
+            var dict = new Dictionary<object, object> { ["key1"] = 1, ["list"] = list };
+            list.Add(dict);
+
+            var expectedResult = "{'key1': 1, 'list': [1, 'a', 'str', {...}]}";
+
+            var result = dict.ToPyString();
+
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public void Prints_Dictionary_Containing_List_Containing_Parent_Dictionary()
+        {
+            var list = new List<object> { 1, 'a', "str" };
+            var dict = new Dictionary<object, object> { ["key1"] = 1, ["list"] = list };
+            list.Add(dict);
+
+            var expectedResult = "{'key1': 1, 'list': [1, 'a', 'str', {...}]}";
+
+            var result = dict.ToPyString();
 
             Assert.Equal(expectedResult, result);
         }
