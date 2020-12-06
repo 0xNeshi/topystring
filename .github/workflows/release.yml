@@ -1,46 +1,69 @@
-name: Release
+name: Create Release
 
 on:
   pull_request:
-    branches: [ master ]
+    types: [closed]
+    branches: [master]
+    paths:
+      - 'src/**'
 
 jobs:
-  release:
+  build:
 
-    runs-on: windows-latest
+    runs-on: ${{ matrix.os }}
     
     defaults:
       run:
         working-directory: src
         
+    strategy:
+      matrix:
+        os: [macos-latest, windows-latest, ubuntu-16.04, ubuntu-18.04, ubuntu-20.04]
+        dotnet: [ '2.1.x', '2.2.x', '3.0.x', '3.1.x' ]
+    
+    name: ${{ matrix.dotnet }} on '${{ matrix.os }}'
+    
     steps:
-    - uses: actions/checkout@v2
-    - name: 🔨 Use .NET Core 2.0 SDK
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: '2.0.x'        
-    # for explanation of the hack see: https://github.com/actions/setup-dotnet/issues/25#issuecomment-646925506  
-    - name: 🪓 **DOTNET HACK** 🪓
-      shell: pwsh
-      run: |
-        $version = Split-Path (Split-Path $ENV:DOTNET_ROOT -Parent) -Leaf;
-        $root = Split-Path (Split-Path $ENV:DOTNET_ROOT -Parent) -Parent;
-        $directories = Get-ChildItem $root | Where-Object { $_.Name -ne $version };
-        foreach ($dir in $directories) {
-          $from = $dir.FullName;
-          $to = "$root/$version";
-          Write-Host Copying from $from to $to;
-          Copy-Item "$from\*" $to -Recurse -Force;
-        }
-    - name: Install dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build --configuration Release --no-restore
-    - name: Run tests
-      run: dotnet test --no-restore --verbosity normal
-    - name: Generate NuGet package
-      run: |  
-        cd Collections.Extensions.ToPyString
-        dotnet pack -c Release -o out --no-restore --no-build
-    - name: Push generated package to NuGet registry
-      run: dotnet nuget push Collections.Extensions.ToPyString\out\*.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json --no-symbols true --skip-duplicate
+      - uses: actions/checkout@v2
+      - id: set-project
+        uses: actions/github-script@v3
+        with:
+          script: |
+            const versionNumbers = '${{ matrix.dotnet }}'.split('.')
+            const coreVersion = versionNumbers[0] + versionNumbers[1]
+            core.setOutput('project', `Collections.Extensions.ToPyString.NetCore${coreVersion}.Tests`)
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ matrix.dotnet }}
+      - name: Install dependencies
+        run: dotnet restore ${{ steps.set-project.outputs.project }}
+      - name: Build
+        run: dotnet build ${{ steps.set-project.outputs.project }} --configuration Release --no-restore
+      - name: Run Tests
+        run: dotnet test ${{ steps.set-project.outputs.project }} --no-restore --verbosity normal
+        
+  release:
+  
+    runs-on: windows-latest
+    
+    defaults:
+      run:
+        working-directory: src
+    
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '3.1.x'
+      - name: Install Dependencies
+        run: dotnet restore
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+      - name: Generate NuGet Package
+        run: |
+          cd Collections.Extensions.ToPyString
+          dotnet pack -c Release -o out --no-restore --no-build
+      - name: Push generated package to NuGet registry
+        run: dotnet nuget push Collections.Extensions.ToPyString\out\*.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json --no-symbols true --skip-duplicate
