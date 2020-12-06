@@ -23,25 +23,20 @@ jobs:
     name: ${{ matrix.dotnet }} on '${{ matrix.os }}'
     steps:
       - uses: actions/checkout@v2
-      - id: get-core-version
+      - id: set-project
         uses: actions/github-script@v3
         with:
           script: |
             const versionNumbers = '${{ matrix.dotnet }}'.split('.')
             const coreVersion = versionNumbers[0] + versionNumbers[1]
-            core.setOutput('coreVersion', coreVersion)
-      - run: echo Setting env variable 'PROJECT_TO_BUILD'=${{steps.get-core-version.outputs.coreVersion}}
-        env:
-          PROJECT_TO_BUILD: Collections.Extensions.ToPyString.NetCore${{steps.get-core-version.outputs.coreVersion}}.Tests
-      - run: echo ${{ env }}
-      - run: echo ${{ env.PROJECT_TO_BUILD }}
+            core.setOutput('project', `Collections.Extensions.ToPyString.NetCore${coreVersion}.Tests`)
       - name: Setup dotnet
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: ${{ matrix.dotnet }}
       - name: Install dependencies
-        run: dotnet restore ${{ env.PROJECT_TO_BUILD }}
+        run: dotnet restore ${{ steps.set-project.outputs.project }}
       - name: Build
-        run: dotnet build ${{ env.PROJECT_TO_BUILD }} --configuration Release --no-restore
+        run: dotnet build ${{ steps.set-project.outputs.project }} --configuration Release --no-restore
       - name: Run Tests
-        run: dotnet test ${{ env.PROJECT_TO_BUILD }} --no-restore --verbosity normal
+        run: dotnet test ${{ steps.set-project.outputs.project }} --no-restore --verbosity normal
