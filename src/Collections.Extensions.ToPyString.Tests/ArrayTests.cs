@@ -112,10 +112,10 @@ namespace Collections.Extensions.ToPyString.Tests
         public void Prints_Array_Containing_Dictionary()
         {
             var dict = new Dictionary<object, object> { ["key1"] = 1, [2] = "value2" };
-            var list = new object[] { 1, 2, dict };
+            var array = new object[] { 1, 2, dict };
             var expectedResult = "[1, 2, {'key1': 1, 2: 'value2'}]";
 
-            var result = list.ToPyString();
+            var result = array.ToPyString();
 
             Assert.Equal(expectedResult, result);
         }

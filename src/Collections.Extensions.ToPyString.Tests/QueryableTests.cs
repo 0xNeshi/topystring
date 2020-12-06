@@ -55,7 +55,7 @@ namespace Collections.Extensions.ToPyString.Tests
         }
 
         [Fact]
-        public void Prints_Queryable_Of_Queryables()
+        public void Prints_Queryable_Of_Lists()
         {
             var queryable = new List<List<int>> { new List<int> { 1, 2, 3 }, new List<int> { 88, -1, -4 } }.AsQueryable();
             var expectedResult = "[[1, 2, 3], [88, -1, -4]]";
@@ -71,6 +71,20 @@ namespace Collections.Extensions.ToPyString.Tests
             var dict = new Dictionary<object, object> { ["key1"] = 1, [2] = "value2" };
             var queryable = new List<object> { 1, 2, dict }.AsQueryable();
             var expectedResult = "[1, 2, {'key1': 1, 2: 'value2'}]";
+
+            var result = queryable.ToPyString();
+
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public void Prints_Queryable_Containing_Dictionary_Containing_Parent_Queryable()
+        {
+            var dict = new Dictionary<object, object> { ["key1"] = 1, [2] = "value2" };
+            var queryable = new List<object> { 1, 2, dict }.AsQueryable();
+            dict["parent"] = queryable;
+
+            var expectedResult = "[1, 2, {'key1': 1, 2: 'value2', 'parent': [...]}]";
 
             var result = queryable.ToPyString();
 

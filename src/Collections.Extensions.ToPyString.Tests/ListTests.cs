@@ -18,10 +18,10 @@ namespace Collections.Extensions.ToPyString.Tests
         }
 
         [Fact]
-        public void Prints_List_Of_Strings()
+        public void Prints_List_Of_Chars()
         {
-            var list = new List<string> { "john", "doe", "test" };
-            var expectedResult = "['john', 'doe', 'test']";
+            var list = new List<char> { 'a', 'b', 'c' };
+            var expectedResult = "['a', 'b', 'c']";
 
             var result = list.ToPyString();
 
@@ -29,10 +29,10 @@ namespace Collections.Extensions.ToPyString.Tests
         }
 
         [Fact]
-        public void Prints_List_Of_Chars()
+        public void Prints_List_Of_Strings()
         {
-            var list = new List<char> { 'a', 'b', 'c' };
-            var expectedResult = "['a', 'b', 'c']";
+            var list = new List<string> { "john", "doe", "test" };
+            var expectedResult = "['john', 'doe', 'test']";
 
             var result = list.ToPyString();
 
