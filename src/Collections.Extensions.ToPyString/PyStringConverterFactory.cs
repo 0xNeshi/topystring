@@ -15,7 +15,7 @@ namespace Collections.Extensions.ToPyString
 
             IPyStringConverter converter = source switch
             {
-                char ch => (IPyStringConverter)new StringPyStringConverter(ch, sourceContainers, prefix),
+                char ch => new StringPyStringConverter(ch, sourceContainers, prefix),
                 string str => new StringPyStringConverter(str, sourceContainers, prefix),
                 decimal dec => new DecimalPyStringConverter(dec, sourceContainers, prefix),
                 float fl => new DecimalPyStringConverter(fl, sourceContainers, prefix),
