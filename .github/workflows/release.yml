@@ -67,6 +67,7 @@ jobs:
             const versionNumbers = '${{ matrix.dotnet }}'.split('.')
             const coreVersion = versionNumbers[0] + versionNumbers[1]
             core.setOutput('project', `Collections.Extensions.ToPyString.NetCore${coreVersion}.Tests`)
+      - run: echo ${{ steps.set-project-to-build.outputs.project }}
       - name: Setup dotnet
         uses: actions/setup-dotnet@v1
         with:
