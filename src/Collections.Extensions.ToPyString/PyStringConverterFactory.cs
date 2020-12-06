@@ -15,7 +15,7 @@ namespace Collections.Extensions.ToPyString
 
             IPyStringConverter converter = source switch
             {
-                char ch => new StringPyStringConverter(ch, sourceContainers, prefix),
+                char ch => (IPyStringConverter)new StringPyStringConverter(ch, sourceContainers, prefix),
                 string str => new StringPyStringConverter(str, sourceContainers, prefix),
                 decimal dec => new DecimalPyStringConverter(dec, sourceContainers, prefix),
                 float fl => new DecimalPyStringConverter(fl, sourceContainers, prefix),
@@ -34,8 +34,8 @@ namespace Collections.Extensions.ToPyString
         {
             var sourceType = source?.GetType();
 
-            if (source != null 
-                && sourceType.IsGenericType 
+            if (source != null
+                && sourceType.IsGenericType
                 && sourceType.GetGenericTypeDefinition() == typeof(KeyValuePair<,>))
             {
                 var key = sourceType.GetProperty(nameof(KeyValuePair<object, object>.Key)).GetValue(source, null);
