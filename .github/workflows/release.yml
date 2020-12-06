@@ -24,16 +24,26 @@ jobs:
     name: ${{ matrix.dotnet }} on '${{ matrix.os }}'
     steps:
       - uses: actions/checkout@v2
+      - id: get-core-version
+        uses: actions/github-script@v3
+        with:
+          script: |
+            const versionNumbers = '${{ matrix.dotnet }}'.split('.')
+            const coreVersion = versionNumbers[0] + versionNumbers[1]
+            core.setOutput('coreVersion', coreVersion)
+      - run: echo Setting env variable 'PROJECT_TO_BUILD'=${{steps.get-core-version.outputs.coreVersion}}
+        env:
+          PROJECT_TO_BUILD: Collections.Extensions.ToPyString.NetCore${{steps.get-core-version.outputs.coreVersion}}.Tests
       - name: Setup dotnet
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: ${{ matrix.dotnet }}
       - name: Install dependencies
-        run: dotnet restore
+        run: dotnet restore $PROJECT_TO_BUILD
       - name: Build
-        run: dotnet build --configuration Release --no-restore
-      - name: Run tests
-        run: dotnet test --no-restore --verbosity normal
+        run: dotnet build $PROJECT_TO_BUILD --configuration Release --no-restore
+      - name: Run Tests
+        run: dotnet test $PROJECT_TO_BUILD --no-restore --verbosity normal
 
   release:
 
