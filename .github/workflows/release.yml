@@ -74,11 +74,11 @@ jobs:
         with:
           dotnet-version: ${{ matrix.dotnet }}
       - name: Install dependencies
-        run: dotnet restore $PROJECT_TO_BUILD
+        run: dotnet restore ${{ env.PROJECT_TO_BUILD }}
       - name: Build
-        run: dotnet build $PROJECT_TO_BUILD --configuration Release --no-restore
+        run: dotnet build ${{ env.PROJECT_TO_BUILD }} --configuration Release --no-restore
       - name: Run Tests
-        run: dotnet test $PROJECT_TO_BUILD --no-restore --verbosity normal
+        run: dotnet test ${{ env.PROJECT_TO_BUILD }} --no-restore --verbosity normal
 
   release:
 
