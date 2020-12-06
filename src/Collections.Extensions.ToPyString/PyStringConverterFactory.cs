@@ -13,7 +13,7 @@ namespace Collections.Extensions.ToPyString
                 return new DictionaryEntryPyStringConverter(dictionaryEntry, sourceContainers, prefix);
             }
 
-            return source switch
+            IPyStringConverter converter = source switch
             {
                 char ch => new StringPyStringConverter(ch, sourceContainers, prefix),
                 string str => new StringPyStringConverter(str, sourceContainers, prefix),
@@ -26,6 +26,8 @@ namespace Collections.Extensions.ToPyString
                 IEnumerable enumerable => new EnumerablePyStringConverter(enumerable, sourceContainers, prefix),
                 _ => new ObjectPyStringConverter(source, sourceContainers, prefix),
             };
+
+            return converter;
         }
 
         private static bool TryCastToDictionaryEntry(object source, out DictionaryEntry dictionaryEntry)
