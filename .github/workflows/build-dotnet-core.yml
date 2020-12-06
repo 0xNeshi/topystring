@@ -23,6 +23,14 @@ jobs:
     name: ${{ matrix.dotnet }} on '${{ matrix.os }}'
     steps:
       - uses: actions/checkout@v2
+      - id: get-core-version
+        uses: actions/github-script@v3
+        with:
+          script: |
+            const versionNumbers = matrix.os.split('.')
+            const coreVersion = versionNumbers[0] + versionNumbers[1]
+            core.setOutput('coreVersion', coreVersion)
+      - run: echo "${{steps.get-core-version.outputs.coreVersion}}"
       - name: Setup dotnet
         uses: actions/setup-dotnet@v1
         with:
@@ -32,4 +40,4 @@ jobs:
       - name: Build
         run: dotnet build --configuration Release --no-restore
       - name: Run Tests
-        run: dotnet test Collections.Extensions.ToPyString.Tests.2.1 --no-restore --verbosity normal
+        run: dotnet test Collections.Extensions.ToPyString.NetCore${{ steps.get-core-version.outputs.coreVersion }}.Tests --no-restore --verbosity normal
