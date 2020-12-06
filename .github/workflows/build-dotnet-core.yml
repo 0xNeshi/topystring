@@ -27,7 +27,7 @@ jobs:
         uses: actions/github-script@v3
         with:
           script: |
-            const versionNumbers = matrix.os.split('.')
+            const versionNumbers = ${{ matrix.dotnet }}.split('.')
             const coreVersion = versionNumbers[0] + versionNumbers[1]
             core.setOutput('coreVersion', coreVersion)
       - run: echo "${{steps.get-core-version.outputs.coreVersion}}"
