@@ -6,7 +6,7 @@
     <PackageId>Collections.Extensions.ToPyString</PackageId>
     <Version>1.2.1</Version>
     <Authors>Nenad Misic</Authors>
-    <ReleaseNotes>Improve stringification of 'null' values</ReleaseNotes>
+    <ReleaseNotes>Improve null value stringification.</ReleaseNotes>
     <PackageDescription>.NET System.Collections ToString extension for converting collections (and other types!) to a string in the format that is based on the one in Python</PackageDescription>
     <Description>.NET System.Collections ToString extension for converting collections (and other types!) to a string in the format that is based on the one in Python</Description>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
@@ -17,7 +17,7 @@
     <PackageProjectUrl>https://misicnenad.github.io/topystring/</PackageProjectUrl>
     <PackageIconUrl>https://raw.githubusercontent.com/misicnenad/topystring/master/src/Collections.Extensions.ToPyString/images/string.png</PackageIconUrl>
     <PackageIcon>string.png</PackageIcon>
-    <PackageReleaseNotes>Improve stringification of 'null' values</PackageReleaseNotes>
+    <PackageReleaseNotes>Improve null value stringification.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
