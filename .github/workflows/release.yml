@@ -9,20 +9,15 @@ on:
 
 jobs:
   build:
-
     runs-on: ${{ matrix.os }}
-
     defaults:
       run:
         working-directory: src
-
     strategy:
       matrix:
         os: [macos-latest, windows-latest, ubuntu-16.04, ubuntu-18.04, ubuntu-20.04]
         dotnet: [ '2.1.x', '2.2.x', '3.0.x', '3.1.x' ]
-
     name: ${{ matrix.dotnet }} on '${{ matrix.os }}'
-
     steps:
       - uses: actions/checkout@v2
       - id: set-project
@@ -44,13 +39,11 @@ jobs:
         run: dotnet test ${{ steps.set-project.outputs.project }} --no-restore --verbosity normal
 
   release:
-
+    needs: build
     runs-on: windows-latest
-
     defaults:
       run:
         working-directory: src
-
     steps:
       - uses: actions/checkout@v2
       - name: Setup .NET
