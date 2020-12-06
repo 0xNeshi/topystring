@@ -40,17 +40,6 @@ namespace Collections.Extensions.ToPyString.Tests
         }
 
         [Fact]
-        public void Prints_List_Of_Chars()
-        {
-            var list = new List<char> { 'a', 'b', 'c' };
-            var expectedResult = "['a', 'b', 'c']";
-
-            var result = list.ToPyString();
-
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
         public void Prints_List_With_Null()
         {
             var list = new List<object> { 1, new object(), null };
