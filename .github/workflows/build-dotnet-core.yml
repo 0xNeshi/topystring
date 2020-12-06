@@ -30,14 +30,16 @@ jobs:
             const versionNumbers = '${{ matrix.dotnet }}'.split('.')
             const coreVersion = versionNumbers[0] + versionNumbers[1]
             core.setOutput('coreVersion', coreVersion)
-      - run: echo "${{steps.get-core-version.outputs.coreVersion}}"
+      - run: echo Setting env variable 'PROJECT_TO_BUILD'=${{steps.get-core-version.outputs.coreVersion}}
+        env:
+          PROJECT_TO_BUILD: Collections.Extensions.ToPyString.NetCore${{steps.get-core-version.outputs.coreVersion}}.Tests
       - name: Setup dotnet
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: ${{ matrix.dotnet }}
       - name: Install dependencies
-        run: dotnet restore Collections.Extensions.ToPyString.NetCore${{ steps.get-core-version.outputs.coreVersion }}.Tests
+        run: dotnet restore $PROJECT_TO_BUILD
       - name: Build
-        run: dotnet build Collections.Extensions.ToPyString.NetCore${{ steps.get-core-version.outputs.coreVersion }}.Tests --configuration Release --no-restore
+        run: dotnet build $PROJECT_TO_BUILD --configuration Release --no-restore
       - name: Run Tests
-        run: dotnet test Collections.Extensions.ToPyString.NetCore${{ steps.get-core-version.outputs.coreVersion }}.Tests --no-restore --verbosity normal
+        run: dotnet test $PROJECT_TO_BUILD --no-restore --verbosity normal
