@@ -10,7 +10,7 @@ ToPyString is a .NET System.Collections extension for converting collections to 
 
 The reason this small project exists is because it's a shame that C# doesn't have an in-built way of stringifying collections (like many other languages do). Although creating a ToString method for your collections isn't difficult, you shouldn't be wasting time implementing rudimentary things on every project... especially on projects you're using to just quickly try something out and Console.WriteLine the output.
 
-The extension is covered with unit tests, so you can be sure it will perform acceptably in 99.9% of cases. If you stumble upon the 0.1% of cases when it behaves strangely, please let me know either directly or by creating an issue.
+The library is covered with unit tests and was tested for .NET Core versions 2.1 -> 3.1 on Windows, Mac and Ubuntu (v16.04, v18.04 and v20.04).
 
 ## Summary
 
