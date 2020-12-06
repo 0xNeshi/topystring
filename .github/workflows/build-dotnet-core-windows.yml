@@ -1,4 +1,4 @@
-name: Build .NET Core Windows
+name: Build .NET Core ${{ matrix.dotnet }}, ${{ matrix.os }}
 
 on:
   pull_request:
@@ -9,7 +9,7 @@ on:
 jobs:
   build:
 
-    runs-on: windows-latest
+    runs-on: ${{ matrix.os }}
     
     defaults:
       run:
@@ -17,6 +17,7 @@ jobs:
         
     strategy:
       matrix:
+        os: [macos-latest, windows-latest, ubuntu-16.04, ubuntu-18.04, ubuntu-20.04]
         dotnet: [ '2.0.x', '2.1.x', '2.2.x', '3.0.x', '3.1.x' ]
     
     name: Run on .NET ${{ matrix.dotnet }}
