@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30128.74
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Collections.Extensions.ToPyString", "Collections.Extensions.ToPyString\Collections.Extensions.ToPyString.csproj", "{5C302C85-1604-4314-8017-19699555DB5E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Collections.Extensions.ToPyString.Tests.2.1", "Collections.Extensions.ToPyString.Tests.2.1\Collections.Extensions.ToPyString.Tests.2.1.csproj", "{7283BDB4-7525-4080-9AE1-33E274825796}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Collections.Extensions.ToPyString.Tests", "Collections.Extensions.ToPyString.Tests\Collections.Extensions.ToPyString.Tests.csproj", "{7283BDB4-7525-4080-9AE1-33E274825796}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample", "Sample\Sample.csproj", "{E5F3F4A8-9189-41C1-B9C4-D47562AE1E3E}"
 EndProject
