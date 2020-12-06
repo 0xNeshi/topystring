@@ -1,4 +1,4 @@
-name: Build .NET Core ${{ matrix.dotnet }}, ${{ matrix.os }}
+name: Build .NET Core
 
 on:
   pull_request:
