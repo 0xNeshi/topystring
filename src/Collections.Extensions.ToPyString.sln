@@ -9,7 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Collections.Extensions.ToPy
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample", "Sample\Sample.csproj", "{E5F3F4A8-9189-41C1-B9C4-D47562AE1E3E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Collections.Extensions.ToPyString.NetCore21.Tests", "Collections.Extensions.ToPyString.NetCore21.Tests\Collections.Extensions.ToPyString.NetCore21.Tests.csproj", "{7A48A940-DADA-4DFE-81C8-ABFB41A9804A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Collections.Extensions.ToPyString.NetCore21.Tests", "Collections.Extensions.ToPyString.NetCore21.Tests\Collections.Extensions.ToPyString.NetCore21.Tests.csproj", "{7A48A940-DADA-4DFE-81C8-ABFB41A9804A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Collections.Extensions.ToPyString.NetCore22.Tests", "Collections.Extensions.ToPyString.NetCore22.Tests\Collections.Extensions.ToPyString.NetCore22.Tests.csproj", "{F3D49BE2-9A42-4789-9325-5C6F9EC79FCB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Collections.Extensions.ToPyString.NetCore31.Tests", "Collections.Extensions.ToPyString.NetCore31.Tests\Collections.Extensions.ToPyString.NetCore31.Tests.csproj", "{61F32AB8-A86A-49E4-9788-061CC6477C57}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Collections.Extensions.ToPyString.NetCore30.Tests", "Collections.Extensions.ToPyString.NetCore30.Tests\Collections.Extensions.ToPyString.NetCore30.Tests.csproj", "{8868C086-6FA9-4E1E-95F0-2E6E5546F4D2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +39,18 @@ Global
 		{7A48A940-DADA-4DFE-81C8-ABFB41A9804A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A48A940-DADA-4DFE-81C8-ABFB41A9804A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A48A940-DADA-4DFE-81C8-ABFB41A9804A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3D49BE2-9A42-4789-9325-5C6F9EC79FCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3D49BE2-9A42-4789-9325-5C6F9EC79FCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3D49BE2-9A42-4789-9325-5C6F9EC79FCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3D49BE2-9A42-4789-9325-5C6F9EC79FCB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61F32AB8-A86A-49E4-9788-061CC6477C57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61F32AB8-A86A-49E4-9788-061CC6477C57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61F32AB8-A86A-49E4-9788-061CC6477C57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61F32AB8-A86A-49E4-9788-061CC6477C57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8868C086-6FA9-4E1E-95F0-2E6E5546F4D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8868C086-6FA9-4E1E-95F0-2E6E5546F4D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8868C086-6FA9-4E1E-95F0-2E6E5546F4D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8868C086-6FA9-4E1E-95F0-2E6E5546F4D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
