@@ -1,4 +1,4 @@
-name: .NET Core
+name: Build .NET Core Windows
 
 on:
   pull_request:
@@ -17,7 +17,7 @@ jobs:
         
     strategy:
       matrix:
-        dotnet: [ '2.2.x', '3.1.x' ]
+        dotnet: [ '2.0.x', '2.1.x', '2.2.x', '3.0.x', '3.1.x' ]
     
     name: Run on .NET ${{ matrix.dotnet }}
     steps:
@@ -30,5 +30,3 @@ jobs:
         run: dotnet restore
       - name: Build
         run: dotnet build --configuration Release --no-restore
-      - name: Test
-        run: dotnet test --no-restore --verbosity normal
