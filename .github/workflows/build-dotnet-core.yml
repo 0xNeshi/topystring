@@ -36,7 +36,7 @@ jobs:
         with:
           dotnet-version: ${{ matrix.dotnet }}
       - name: Install dependencies
-        run: dotnet restore
+        run: dotnet restore Collections.Extensions.ToPyString.NetCore${{ steps.get-core-version.outputs.coreVersion }}.Tests
       - name: Build
         run: dotnet build Collections.Extensions.ToPyString.NetCore${{ steps.get-core-version.outputs.coreVersion }}.Tests --configuration Release --no-restore
       - name: Run Tests
