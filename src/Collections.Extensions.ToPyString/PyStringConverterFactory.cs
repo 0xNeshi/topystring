@@ -8,9 +8,12 @@ namespace Collections.Extensions.ToPyString
     {
         internal static IPyStringConverter Create<T>(T source, IEnumerable<object> sourceContainers = default, string prefix = "")
         {
-            var normalizedSource = NormalizeSource(source);
+            if (PyStringConverterFactory.TryCastToDictionaryEntry(source, out var dictionaryEntry))
+            {
+                return new DictionaryEntryPyStringConverter(dictionaryEntry, sourceContainers, prefix);
+            }
 
-            switch (normalizedSource)
+            switch (source)
             {
                 case char ch:
                     return new StringPyStringConverter(ch, sourceContainers, prefix);
@@ -35,11 +38,11 @@ namespace Collections.Extensions.ToPyString
             }
         }
 
-        private static object NormalizeSource<T>(T source)
+        private static bool TryCastToDictionaryEntry(object source, out DictionaryEntry dictionaryEntry)
         {
             if (source == null)
             {
-                return source;
+                return false;
             }
 
             var sourceType = source.GetType();
@@ -49,10 +52,12 @@ namespace Collections.Extensions.ToPyString
             {
                 var key = sourceType.GetProperty(nameof(KeyValuePair<object, object>.Key)).GetValue(source, null);
                 var value = sourceType.GetProperty(nameof(KeyValuePair<object, object>.Value)).GetValue(source, null);
-                return new DictionaryEntry(key, value);
+                dictionaryEntry = new DictionaryEntry(key, value);
+
+                return true;
             }
 
-            return source;
+            return false;
         }
     }
 }
