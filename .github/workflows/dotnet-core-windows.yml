@@ -15,16 +15,17 @@ jobs:
       run:
         working-directory: src
         
+    strategy:
+      matrix:
+        dotnet: [ '2.2.x', '3.1.x' ]
+    
+    name: Run on .NET ${{ matrix.dotnet }}
     steps:
       - uses: actions/checkout@v2
       - name: Setup dotnet
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: '2.2.103'
-      - name: Setup dotnet
-        uses: actions/setup-dotnet@v1
-        with:
-         dotnet-version: '3.1.x'
+          dotnet-version: ${{ matrix.dotnet }}
       - name: Install dependencies
         run: dotnet restore
       - name: Build
