@@ -18,7 +18,7 @@ jobs:
     strategy:
       matrix:
         os: [macos-latest, windows-latest, ubuntu-16.04, ubuntu-18.04, ubuntu-20.04]
-        dotnet: [ '2.1.x', '2.2.x', '3.0.x', '3.1.x' ]
+        dotnet: [ '2.1.x' ]
     
     name: ${{ matrix.dotnet }} on '${{ matrix.os }}'
     steps:
@@ -32,4 +32,4 @@ jobs:
       - name: Build
         run: dotnet build --configuration Release --no-restore
       - name: Run Tests
-        run: dotnet test --no-restore --verbosity normal
+        run: dotnet test Collections.Extensions.ToPyString.Tests.2.1 --no-restore --verbosity normal
