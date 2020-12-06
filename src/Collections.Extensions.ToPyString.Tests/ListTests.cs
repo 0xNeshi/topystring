@@ -18,6 +18,17 @@ namespace Collections.Extensions.ToPyString.Tests
         }
 
         [Fact]
+        public void Prints_List_Of_Chars()
+        {
+            var list = new List<char> { 'a', 'b', 'c' };
+            var expectedResult = "['a', 'b', 'c']";
+
+            var result = list.ToPyString();
+
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
         public void Prints_List_Of_Strings()
         {
             var list = new List<string> { "john", "doe", "test" };
@@ -93,6 +104,49 @@ namespace Collections.Extensions.ToPyString.Tests
             var dict = new Dictionary<object, object> { ["key1"] = 1, [2] = "value2" };
             var list = new List<object> { 1, 2, dict };
             var expectedResult = "[1, 2, {'key1': 1, 2: 'value2'}]";
+
+            var result = list.ToPyString();
+
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public void Prints_List_Containing_Dictionary_Containing_Parent_List()
+        {
+            var dict = new Dictionary<object, object> { ["key1"] = 1, [2] = "value2" };
+            var list = new List<object> { 1, 2, dict };
+            dict["parent"] = list;
+
+            var expectedResult = "[1, 2, {'key1': 1, 2: 'value2', 'parent': [...]}]";
+
+            var result = list.ToPyString();
+
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public void Prints_List_Of_List_ChildList2_Contains_ChildList1()
+        {
+            var childList1 = new List<object> { "asd" };
+            var childList2 = new List<object> { 2, childList1 };
+            var list = new List<object> { childList1, childList2 };
+
+            var expectedResult = "[['asd'], [2, ['asd']]]";
+
+            var result = list.ToPyString();
+
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public void Prints_List_Of_List_ChildLists_Contain_Each_Other()
+        {
+            var childList1 = new List<object> { "asd" };
+            var childList2 = new List<object> { 2, childList1 };
+            childList1.Add(childList2);
+            var list = new List<object> { childList1, childList2 };
+
+            var expectedResult = "[['asd', [2, [...]]], [2, ['asd', [...]]]]";
 
             var result = list.ToPyString();
 

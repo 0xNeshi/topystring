@@ -87,5 +87,19 @@ namespace Collections.Extensions.ToPyString.Tests
 
             Assert.Equal(expectedResult, result);
         }
+
+        [Fact]
+        public void Prints_HashSet_Containing_Dictionary_Containing_Parent_HashSet()
+        {
+            var dict = new Dictionary<object, object> { ["key1"] = 1, [2] = "value2" };
+            var set = new HashSet<object> { 1, 2, dict };
+            dict["parent"] = set;
+
+            var expectedResult = "[1, 2, {'key1': 1, 2: 'value2', 'parent': [...]}]";
+
+            var result = set.ToPyString();
+
+            Assert.Equal(expectedResult, result);
+        }
     }
 }

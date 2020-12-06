@@ -11,7 +11,7 @@ namespace Collections.Extensions.ToPyString
 
         public override string GetConvertedValue()
         {
-            return Prefix + Source.ToString();
+            return Prefix + (Source?.ToString() ?? "null");
         }
     }
 }

@@ -1,5 +1,5 @@
 using System;
-
+using System.Collections.Generic;
 using Xunit;
 
 namespace Collections.Extensions.ToPyString.Tests
@@ -102,6 +102,32 @@ namespace Collections.Extensions.ToPyString.Tests
         {
             var array = new int[][] { new int[] { 1, 2, 3, -2 }, new int[] { 88, -1, -4 }, Array.Empty<int>(), new int[] { -100 } };
             var expectedResult = "[[1, 2, 3, -2], [88, -1, -4], [], [-100]]";
+
+            var result = array.ToPyString();
+
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public void Prints_Array_Containing_Dictionary()
+        {
+            var dict = new Dictionary<object, object> { ["key1"] = 1, [2] = "value2" };
+            var array = new object[] { 1, 2, dict };
+            var expectedResult = "[1, 2, {'key1': 1, 2: 'value2'}]";
+
+            var result = array.ToPyString();
+
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public void Prints_Array_Containing_Dictionary_Containing_Parent_Array()
+        {
+            var dict = new Dictionary<object, object> { ["key1"] = 1, [2] = "value2" };
+            var array = new object[] { 1, 2, dict };
+            dict["parent"] = array;
+
+            var expectedResult = "[1, 2, {'key1': 1, 2: 'value2', 'parent': [...]}]";
 
             var result = array.ToPyString();
 

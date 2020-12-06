@@ -1,9 +1,8 @@
-name: Create Release
+name: Build .NET Core
 
 on:
   pull_request:
-    types: [closed]
-    branches: [master]
+    branches: [ master, develop ]
     paths:
       - 'src/**'
 
@@ -11,18 +10,17 @@ jobs:
   build:
 
     runs-on: ${{ matrix.os }}
-
+    
     defaults:
       run:
         working-directory: src
-
+        
     strategy:
       matrix:
         os: [macos-latest, windows-latest, ubuntu-16.04, ubuntu-18.04, ubuntu-20.04]
         dotnet: [ '2.1.x', '2.2.x', '3.0.x', '3.1.x' ]
-
+    
     name: ${{ matrix.dotnet }} on '${{ matrix.os }}'
-
     steps:
       - uses: actions/checkout@v2
       - id: set-project
@@ -42,28 +40,3 @@ jobs:
         run: dotnet build ${{ steps.set-project.outputs.project }} --configuration Release --no-restore
       - name: Run Tests
         run: dotnet test ${{ steps.set-project.outputs.project }} --no-restore --verbosity normal
-
-  release:
-
-    runs-on: windows-latest
-
-    defaults:
-      run:
-        working-directory: src
-
-    steps:
-      - uses: actions/checkout@v2
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: '3.1.x'
-      - name: Install Dependencies
-        run: dotnet restore
-      - name: Build
-        run: dotnet build --configuration Release --no-restore
-      - name: Generate NuGet Package
-        run: |
-          cd Collections.Extensions.ToPyString
-          dotnet pack -c Release -o out --no-restore --no-build
-      - name: Push generated package to NuGet registry
-        run: dotnet nuget push Collections.Extensions.ToPyString\out\*.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json --no-symbols true --skip-duplicate
