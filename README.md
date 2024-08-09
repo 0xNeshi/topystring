@@ -164,7 +164,7 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduc
 
 ## Authors
 
-- **Nenad Misic** - [misicnenad](https://github.com/misicnenad)
+- **Nenad** - [0xNeshi](https://github.com/0xNeshi)
 
 ## License
 
