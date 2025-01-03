@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Collections.Extensions.ToPyString.Tests
 {
-    public class Net70ValueTypesTests
+    public class Net80ValueTypesTests
     {
         [Fact]
         public void Prints_Vector512()
