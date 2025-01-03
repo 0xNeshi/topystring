@@ -7,6 +7,17 @@ namespace Collections.Extensions.ToPyString.Tests
     public class PrimitiveTypesTests
     {
         [Fact]
+        public void Prints_Bool()
+        {
+            bool value = true;
+            var expectedResult = value.ToString(CultureInfo.InvariantCulture);
+
+            var result = value.ToPyString();
+
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
         public void Prints_SByte()
         {
             sbyte value = 0x7F;

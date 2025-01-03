@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <Compile Include="..\Collections.Extensions.ToPyString.Tests\*.cs" Link="%(Filename)%(Extension)" />
+    <Compile Include="..\Collections.Extensions.ToPyString.Net50.Tests\*.cs" Link="%(Filename)%(Extension)" />
   </ItemGroup>
 
   <ItemGroup>
