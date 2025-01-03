@@ -71,9 +71,16 @@ jobs:
       - name: Determine Test Project
         id: set-project
         run: |
-          VERSION="${{ matrix.dotnet }}"
-          CORE_VERSION="${VERSION%%.*}${VERSION#*.}"
-          echo "project=Collections.Extensions.ToPyString.NetCore${CORE_VERSION}.Tests" >> $GITHUB_OUTPUT
+          case "${{ matrix.dotnet }}" in
+            "2.1.x") echo "project=Collections.Extensions.ToPyString.NetCore21.Tests" >> $GITHUB_OUTPUT ;;
+            "3.1.x") echo "project=Collections.Extensions.ToPyString.NetCore31.Tests" >> $GITHUB_OUTPUT ;;
+            "5.0.x") echo "project=Collections.Extensions.ToPyString.Net50.Tests" >> $GITHUB_OUTPUT ;;
+            "6.0.x") echo "project=Collections.Extensions.ToPyString.Net60.Tests" >> $GITHUB_OUTPUT ;;
+            "7.0.x") echo "project=Collections.Extensions.ToPyString.Net70.Tests" >> $GITHUB_OUTPUT ;;
+            "8.0.x") echo "project=Collections.Extensions.ToPyString.Net80.Tests" >> $GITHUB_OUTPUT ;;
+            "9.0.x") echo "project=Collections.Extensions.ToPyString.Net90.Tests" >> $GITHUB_OUTPUT ;;
+            *) echo "Error: Unsupported .NET version: ${{ matrix.dotnet }}" && exit 1 ;;
+          esac
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
