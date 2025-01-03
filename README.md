@@ -1,5 +1,6 @@
 # ToPyString
 
+[![Build & Test .NET Library](https://github.com/0xNeshi/topystring/actions/workflows/build-dotnet-core.yml/badge.svg)](https://github.com/0xNeshi/topystring/actions/workflows/build-dotnet-core.yml)
 <a href="https://www.nuget.org/packages/Collections.Extensions.ToPyString" target="_blank"><img src="https://img.shields.io/nuget/v/Collections.Extensions.ToPyString?logo=nuget" alt="download" /></a>
 <a href="https://opensource.org/licenses/MIT" target="_blank"><img src="https://img.shields.io/github/license/misicnenad/topystring?color=yellow" alt="download" /></a>
 <a href="https://github.com/misicnenad/topystring/issues" target="_blank"><img src="assets/contributions.svg" alt="contributions" /></a>
