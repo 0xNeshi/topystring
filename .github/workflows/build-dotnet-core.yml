@@ -71,16 +71,28 @@ jobs:
       - name: Determine Test Project
         id: set-project
         run: |
-          case "${{ matrix.dotnet }}" in
-            "2.1.x") echo "project=Collections.Extensions.ToPyString.NetCore21.Tests" >> $GITHUB_OUTPUT ;;
-            "3.1.x") echo "project=Collections.Extensions.ToPyString.NetCore31.Tests" >> $GITHUB_OUTPUT ;;
-            "5.0.x") echo "project=Collections.Extensions.ToPyString.Net50.Tests" >> $GITHUB_OUTPUT ;;
-            "6.0.x") echo "project=Collections.Extensions.ToPyString.Net60.Tests" >> $GITHUB_OUTPUT ;;
-            "7.0.x") echo "project=Collections.Extensions.ToPyString.Net70.Tests" >> $GITHUB_OUTPUT ;;
-            "8.0.x") echo "project=Collections.Extensions.ToPyString.Net80.Tests" >> $GITHUB_OUTPUT ;;
-            "9.0.x") echo "project=Collections.Extensions.ToPyString.Net90.Tests" >> $GITHUB_OUTPUT ;;
-            *) echo "Error: Unsupported .NET version: ${{ matrix.dotnet }}" && exit 1 ;;
-          esac
+          if [[ "$RUNNER_OS" == "Windows" ]]; then
+            if (${{ matrix.dotnet }} -eq "2.1.x") { Write-Output "project=Collections.Extensions.ToPyString.NetCore21.Tests" } 
+            elseif (${{ matrix.dotnet }} -eq "3.1.x") { Write-Output "project=Collections.Extensions.ToPyString.NetCore31.Tests" } 
+            elseif (${{ matrix.dotnet }} -eq "5.0.x") { Write-Output "project=Collections.Extensions.ToPyString.Net50.Tests" } 
+            elseif (${{ matrix.dotnet }} -eq "6.0.x") { Write-Output "project=Collections.Extensions.ToPyString.Net60.Tests" } 
+            elseif (${{ matrix.dotnet }} -eq "7.0.x") { Write-Output "project=Collections.Extensions.ToPyString.Net70.Tests" } 
+            elseif (${{ matrix.dotnet }} -eq "8.0.x") { Write-Output "project=Collections.Extensions.ToPyString.Net80.Tests" } 
+            elseif (${{ matrix.dotnet }} -eq "9.0.x") { Write-Output "project=Collections.Extensions.ToPyString.Net90.Tests" } 
+            else { Write-Error "Unsupported .NET version: ${{ matrix.dotnet }}" }
+          else
+            # Code for Linux/macOS
+            case "${{ matrix.dotnet }}" in
+              "2.1.x") echo "project=Collections.Extensions.ToPyString.NetCore21.Tests" ;;
+              "3.1.x") echo "project=Collections.Extensions.ToPyString.NetCore31.Tests" ;;
+              "5.0.x") echo "project=Collections.Extensions.ToPyString.Net50.Tests" ;;
+              "6.0.x") echo "project=Collections.Extensions.ToPyString.Net60.Tests" ;;
+              "7.0.x") echo "project=Collections.Extensions.ToPyString.Net70.Tests" ;;
+              "8.0.x") echo "project=Collections.Extensions.ToPyString.Net80.Tests" ;;
+              "9.0.x") echo "project=Collections.Extensions.ToPyString.Net90.Tests" ;;
+              *) echo "Error: Unsupported .NET version: ${{ matrix.dotnet }}" && exit 1 ;;
+            esac
+          fi
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
