@@ -23,7 +23,7 @@ namespace Collections.Extensions.ToPyString.Tests
         public void Prints_Object_ToString()
         {
             var someClassWithToString = new SomeClassWithToString { SomeIntProperty = 22, SomeStringProperty = "prop" };
-            var expectedResult = someClassWithToString.ToString(CultureInfo.InvariantCulture);
+            var expectedResult = someClassWithToString.ToString();
 
             var result = someClassWithToString.ToPyString();
 

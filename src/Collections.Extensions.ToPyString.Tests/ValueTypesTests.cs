@@ -186,7 +186,7 @@ namespace Collections.Extensions.ToPyString.Tests
         public void Prints_ValueTuple()
         {
             var value = (1, "test");
-            var expectedResult = value.ToString(CultureInfo.InvariantCulture);
+            var expectedResult = value.ToString();
 
             var result = value.ToPyString();
 

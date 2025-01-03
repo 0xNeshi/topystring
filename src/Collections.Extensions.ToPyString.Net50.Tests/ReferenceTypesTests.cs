@@ -1,6 +1,4 @@
-﻿using System.Globalization;
-
-using Xunit;
+﻿using Xunit;
 
 namespace Collections.Extensions.ToPyString.Tests
 {
@@ -10,7 +8,7 @@ namespace Collections.Extensions.ToPyString.Tests
         public void Prints_Record()
         {
             var value = new TestRecord("John", 42);
-            var expectedResult = value.ToString(CultureInfo.InvariantCulture);
+            var expectedResult = value.ToString();
 
             var result = value.ToPyString();
 
@@ -21,7 +19,7 @@ namespace Collections.Extensions.ToPyString.Tests
         public void Prints_Init_Only_Record()
         {
             var value = new TestInitRecord { Name = "John", Age = 42 };
-            var expectedResult = value.ToString(CultureInfo.InvariantCulture);
+            var expectedResult = value.ToString();
 
             var result = value.ToPyString();
 

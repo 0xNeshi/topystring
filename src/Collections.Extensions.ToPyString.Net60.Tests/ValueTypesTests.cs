@@ -32,7 +32,7 @@ namespace Collections.Extensions.ToPyString.Tests
         public void Prints_Record_Struct()
         {
             var value = new TestRecordStruct("John", 42);
-            var expectedResult = value.ToString(CultureInfo.InvariantCulture);
+            var expectedResult = value.ToString();
 
             var result = value.ToPyString();
 
