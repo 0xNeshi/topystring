@@ -108,4 +108,12 @@ namespace Collections.Extensions.ToPyString.Tests
             Assert.Equal(expectedResult, result);
         }
     }
+    
+    public record TestRecord(string Name, int Age);
+
+    public record TestInitRecord
+    {
+        public string Name { get; init; }
+        public int Age { get; init; }
+    }
 }

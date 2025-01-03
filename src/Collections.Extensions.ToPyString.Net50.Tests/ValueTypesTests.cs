@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Collections.Extensions.ToPyString.Tests
 {
-    public class PrimitiveTypesTests
+    public class ValueTypesTests
     {
         [Fact]
         public void Prints_Half()
@@ -33,6 +33,28 @@ namespace Collections.Extensions.ToPyString.Tests
         {
             nuint value = 42;
             var expectedResult = value.ToString(CultureInfo.InvariantCulture);
+
+            var result = value.ToPyString();
+
+            Assert.Equal(expectedResult, result);
+        }
+        
+        [Fact]
+        public void Prints_Record()
+        {
+            var value = new TestRecord("John", 42);
+            var expectedResult = value.ToString();
+
+            var result = value.ToPyString();
+
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public void Prints_Init_Only_Record()
+        {
+            var value = new TestInitRecord { Name = "John", Age = 42 };
+            var expectedResult = value.ToString();
 
             var result = value.ToPyString();
 

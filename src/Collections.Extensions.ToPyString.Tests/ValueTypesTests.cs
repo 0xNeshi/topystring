@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Collections.Extensions.ToPyString.Tests
 {
-    public class PrimitiveTypesTests
+    public class ValueTypesTests
     {
         [Fact]
         public void Prints_Bool()
@@ -176,6 +176,17 @@ namespace Collections.Extensions.ToPyString.Tests
         {
             var value = 1.012d;
             var expectedResult = value.ToString(CultureInfo.InvariantCulture);
+
+            var result = value.ToPyString();
+
+            Assert.Equal(expectedResult, result);
+        }
+        
+        [Fact]
+        public void Prints_ValueTuple()
+        {
+            var value = (1, "test");
+            var expectedResult = value.ToString();
 
             var result = value.ToPyString();
 
