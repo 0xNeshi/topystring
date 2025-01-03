@@ -1,16 +1,13 @@
 # ToPyString
 
-<a href="https://github.com/misicnenad/topystring/actions?query=workflow%3A%22Build%22" target="_blank">![Build](https://github.com/misicnenad/topystring/workflows/Build/badge.svg)</a>
-<a href="https://github.com/misicnenad/topystring/actions?query=workflow%3A%22Release%22" target="_blank">![Release](https://github.com/misicnenad/topystring/workflows/Release/badge.svg)</a>
-<a href="https://www.nuget.org/packages/Collections.Extensions.ToPyString" target="_blank"><img src="https://img.shields.io/nuget/v/Collections.Extensions.ToPyString?logo=nuget" alt="download" /></a>
-<a href="https://opensource.org/licenses/MIT" target="_blank"><img src="https://img.shields.io/github/license/misicnenad/topystring?color=yellow" alt="download" /></a>
-<a href="https://github.com/misicnenad/topystring/issues" target="_blank"><img src="assets/contributions.svg" alt="contributions" /></a>
+[![Build & Test .NET Library](https://github.com/0xNeshi/topystring/actions/workflows/build-dotnet-core.yml/badge.svg)](https://github.com/0xNeshi/topystring/actions/workflows/build-dotnet-core.yml)
+[![NuGet](https://img.shields.io/nuget/v/Collections.Extensions.ToPyString?logo=nuget)](https://www.nuget.org/packages/Collections.Extensions.ToPyString)
+[![License](https://img.shields.io/github/license/misicnenad/topystring?color=yellow)](https://opensource.org/licenses/MIT)
+[![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen)](https://github.com/0xNeshi/topystring/issues)
 
 ToPyString is a .NET System.Collections extension for converting collections to a string in Python format. Actually you can use the extension to turn any .NET type into a Python format!
 
 The reason this small project exists is because it's a shame that C# doesn't have an in-built way of stringifying collections (like many other languages do). Although creating a ToString method for your collections isn't difficult, you shouldn't be wasting time implementing rudimentary things on every project... especially on projects you're using to just quickly try something out and Console.WriteLine the output.
-
-The extension is covered with unit tests, so you can be sure it will perform acceptably in 99.9% of cases. If you stumble upon the 0.1% of cases when it behaves strangely, please let me know either directly or by creating an issue.
 
 ## Summary
 
@@ -166,7 +163,7 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduc
 
 ## Authors
 
-- **Nenad Misic** - [misicnenad](https://github.com/misicnenad)
+- **Nenad** - [0xNeshi](https://github.com/0xNeshi)
 
 ## License
 

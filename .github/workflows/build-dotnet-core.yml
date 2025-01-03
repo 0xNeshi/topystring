@@ -1,6 +1,8 @@
-name: Build .NET Core
+name: Build & Test .NET Library
 
 on:
+  push:
+    branches: [ master, develop ]
   pull_request:
     branches: [ master, develop ]
     paths:
@@ -14,29 +16,101 @@ jobs:
     defaults:
       run:
         working-directory: src
-        
+
     strategy:
+      fail-fast: false
       matrix:
-        os: [macos-latest, windows-latest, ubuntu-16.04, ubuntu-18.04, ubuntu-20.04]
-        dotnet: [ '2.1.x', '2.2.x', '3.0.x', '3.1.x' ]
+        os: [ubuntu-20.04, ubuntu-22.04, ubuntu-24.04, macos-latest, windows-latest]
+        dotnet: [ '2.1.x', '2.2.x', '3.0.x', '3.1.x', '5.0.x', '6.0.x', '7.0.x', '8.0.x', '9.0.x' ]
+        
+        exclude:
+          # Ubuntu 16.04 supports < 5.0
+          - os: ubuntu-16.04
+            dotnet: '5.0.x'
+          - os: ubuntu-16.04
+            dotnet: '6.0.x'
+          - os: ubuntu-16.04
+            dotnet: '7.0.x'
+          - os: ubuntu-16.04
+            dotnet: '8.0.x'
+          - os: ubuntu-16.04
+            dotnet: '9.0.x'
+
+          # Ubuntu 18.04 supports only up to 6.0.x
+          - os: ubuntu-18.04
+            dotnet: '7.0.x'
+          - os: ubuntu-18.04
+            dotnet: '8.0.x'
+          - os: ubuntu-18.04
+            dotnet: '9.0.x'
+
+          # Ubuntu 20.04 does not support 9.0.x
+          - os: ubuntu-20.04
+            dotnet: '9.0.x'
+
+          # Ubuntu 22.04 does not support 2.1.x, 2.2.x and 5.0.x
+          - os: ubuntu-22.04
+            dotnet: '2.1.x'
+          - os: ubuntu-22.04
+            dotnet: '2.2.x'
+          - os: ubuntu-22.04
+            dotnet: '5.0.x'
+
+          # Ubuntu 24.04 does not support < 6.0.x
+          - os: ubuntu-24.04
+            dotnet: '2.1.x'
+          - os: ubuntu-24.04
+            dotnet: '2.2.x'
+          - os: ubuntu-24.04
+            dotnet: '3.0.x'
+          - os: ubuntu-24.04
+            dotnet: '3.1.x'
+          - os: ubuntu-24.04
+            dotnet: '5.0.x'
+
+          # MacOS does not support < 8.0.x
+          - os: macos-latest
+            dotnet: '2.1.x'
+          - os: macos-latest
+            dotnet: '2.2.x'
+          - os: macos-latest
+            dotnet: '3.0.x'
+          - os: macos-latest
+            dotnet: '3.1.x'
+          - os: macos-latest
+            dotnet: '5.0.x'
+          - os: macos-latest
+            dotnet: '6.0.x'
+          - os: macos-latest
+            dotnet: '7.0.x'
+
+    name: .NET ${{ matrix.dotnet }} on ${{ matrix.os }}
     
-    name: ${{ matrix.dotnet }} on '${{ matrix.os }}'
     steps:
-      - uses: actions/checkout@v2
-      - id: set-project
-        uses: actions/github-script@v3
-        with:
-          script: |
-            const versionNumbers = '${{ matrix.dotnet }}'.split('.')
-            const coreVersion = versionNumbers[0] + versionNumbers[1]
-            core.setOutput('project', `Collections.Extensions.ToPyString.NetCore${coreVersion}.Tests`)
-      - name: Setup dotnet
-        uses: actions/setup-dotnet@v1
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Determine Test Project
+        shell: bash
+        run: |
+          VERSION_DIGITS=$(echo "${{ matrix.dotnet }}" | grep -oE '^[0-9]+\.[0-9]')
+          CONCAT_DIGITS=$(echo "$VERSION_DIGITS" | tr -d '.')
+          if [ "$CONCAT_DIGITS" -lt 50 ]; then
+            echo "PROJECT=Collections.Extensions.ToPyString.NetCore${CONCAT_DIGITS}.Tests" >> "$GITHUB_ENV"
+          else
+            echo "PROJECT=Collections.Extensions.ToPyString.Net${CONCAT_DIGITS}.Tests" >> "$GITHUB_ENV"
+          fi
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: ${{ matrix.dotnet }}
-      - name: Install dependencies
-        run: dotnet restore ${{ steps.set-project.outputs.project }}
-      - name: Build
-        run: dotnet build ${{ steps.set-project.outputs.project }} --configuration Release --no-restore
+
+      - name: Install Dependencies
+        run: dotnet restore ${{ env.PROJECT }}
+      
+      - name: Build Library
+        run: dotnet build ${{ env.PROJECT }} --configuration Release --no-restore
+      
       - name: Run Tests
-        run: dotnet test ${{ steps.set-project.outputs.project }} --no-restore --verbosity normal
+        run: dotnet test ${{ env.PROJECT }} --no-restore --verbosity normal
