@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net5.0</TargetFrameworks>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Collections.Extensions.ToPyString.Tests\ArrayTests.cs" Link="ArrayTests.cs" />
+    <Compile Include="..\Collections.Extensions.ToPyString.Tests\DictionaryTests.cs" Link="DictionaryTests.cs" />
+    <Compile Include="..\Collections.Extensions.ToPyString.Tests\ListTests.cs" Link="ListTests.cs" />
+    <Compile Include="..\Collections.Extensions.ToPyString.Tests\PrimitiveTypesTests.cs" Link="PrimitiveTypesTests.cs" />
+    <Compile Include="..\Collections.Extensions.ToPyString.Tests\QueryableTests.cs" Link="QueryableTests.cs" />
+    <Compile Include="..\Collections.Extensions.ToPyString.Tests\ReferenceTypeTests.cs" Link="ReferenceTypeTests.cs" />
+    <Compile Include="..\Collections.Extensions.ToPyString.Tests\SetTests.cs" Link="SetTests.cs" />
+    <Compile Include="..\Collections.Extensions.ToPyString.Tests\SomeClassNoToString.cs" Link="SomeClassNoToString.cs" />
+    <Compile Include="..\Collections.Extensions.ToPyString.Tests\SomeClassWithToString.cs" Link="SomeClassWithToString.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.0" />
+    <PackageReference Include="xunit" Version="2.4.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
+    <PackageReference Include="coverlet.collector" Version="6.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Collections.Extensions.ToPyString\Collections.Extensions.ToPyString.csproj" />
+  </ItemGroup>
+
+</Project>
