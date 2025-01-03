@@ -25,8 +25,6 @@ namespace Collections.Extensions.ToPyString
                     return new DecimalPyStringConverter(fl, sourceContainers, prefix);
                 case double doub:
                     return new DecimalPyStringConverter(doub, sourceContainers, prefix);
-                case PriorityQueue<TElement, TPriority> pq:
-                    return new PriorityQueuePyStringConverter<TElement, TPriority>(pq, sourceContainers, prefix);
                 case DictionaryEntry dictEntry:
                     return new DictionaryEntryPyStringConverter(dictEntry, sourceContainers, prefix);
                 case IDictionary dictionary:
