@@ -90,9 +90,35 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Determine Test Project
-        shell: bash
-        run: echo "PROJECT=Collections.Extensions.ToPyString.NetCore21.Tests" >> "$GITHUB_ENV"
+      - name: Determine Test Project (if Windows)
+        if: runner.os == 'Windows'
+        run: |
+          if ("${{ matrix.dotnet }}" -eq "2.1.x") { echo "PROJECT=Collections.Extensions.ToPyString.NetCore21.Tests" >> $env:GITHUB_ENV }
+          elseif ("${{ matrix.dotnet }}" -eq "2.2.x") { echo "PROJECT=Collections.Extensions.ToPyString.NetCore22.Tests" >> $env:GITHUB_ENV }
+          elseif ("${{ matrix.dotnet }}" -eq "3.0.x") { echo "PROJECT=Collections.Extensions.ToPyString.NetCore30.Tests" >> $env:GITHUB_ENV }
+          elseif ("${{ matrix.dotnet }}" -eq "3.1.x") { echo "PROJECT=Collections.Extensions.ToPyString.NetCore31.Tests" >> $env:GITHUB_ENV }
+          elseif ("${{ matrix.dotnet }}" -eq "5.0.x") { echo "PROJECT=Collections.Extensions.ToPyString.Net50.Tests" >> $env:GITHUB_ENV }
+          elseif ("${{ matrix.dotnet }}" -eq "6.0.x") { echo "PROJECT=Collections.Extensions.ToPyString.Net60.Tests" >> $env:GITHUB_ENV }
+          elseif ("${{ matrix.dotnet }}" -eq "7.0.x") { echo "PROJECT=Collections.Extensions.ToPyString.Net70.Tests" >> $env:GITHUB_ENV }
+          elseif ("${{ matrix.dotnet }}" -eq "8.0.x") { echo "PROJECT=Collections.Extensions.ToPyString.Net80.Tests" >> $env:GITHUB_ENV }
+          elseif ("${{ matrix.dotnet }}" -eq "9.0.x") { echo "PROJECT=Collections.Extensions.ToPyString.Net90.Tests" >> $env:GITHUB_ENV }
+          else { Write-Error "Unsupported .NET version: ${{ matrix.dotnet }}" }
+      
+      - name: Determine Test Project (if UNIX)
+        if: runner.os == 'macOS' || runner.os == 'Linux'
+        run: |
+          case "${{ matrix.dotnet }}" in
+            "2.1.x") echo "PROJECT=Collections.Extensions.ToPyString.NetCore21.Tests" >> "$GITHUB_ENV" ;;
+            "2.2.x") echo "PROJECT=Collections.Extensions.ToPyString.NetCore22.Tests" >> "$GITHUB_ENV" ;;
+            "3.0.x") echo "PROJECT=Collections.Extensions.ToPyString.NetCore30.Tests" >> "$GITHUB_ENV" ;;
+            "3.1.x") echo "PROJECT=Collections.Extensions.ToPyString.NetCore31.Tests" >> "$GITHUB_ENV" ;;
+            "5.0.x") echo "PROJECT=Collections.Extensions.ToPyString.Net50.Tests" >> "$GITHUB_ENV" ;;
+            "6.0.x") echo "PROJECT=Collections.Extensions.ToPyString.Net60.Tests" >> "$GITHUB_ENV" ;;
+            "7.0.x") echo "PROJECT=Collections.Extensions.ToPyString.Net70.Tests" >> "$GITHUB_ENV" ;;
+            "8.0.x") echo "PROJECT=Collections.Extensions.ToPyString.Net80.Tests" >> "$GITHUB_ENV" ;;
+            "9.0.x") echo "PROJECT=Collections.Extensions.ToPyString.Net90.Tests" >> "$GITHUB_ENV" ;;
+            *) echo "Error: Unsupported .NET version: ${{ matrix.dotnet }}" && exit 1 ;;
+          esac
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
