@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using System;
+using System.Runtime.Intrinsics;
 using Xunit;
 
 namespace Collections.Extensions.ToPyString.Tests
