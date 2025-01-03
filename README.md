@@ -3,7 +3,7 @@
 [![Build & Test .NET Library](https://github.com/0xNeshi/topystring/actions/workflows/build-dotnet-core.yml/badge.svg)](https://github.com/0xNeshi/topystring/actions/workflows/build-dotnet-core.yml)
 [![NuGet](https://img.shields.io/nuget/v/Collections.Extensions.ToPyString?logo=nuget)](https://www.nuget.org/packages/Collections.Extensions.ToPyString)
 [![License](https://img.shields.io/github/license/misicnenad/topystring?color=yellow)](https://opensource.org/licenses/MIT)
-[![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen)](https://github.com/misicnenad/topystring/issues)
+[![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen)](https://github.com/0xNeshi/topystring/issues)
 
 ToPyString is a .NET System.Collections extension for converting collections to a string in Python format. Actually you can use the extension to turn any .NET type into a Python format!
 
