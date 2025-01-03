@@ -50,16 +50,5 @@ namespace Collections.Extensions.ToPyString.Tests
 
             Assert.Equal(expectedResult, result);
         }
-
-        [Fact]
-        public void Prints_Vector512()
-        {
-            var value = Vector512.Create(1.0f);
-            var expectedResult = value.ToString();
-
-            var result = value.ToPyString();
-
-            Assert.Equal(expectedResult, result);
-        }
     }
 }

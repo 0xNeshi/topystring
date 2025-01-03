@@ -10,6 +10,7 @@
     <Compile Include="..\Collections.Extensions.ToPyString.Net50.Tests\*.cs" Link="%(Filename)%(Extension)" />
     <Compile Include="..\Collections.Extensions.ToPyString.Net60.Tests\*.cs" Link="%(Filename)%(Extension)" />
     <Compile Include="..\Collections.Extensions.ToPyString.Net70.Tests\*.cs" Link="%(Filename)%(Extension)" />
+    <Compile Include="..\Collections.Extensions.ToPyString.Net80.Tests\*.cs" Link="%(Filename)%(Extension)" />
   </ItemGroup>
 
   <ItemGroup>
