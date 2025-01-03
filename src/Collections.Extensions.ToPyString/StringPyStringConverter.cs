@@ -11,7 +11,7 @@ namespace Collections.Extensions.ToPyString
         }
 
         internal StringPyStringConverter(char source, IEnumerable<object> sourceContainers, string prefix)
-            : base(source.ToString(), sourceContainers, prefix)
+            : base(source.ToString(CultureInfo.InvariantCulture), sourceContainers, prefix)
         {
         }
 

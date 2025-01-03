@@ -45,7 +45,7 @@ namespace Collections.Extensions.ToPyString
 
             sb.Append(_bracketPair.ClosingBracket);
 
-            return Prefix + sb.ToString();
+            return Prefix + sb.ToString(CultureInfo.InvariantCulture);
         }
 
         private string CollectionReferenceLoopToString()
