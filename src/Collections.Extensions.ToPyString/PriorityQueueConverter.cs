@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 namespace Collections.Extensions.ToPyString
 {
-#if NET5_0_OR_GREATER
     class PriorityQueuePyStringConverter<TElement, TPriority> : BaseCollectionPyStringConverter<PriorityQueue<TElement, TPriority>>
     {
         internal PriorityQueuePyStringConverter(PriorityQueue<TElement, TPriority> source, IEnumerable<object> sourceContainers, string prefix)
@@ -28,5 +27,4 @@ namespace Collections.Extensions.ToPyString
             return list.ToArray();
         }
     }
-#endif
 }
