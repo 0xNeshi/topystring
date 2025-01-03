@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Collections.Extensions.ToPyString
 {
@@ -12,7 +11,7 @@ namespace Collections.Extensions.ToPyString
 
         public override string GetConvertedValue()
         {
-            return Prefix + (Source?.ToString(CultureInfo.InvariantCulture) ?? "null");
+            return Prefix + (Source?.ToString() ?? "null");
         }
     }
 }

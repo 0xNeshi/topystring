@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -46,7 +45,7 @@ namespace Collections.Extensions.ToPyString
 
             sb.Append(_bracketPair.ClosingBracket);
 
-            return Prefix + sb.ToString(CultureInfo.InvariantCulture);
+            return Prefix + sb.ToString();
         }
 
         private string CollectionReferenceLoopToString()
