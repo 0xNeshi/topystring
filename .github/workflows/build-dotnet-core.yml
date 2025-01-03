@@ -59,7 +59,7 @@ jobs:
           # Ubuntu 24.04 does not support < 6.0.x
           - os: ubuntu-24.04
             dotnet: '2.1.x'
-          - os: ubuntu-22.04
+          - os: ubuntu-24.04
             dotnet: '2.2.x'
           - os: ubuntu-24.04
             dotnet: '3.0.x'
