@@ -17,7 +17,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Collections.Extensions.ToPy
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Collections.Extensions.ToPyString.NetCore31.Tests", "Collections.Extensions.ToPyString.NetCore31.Tests\Collections.Extensions.ToPyString.NetCore31.Tests.csproj", "{61F32AB8-A86A-49E4-9788-061CC6477C57}"
 EndProject
-Project("{AB21F465-A71E-4D99-B8FA-596F360C3C2E}") = "Collections.Extensions.ToPyString.NetCore50.Tests", "Collections.Extensions.ToPyString.NetCore50.Tests\Collections.Extensions.ToPyString.NetCore50.Tests.csproj", "{F96E695F-8D85-42A6-AA3E-332A63732AE8}"
+Project("{AB21F465-A71E-4D99-B8FA-596F360C3C2E}") = "Collections.Extensions.ToPyString.Net50.Tests", "Collections.Extensions.ToPyString.Net50.Tests\Collections.Extensions.ToPyString.Net50.Tests.csproj", "{F96E695F-8D85-42A6-AA3E-332A63732AE8}"
+EndProject
+Project("{9A69F0B4-407B-4F85-901B-AF85A4E9302C}") = "Collections.Extensions.ToPyString.Net60.Tests", "Collections.Extensions.ToPyString.Net60.Tests\Collections.Extensions.ToPyString.Net60.Tests.csproj", "{B38BEC8A-45FA-4B4F-BEF2-348A80364851}"
+EndProject
+Project("{A545DF12-060D-408E-B47E-04E90BED97AE}") = "Collections.Extensions.ToPyString.Net70.Tests", "Collections.Extensions.ToPyString.Net70.Tests\Collections.Extensions.ToPyString.Net70.Tests.csproj", "{5A674551-452E-46CC-B983-EFFBFA29E7CC}"
+EndProject
+Project("{46576561-214A-4EDB-A93C-E8393F9957E2}") = "Collections.Extensions.ToPyString.Net80.Tests", "Collections.Extensions.ToPyString.Net80.Tests\Collections.Extensions.ToPyString.Net80.Tests.csproj", "{F3F27D4F-C604-40CC-87F1-25C2329B3546}"
+EndProject
+Project("{761F954F-A02A-4716-AF13-FCBDDF068050}") = "Collections.Extensions.ToPyString.Net90.Tests", "Collections.Extensions.ToPyString.Net90.Tests\Collections.Extensions.ToPyString.Net90.Tests.csproj", "{F2111CF2-95DA-46D4-A289-0E84FB241DB8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +65,22 @@ Global
 		{F96E695F-8D85-42A6-AA3E-332A63732AE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F96E695F-8D85-42A6-AA3E-332A63732AE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F96E695F-8D85-42A6-AA3E-332A63732AE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B38BEC8A-45FA-4B4F-BEF2-348A80364851}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B38BEC8A-45FA-4B4F-BEF2-348A80364851}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B38BEC8A-45FA-4B4F-BEF2-348A80364851}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B38BEC8A-45FA-4B4F-BEF2-348A80364851}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A674551-452E-46CC-B983-EFFBFA29E7CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A674551-452E-46CC-B983-EFFBFA29E7CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A674551-452E-46CC-B983-EFFBFA29E7CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A674551-452E-46CC-B983-EFFBFA29E7CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3F27D4F-C604-40CC-87F1-25C2329B3546}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3F27D4F-C604-40CC-87F1-25C2329B3546}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3F27D4F-C604-40CC-87F1-25C2329B3546}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3F27D4F-C604-40CC-87F1-25C2329B3546}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2111CF2-95DA-46D4-A289-0E84FB241DB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2111CF2-95DA-46D4-A289-0E84FB241DB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2111CF2-95DA-46D4-A289-0E84FB241DB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2111CF2-95DA-46D4-A289-0E84FB241DB8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
