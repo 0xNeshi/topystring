@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Collections.Extensions.ToPyString.Tests
 {
-    public class ReferenceTypesTests
+    public class Net50ReferenceTypesTests
     {
         [Fact]
         public void Prints_Record()

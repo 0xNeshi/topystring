@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Collections.Extensions.ToPyString.Tests
 {
-    public class ValueTypesTests
+    public class Net50ValueTypesTests
     {
         [Fact]
         public void Prints_Half()

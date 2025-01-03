@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Collections.Extensions.ToPyString.Tests
 {
-    public class ValueTypesTests
+    public class Net70ValueTypesTests
     {
         [Fact]
         public void Prints_Int128()
