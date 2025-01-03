@@ -64,7 +64,7 @@ jobs:
     
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Determine Test Project
         id: set-project
@@ -74,7 +74,7 @@ jobs:
           echo "project=Collections.Extensions.ToPyString.NetCore${CORE_VERSION}.Tests" >> $GITHUB_OUTPUT
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: ${{ matrix.dotnet }}
 
