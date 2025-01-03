@@ -11,7 +11,7 @@ namespace Collections.Extensions.ToPyString.Tests
         public void Prints_Vector512()
         {
             var value = Vector512.Create(1.0f);
-            var expectedResult = value.ToString(CultureInfo.InvariantCulture);
+            var expectedResult = value.ToString();
 
             var result = value.ToPyString();
 
