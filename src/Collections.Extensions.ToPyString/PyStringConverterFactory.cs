@@ -25,8 +25,10 @@ namespace Collections.Extensions.ToPyString
                     return new DecimalPyStringConverter(fl, sourceContainers, prefix);
                 case double doub:
                     return new DecimalPyStringConverter(doub, sourceContainers, prefix);
+#if NET5_0_OR_GREATER
                 case PriorityQueue<TElement, TPriority> pq:
                     return new PriorityQueuePyStringConverter<TElement, TPriority>(pq, sourceContainers, prefix);
+#endif
                 case DictionaryEntry dictEntry:
                     return new DictionaryEntryPyStringConverter(dictEntry, sourceContainers, prefix);
                 case IDictionary dictionary:
