@@ -24,7 +24,7 @@ jobs:
         dotnet: [ '2.1.x', '2.2.x', '3.0.x', '3.1.x', '5.0.x', '6.0.x', '7.0.x', '8.0.x', '9.0.x' ]
         
         exclude:
-          # Ubuntu 16.04 supports only 2.1.x and 3.1.x
+          # Ubuntu 16.04 supports < 5.0
           - os: ubuntu-16.04
             dotnet: '5.0.x'
           - os: ubuntu-16.04
@@ -48,23 +48,33 @@ jobs:
           - os: ubuntu-20.04
             dotnet: '9.0.x'
 
-          # Ubuntu 22.04 does not support 2.1.x and 5.0.x
+          # Ubuntu 22.04 does not support 2.1.x, 2.2.x and 5.0.x
           - os: ubuntu-22.04
             dotnet: '2.1.x'
+          - os: ubuntu-22.04
+            dotnet: '2.2.x'
           - os: ubuntu-22.04
             dotnet: '5.0.x'
 
-          # Ubuntu 24.04 does not support 2.1.x, 3.1.x, 5.0.x
+          # Ubuntu 24.04 does not support < 6.0.x
           - os: ubuntu-24.04
             dotnet: '2.1.x'
+          - os: ubuntu-22.04
+            dotnet: '2.2.x'
+          - os: ubuntu-24.04
+            dotnet: '3.0.x'
           - os: ubuntu-24.04
             dotnet: '3.1.x'
           - os: ubuntu-24.04
             dotnet: '5.0.x'
 
-          # MacOS does not support 2.1.x, 3.1.x, 5.0.x, 6.0.x, 7.0.x
+          # MacOS does not support < 8.0.x
           - os: macos-latest
             dotnet: '2.1.x'
+          - os: macos-latest
+            dotnet: '2.2.x'
+          - os: macos-latest
+            dotnet: '3.0.x'
           - os: macos-latest
             dotnet: '3.1.x'
           - os: macos-latest
@@ -84,6 +94,8 @@ jobs:
         if: runner.os == 'Windows'
         run: |
           if ("${{ matrix.dotnet }}" -eq "2.1.x") { echo "PROJECT=Collections.Extensions.ToPyString.NetCore21.Tests" >> $env:GITHUB_ENV }
+          elseif ("${{ matrix.dotnet }}" -eq "2.2.x") { echo "PROJECT=Collections.Extensions.ToPyString.NetCore22.Tests" >> $env:GITHUB_ENV }
+          elseif ("${{ matrix.dotnet }}" -eq "3.0.x") { echo "PROJECT=Collections.Extensions.ToPyString.NetCore30.Tests" >> $env:GITHUB_ENV }
           elseif ("${{ matrix.dotnet }}" -eq "3.1.x") { echo "PROJECT=Collections.Extensions.ToPyString.NetCore31.Tests" >> $env:GITHUB_ENV }
           elseif ("${{ matrix.dotnet }}" -eq "5.0.x") { echo "PROJECT=Collections.Extensions.ToPyString.Net50.Tests" >> $env:GITHUB_ENV }
           elseif ("${{ matrix.dotnet }}" -eq "6.0.x") { echo "PROJECT=Collections.Extensions.ToPyString.Net60.Tests" >> $env:GITHUB_ENV }
@@ -97,6 +109,8 @@ jobs:
         run: |
           case "${{ matrix.dotnet }}" in
             "2.1.x") echo "PROJECT=Collections.Extensions.ToPyString.NetCore21.Tests" >> "$GITHUB_ENV" ;;
+            "2.2.x") echo "PROJECT=Collections.Extensions.ToPyString.NetCore22.Tests" >> "$GITHUB_ENV" ;;
+            "3.0.x") echo "PROJECT=Collections.Extensions.ToPyString.NetCore30.Tests" >> "$GITHUB_ENV" ;;
             "3.1.x") echo "PROJECT=Collections.Extensions.ToPyString.NetCore31.Tests" >> "$GITHUB_ENV" ;;
             "5.0.x") echo "PROJECT=Collections.Extensions.ToPyString.Net50.Tests" >> "$GITHUB_ENV" ;;
             "6.0.x") echo "PROJECT=Collections.Extensions.ToPyString.Net60.Tests" >> "$GITHUB_ENV" ;;
