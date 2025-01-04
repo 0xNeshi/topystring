@@ -33,8 +33,8 @@ namespace Collections.Extensions.ToPyString
                     return new DictionaryEntryPyStringConverter(dictEntry, sourceContainers, prefix);
                 case IDictionary dictionary:
                     return new DictionaryPyStringConverter(dictionary, sourceContainers, prefix);
-                case ISet dictionary:
-                    return new SetPyStringConverter(dictionary, sourceContainers, prefix);
+                case object set when IsSet(set):
+                    return CreateSetConverter(set, sourceContainers, prefix);
                 case Array array when array.Rank > 1:
                     return new MultidimensionalArrayPyStringConverter(array, sourceContainers, prefix);
                 case IEnumerable enumerable:
@@ -68,6 +68,31 @@ namespace Collections.Extensions.ToPyString
             return false;
         }
         
+        private static bool IsSet(object source)
+        {
+            var type = source.GetType();
+            return type.IsGenericType && type.GetInterface("ISet`1") != null;
+        }
+
+        private static IPyStringConverter CreateSetConverter(object set, IEnumerable<object> sourceContainers, string prefix)
+        {
+            var setType = set.GetType();
+            var elementType = setType.IsGenericType ? 
+                setType.GetGenericArguments()[0] : 
+                setType.GetInterfaces()
+                    .First(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(ISet<>))
+                    .GetGenericArguments()[0];
+
+            var converterType = typeof(SetPyStringConverter<>).MakeGenericType(elementType);
+
+            return (IPyStringConverter)Activator.CreateInstance(
+                converterType,
+                System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic,
+                null,
+                new object[] { set, sourceContainers, prefix },
+                null);
+        }
+
 #if NET6_0_OR_GREATER
         private static bool IsPriorityQueue(object source)
         {
