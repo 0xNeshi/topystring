@@ -5,17 +5,16 @@ using System.Collections.Generic;
 namespace Collections.Extensions.ToPyString
 {
 #if NET6_0_OR_GREATER
-    class PriorityQueuePyStringConverter<TElement, TPriority> : BaseCollectionPyStringConverter<PriorityQueue<TElement, TPriority>>
+    class PriorityQueuePyStringConverter<TElement, TPriority> : BaseCollectionPyStringConverter<IList<TElement>>
     {
         internal PriorityQueuePyStringConverter(PriorityQueue<TElement, TPriority> source, IEnumerable<object> sourceContainers, string prefix)
-            : base(source, sourceContainers, prefix, BracketType.Square)
+            : base(ConvertPriorityQueueToList(source), sourceContainers, prefix, BracketType.Square)
         {
-            Source = ConvertPriorityQueueToArray(source);
         }
 
-        private object[] ConvertPriorityQueueToArray(PriorityQueue<TElement, TPriority> priorityQueue)
+        private static IList<TElement> ConvertPriorityQueueToList(PriorityQueue<TElement, TPriority> priorityQueue)
         {
-            var list = new List<object>();
+            var list = new List<TElement>();
 
             // We need to extract all elements and their priorities
             while (priorityQueue.Count > 0)
@@ -25,7 +24,7 @@ namespace Collections.Extensions.ToPyString
                 list.Add(element);
             }
 
-            return list.ToArray();
+            return list;
         }
     }
 #endif
