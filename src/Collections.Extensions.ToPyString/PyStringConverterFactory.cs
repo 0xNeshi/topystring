@@ -33,6 +33,8 @@ namespace Collections.Extensions.ToPyString
                     return new DictionaryEntryPyStringConverter(dictEntry, sourceContainers, prefix);
                 case IDictionary dictionary:
                     return new DictionaryPyStringConverter(dictionary, sourceContainers, prefix);
+                case ISet dictionary:
+                    return new SetPyStringConverter(dictionary, sourceContainers, prefix);
                 case Array array when array.Rank > 1:
                     return new MultidimensionalArrayPyStringConverter(array, sourceContainers, prefix);
                 case IEnumerable enumerable:
