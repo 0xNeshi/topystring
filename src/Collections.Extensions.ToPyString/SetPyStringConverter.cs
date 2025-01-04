@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace Collections.Extensions.ToPyString
 {
-    class SetPyStringConverter : BaseCollectionPyStringConverter<ISet>
+    class SetPyStringConverter<T> : BaseCollectionPyStringConverter<ISet<T>>
     {
-        internal SetPyStringConverter(ISet source, IEnumerable<object> sourceContainers, string prefix)
+        internal SetPyStringConverter(ISet<T> source, IEnumerable<object> sourceContainers, string prefix)
             : base(source, sourceContainers, prefix, BracketType.Braces)
         {
         }
