@@ -1,5 +1,5 @@
 ﻿using System.Globalization;
-
+using System;
 using Xunit;
 
 namespace Collections.Extensions.ToPyString.Tests
@@ -186,6 +186,17 @@ namespace Collections.Extensions.ToPyString.Tests
         public void Prints_ValueTuple()
         {
             var value = (1, "test");
+            var expectedResult = value.ToString();
+
+            var result = value.ToPyString();
+
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public void ToPyString_DateTime_ReturnsCorrectPythonFormat()
+        {
+            var value = new DateTime(2024, 1, 4, 15, 30, 45);
             var expectedResult = value.ToString();
 
             var result = value.ToPyString();
