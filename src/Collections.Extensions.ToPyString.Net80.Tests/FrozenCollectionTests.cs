@@ -42,7 +42,7 @@ namespace Collections.Extensions.ToPyString.Tests
 
             var result = frozen.ToPyString();
 
-            Assert.Equal("set()", result);
+            Assert.Equal("{}", result);
         }
 
         [Fact]

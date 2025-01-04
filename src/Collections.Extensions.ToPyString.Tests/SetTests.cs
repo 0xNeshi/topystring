@@ -69,7 +69,7 @@ namespace Collections.Extensions.ToPyString.Tests
         {
             var set = new HashSet<object> { 1, 2, "test", new object() };
             set.Add(set);
-            var expectedResult = "{1, 2, 'test', System.Object, [...]}";
+            var expectedResult = "{1, 2, 'test', System.Object, {...}}";
 
             var result = set.ToPyString();
 
