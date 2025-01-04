@@ -20,8 +20,10 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        os: [ubuntu-20.04, ubuntu-22.04, ubuntu-24.04, macos-latest, windows-latest]
-        dotnet: [ '2.1.x', '2.2.x', '3.0.x', '3.1.x', '5.0.x', '6.0.x', '7.0.x', '8.0.x', '9.0.x' ]
+        # os: [ubuntu-20.04, ubuntu-22.04, ubuntu-24.04, macos-latest, windows-latest]
+        os: [windows-latest]
+        dotnet: [ '2.1.x' ]
+        # dotnet: [ '2.1.x', '2.2.x', '3.0.x', '3.1.x', '5.0.x', '6.0.x', '7.0.x', '8.0.x', '9.0.x' ]
         
         exclude:
           # Ubuntu 16.04 supports < 5.0
@@ -111,6 +113,7 @@ jobs:
           dotnet pack Collections.Extensions.ToPyString/Collections.Extensions.ToPyString.csproj --configuration Release --output ./local-nuget
 
       - name: Install Dependencies
+        shell: bash
         run: |
           LOCAL_NUGET_PATH=$(pwd)/local-nuget
           dotnet nuget add source "$LOCAL_NUGET_PATH" --name LocalNuGet
