@@ -106,8 +106,14 @@ jobs:
         with:
           dotnet-version: ${{ matrix.dotnet }}
 
+      - name: Build & Pack NuGet Package
+        run: |
+          dotnet pack Collections.Extensions.ToPyString/Collections.Extensions.ToPyString.csproj --configuration Release --output ./local-nuget
+
       - name: Install Dependencies
-        run: dotnet restore ${{ env.PROJECT }}
+        run: |
+          dotnet nuget add source ./local-nuget --name LocalNuGet
+          dotnet restore ${{ env.PROJECT }} --source ./local-nuget --source https://api.nuget.org/v3/index.json
       
       - name: Build Library
         run: dotnet build ${{ env.PROJECT }} --configuration Release --no-restore
