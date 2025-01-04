@@ -69,8 +69,8 @@ namespace Collections.Extensions.ToPyString.Tests
         {
             var queue = new PriorityQueue<string, string>();
             queue.Enqueue("first", "high");
-            queue.Enqueue("second", "medium");
-            queue.Enqueue("third", "low");
+            queue.Enqueue("third", "medium");
+            queue.Enqueue("second", "low");
             var expectedResult = "['first', 'second', 'third']";
 
             var result = queue.ToPyString();
