@@ -113,12 +113,13 @@ jobs:
           dotnet pack Collections.Extensions.ToPyString/Collections.Extensions.ToPyString.csproj --configuration Release --output ./local-nuget
 
       - name: Install Dependencies
+        shell: bash  # Explicitly use bash even on Windows
         run: |
-          dotnet nuget add source ./local-nuget --name LocalNuGet
-          dotnet restore ${{ env.PROJECT }} --source ./local-nuget
+          dotnet nuget add source "$PWD/local-nuget" --name LocalNuGet
+          dotnet restore ${{ env.PROJECT }} --source "$PWD/local-nuget" --source https://api.nuget.org/v3/index.json
       
       - name: Build Library
         run: dotnet build ${{ env.PROJECT }} --configuration Release --no-restore
       
       - name: Run Tests
-        run: dotnet test ${{ env.PROJECT }} --no-restore --verbosity normal
+        run: dotnet test ${{ env.PROJECT }} --no-restore --verbosity normal # --no-build
