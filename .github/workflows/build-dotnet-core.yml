@@ -113,7 +113,7 @@ jobs:
       - name: Install Dependencies
         run: |
           dotnet nuget add source ./local-nuget --name LocalNuGet
-          dotnet restore ${{ env.PROJECT }} --source ./local-nuget --source "https://api.nuget.org/v3/index.json"
+          dotnet restore ${{ env.PROJECT }}
       
       - name: Build Library
         run: dotnet build ${{ env.PROJECT }} --configuration Release --no-restore
