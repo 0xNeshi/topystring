@@ -44,6 +44,8 @@ namespace Collections.Extensions.ToPyString
 
         private static bool TryCastToDictionaryEntry(object source, out DictionaryEntry dictionaryEntry)
         {
+            dictionaryEntry = default;
+
             if (source == null)
             {
                 return false;
