@@ -25,6 +25,10 @@ namespace Collections.Extensions.ToPyString
                     return new DecimalPyStringConverter(fl, sourceContainers, prefix);
                 case double doub:
                     return new DecimalPyStringConverter(doub, sourceContainers, prefix);
+#if NET6_0_OR_GREATER
+                case object pq when IsPriorityQueue(pq):
+                    return CreatePriorityQueueConverter(pq, sourceContainers, prefix);
+#endif
                 case DictionaryEntry dictEntry:
                     return new DictionaryEntryPyStringConverter(dictEntry, sourceContainers, prefix);
                 case IDictionary dictionary:
@@ -40,6 +44,8 @@ namespace Collections.Extensions.ToPyString
 
         private static bool TryCastToDictionaryEntry(object source, out DictionaryEntry dictionaryEntry)
         {
+            dictionaryEntry = default;
+
             if (source == null)
             {
                 return false;
@@ -59,5 +65,29 @@ namespace Collections.Extensions.ToPyString
 
             return false;
         }
+        
+#if NET6_0_OR_GREATER
+        private static bool IsPriorityQueue(object source)
+        {
+            var type = source.GetType();
+            return type.IsGenericType && type.GetGenericTypeDefinition() == typeof(PriorityQueue<,>);
+        }
+
+        private static IPyStringConverter CreatePriorityQueueConverter(object pq, IEnumerable<object> sourceContainers, string prefix)
+        {
+            var pqType = pq.GetType();
+            var elementType = pqType.GetGenericArguments()[0];
+            var priorityType = pqType.GetGenericArguments()[1];
+
+            var converterType = typeof(PriorityQueuePyStringConverter<,>).MakeGenericType(elementType, priorityType);
+
+            return (IPyStringConverter)Activator.CreateInstance(
+                converterType,
+                System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic,
+                null,
+                new object[] { pq, sourceContainers, prefix },
+                null);
+        }
+#endif
     }
 }
