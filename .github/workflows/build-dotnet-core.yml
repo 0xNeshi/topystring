@@ -112,7 +112,8 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          dotnet nuget add source ./local-nuget --name LocalNuGet
+          LOCAL_NUGET_PATH=$(pwd)/local-nuget
+          dotnet nuget add source "$LOCAL_NUGET_PATH" --name LocalNuGet
           dotnet restore ${{ env.PROJECT }}
       
       - name: Build Library
