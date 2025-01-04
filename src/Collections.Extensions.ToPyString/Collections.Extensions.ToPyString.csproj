@@ -2,22 +2,22 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0;net5.0</TargetFramework>
-    <LangVersion>7.3</LangVersion>
+    <LangVersion>latest</LangVersion>
     <PackageId>Collections.Extensions.ToPyString</PackageId>
-    <Version>1.3.0</Version>
+    <Version>1.4.0</Version>
     <Authors>Nenad Misic</Authors>
-    <ReleaseNotes>Add support for .NET Core 2.x</ReleaseNotes>
-    <PackageDescription>.NET System.Collections ToString extension for converting collections (and other types!) to a string in the format that is based on the one in Python</PackageDescription>
-    <Description>.NET System.Collections ToString extension for converting collections (and other types!) to a string in the format that is based on the one in Python</Description>
+    <ReleaseNotes>Add support for Priority Queues</ReleaseNotes>
+    <PackageDescription>.NET System.Collections ToString extension for converting collections to a string in the format that is based on the one in Python</PackageDescription>
+    <Description>.NET System.Collections ToString extension for converting collections to a string in the format that is based on the one in Python</Description>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <copyright>Copyright 2020</copyright>
     <PackageTags>system;collections;extensions;tostring;topystring</PackageTags>
-    <RepositoryUrl>https://github.com/misicnenad/topystring</RepositoryUrl>
-    <PackageProjectUrl>https://misicnenad.github.io/topystring/</PackageProjectUrl>
-    <PackageIconUrl>https://raw.githubusercontent.com/misicnenad/topystring/master/src/Collections.Extensions.ToPyString/images/string.png</PackageIconUrl>
+    <RepositoryUrl>https://github.com/0xNeshi/topystring</RepositoryUrl>
+    <PackageProjectUrl>https://0xNeshi.github.io/topystring/</PackageProjectUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/0xNeshi/topystring/master/src/Collections.Extensions.ToPyString/images/string.png</PackageIconUrl>
     <PackageIcon>string.png</PackageIcon>
-    <PackageReleaseNotes>Add support for .NET Core 2.x</PackageReleaseNotes>
+    <PackageReleaseNotes>Add support for Priority Queues</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
