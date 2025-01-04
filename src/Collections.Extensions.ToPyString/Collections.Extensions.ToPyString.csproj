@@ -5,7 +5,7 @@
     <LangVersion>latest</LangVersion>
     <PackageId>Collections.Extensions.ToPyString</PackageId>
     <Version>1.4.0</Version>
-    <Authors>Nenad Misic</Authors>
+    <Authors>0xNeshi</Authors>
     <ReleaseNotes>Add support for Priority Queues</ReleaseNotes>
     <PackageDescription>.NET System.Collections ToString extension for converting collections to a string in the format that is based on the one in Python</PackageDescription>
     <Description>.NET System.Collections ToString extension for converting collections to a string in the format that is based on the one in Python</Description>
