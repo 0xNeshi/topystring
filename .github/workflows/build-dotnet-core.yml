@@ -18,7 +18,7 @@ jobs:
         working-directory: src
 
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
         # os: [ubuntu-20.04, ubuntu-22.04, ubuntu-24.04, macos-latest, windows-latest]
         os: [windows-latest]
@@ -113,15 +113,9 @@ jobs:
           dotnet pack Collections.Extensions.ToPyString/Collections.Extensions.ToPyString.csproj --configuration Release --output ./local-nuget
 
       - name: Install Dependencies
-        shell: bash
         run: |
-          if [[ "$RUNNER_OS" == "Windows" ]]; then
-            LOCAL_NUGET_PATH=$(pwd -W)/local-nuget # Use Windows-compatible path
-          else
-            LOCAL_NUGET_PATH=$(pwd)/local-nuget
-          fi
-          dotnet nuget add source "$LOCAL_NUGET_PATH" --name LocalNuGet
-          dotnet restore ${{ env.PROJECT }}
+          dotnet nuget add source ./local-nuget --name LocalNuGet
+          dotnet restore ${{ env.PROJECT }} --source ./local-nuget
       
       - name: Build Library
         run: dotnet build ${{ env.PROJECT }} --configuration Release --no-restore
