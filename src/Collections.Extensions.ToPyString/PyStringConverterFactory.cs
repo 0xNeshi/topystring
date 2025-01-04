@@ -77,11 +77,7 @@ namespace Collections.Extensions.ToPyString
         private static IPyStringConverter CreateSetConverter(object set, IEnumerable<object> sourceContainers, string prefix)
         {
             var setType = set.GetType();
-            var elementType = setType.IsGenericType ? 
-                setType.GetGenericArguments()[0] : 
-                setType.GetInterfaces()
-                    .First(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(ISet<>))
-                    .GetGenericArguments()[0];
+            var elementType = setType.GetGenericArguments()[0];
 
             var converterType = typeof(SetPyStringConverter<>).MakeGenericType(elementType);
 
