@@ -115,7 +115,11 @@ jobs:
       - name: Install Dependencies
         shell: bash
         run: |
-          LOCAL_NUGET_PATH=$(pwd)/local-nuget
+          if [[ "$RUNNER_OS" == "Windows" ]]; then
+            LOCAL_NUGET_PATH=$(pwd -W)/local-nuget # Use Windows-compatible path
+          else
+            LOCAL_NUGET_PATH=$(pwd)/local-nuget
+          fi
           dotnet nuget add source "$LOCAL_NUGET_PATH" --name LocalNuGet
           dotnet restore ${{ env.PROJECT }}
       
