@@ -80,7 +80,13 @@ namespace Collections.Extensions.ToPyString
             var priorityType = pqType.GetGenericArguments()[1];
 
             var converterType = typeof(PriorityQueuePyStringConverter<,>).MakeGenericType(elementType, priorityType);
-            return (IPyStringConverter)Activator.CreateInstance(converterType, pq, sourceContainers, prefix);
+
+            return (IPyStringConverter)Activator.CreateInstance(
+                converterType,
+                System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic,
+                null,
+                new object[] { pq, sourceContainers, prefix },
+                null);
         }
 #endif
     }
