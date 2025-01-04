@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace Collections.Extensions.ToPyString
@@ -12,7 +11,7 @@ namespace Collections.Extensions.ToPyString
         }
 
         internal StringPyStringConverter(char source, IEnumerable<object> sourceContainers, string prefix)
-            : base(source.ToString(CultureInfo.InvariantCulture), sourceContainers, prefix)
+            : base(source.ToString(), sourceContainers, prefix)
         {
         }
 
