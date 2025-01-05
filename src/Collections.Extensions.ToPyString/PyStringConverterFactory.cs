@@ -21,7 +21,7 @@ namespace Collections.Extensions.ToPyString
                     return new StringPyStringConverter(str, sourceContainers, prefix);
 #if NET6_0_OR_GREATER
                 case object pq when IsPriorityQueue(pq):
-                    return new BaseCollectionPyStringConverter<IEnumerable>(ConvertPriorityQueueToList(source), sourceContainers, prefix, BracketType.Square);
+                    return new BaseCollectionPyStringConverter<IEnumerable>(ConvertPriorityQueueToList(pq), sourceContainers, prefix, BracketType.Square);
 #endif
                 case DictionaryEntry dictEntry:
                     return new DictionaryEntryPyStringConverter(dictEntry, sourceContainers, prefix);
@@ -75,9 +75,10 @@ namespace Collections.Extensions.ToPyString
             return type.IsGenericType && type.GetGenericTypeDefinition() == typeof(PriorityQueue<,>);
         }
         
-        private static IList<TElement> ConvertPriorityQueueToList(PriorityQueue<TElement, TPriority> priorityQueue)
+        private static IEnumerable ConvertPriorityQueueToList(object pq)
         {
-            var list = new List<TElement>();
+            var priorityQueue = (PriorityQueue<object, object>) pq;
+            var list = new List<object>(priorityQueue.Count);
 
             // We need to extract all elements and their priorities
             while (priorityQueue.Count > 0)
