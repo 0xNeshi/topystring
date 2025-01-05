@@ -38,7 +38,8 @@ namespace Collections.Extensions.ToPyString
                 sb.Append(firstConverter.GetConvertedValue());
                 while (en.MoveNext())
                 {
-                    var converter = PyStringConverterFactory.Create(en.Current, newSourceContainers, ", ");
+                    var converter = PyStringConverterFactory.Create(en.Current, newSourceContainers);
+                    sb.Append(", ");
                     sb.Append(converter.GetConvertedValue());
                 }
             }
