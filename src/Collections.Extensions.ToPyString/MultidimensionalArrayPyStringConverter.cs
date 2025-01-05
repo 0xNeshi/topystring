@@ -6,8 +6,8 @@ namespace Collections.Extensions.ToPyString
 {
     class MultidimensionalArrayPyStringConverter : BaseCollectionPyStringConverter<Array>
     {
-        internal MultidimensionalArrayPyStringConverter(Array source, IEnumerable<object> sourceContainers, string prefix)
-            : base(source, sourceContainers, prefix, BracketType.Square)
+        internal MultidimensionalArrayPyStringConverter(Array source, IEnumerable<object> sourceContainers)
+            : base(source, sourceContainers, BracketType.Square)
         {
             var enumerator = source.GetEnumerator();
             Source = GetArray(source, 1, enumerator);

@@ -6,32 +6,32 @@ namespace Collections.Extensions.ToPyString
 {
     static class PyStringConverterFactory
     {
-        internal static IPyStringConverter Create<T>(T source, IEnumerable<object> sourceContainers = default, string prefix = "")
+        internal static IPyStringConverter Create<T>(T source, IEnumerable<object> sourceContainers = default)
         {
             switch (source)
             {
                 case char ch:
-                    return new StringPyStringConverter(ch, sourceContainers, prefix);
+                    return new StringPyStringConverter(ch.ToString(), sourceContainers);
                 case string str:
-                    return new StringPyStringConverter(str, sourceContainers, prefix);
+                    return new StringPyStringConverter(str, sourceContainers);
 #if NET6_0_OR_GREATER
                 case object pq when IsPriorityQueue(pq):
-                    return new BaseCollectionPyStringConverter<IEnumerable>(ConvertPriorityQueueToList(pq), sourceContainers, prefix, BracketType.Square);
+                    return new BaseCollectionPyStringConverter<IEnumerable>(ConvertPriorityQueueToList(pq), sourceContainers, BracketType.Square);
 #endif
                 case DictionaryEntry dictEntry:
-                    return new DictionaryEntryPyStringConverter(dictEntry, sourceContainers, prefix);
+                    return new DictionaryEntryPyStringConverter(dictEntry, sourceContainers);
                 case object kvp when TryCastToDictionaryEntry(kvp, out var dictEntry):
-                    return new DictionaryEntryPyStringConverter(dictEntry, sourceContainers, prefix);
+                    return new DictionaryEntryPyStringConverter(dictEntry, sourceContainers);
                 case IDictionary dictionary:
-                    return new BaseCollectionPyStringConverter<IDictionary>(dictionary, sourceContainers, prefix, BracketType.Braces);
+                    return new BaseCollectionPyStringConverter<IDictionary>(dictionary, sourceContainers, BracketType.Braces);
                 case object set when IsSet(set):
-                    return new BaseCollectionPyStringConverter<IEnumerable>((IEnumerable) set, sourceContainers, prefix, BracketType.Braces);
+                    return new BaseCollectionPyStringConverter<IEnumerable>((IEnumerable) set, sourceContainers, BracketType.Braces);
                 // case Array array when array.Rank > 1:
-                //     return new MultidimensionalArrayPyStringConverter(array, sourceContainers, prefix);
+                //     return new MultidimensionalArrayPyStringConverter(array, sourceContainers);
                 case IEnumerable enumerable:
-                    return new BaseCollectionPyStringConverter<IEnumerable>(enumerable, sourceContainers, prefix, BracketType.Square);
+                    return new BaseCollectionPyStringConverter<IEnumerable>(enumerable, sourceContainers, BracketType.Square);
                 default:
-                    return new ObjectPyStringConverter(source, sourceContainers, prefix);
+                    return new ObjectPyStringConverter(source, sourceContainers);
             }
         }
 

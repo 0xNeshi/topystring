@@ -16,8 +16,8 @@ namespace Collections.Extensions.ToPyString
 
         private readonly BracketPair _bracketPair;
 
-        internal BaseCollectionPyStringConverter(T source, IEnumerable<object> sourceContainers, string prefix, BracketType bracketType)
-            : base(source, sourceContainers, prefix)
+        internal BaseCollectionPyStringConverter(T source, IEnumerable<object> sourceContainers, BracketType bracketType)
+            : base(source, sourceContainers)
         {
             _bracketPair = _bracketPairsDictionary[bracketType];
         }
@@ -26,7 +26,7 @@ namespace Collections.Extensions.ToPyString
         {
             if (SourceContainers.Contains(Source))
             {
-                return Prefix + CollectionReferenceLoopToString();
+                return CollectionReferenceLoopToString();
             }
 
             var en = Source.GetEnumerator();
@@ -46,7 +46,7 @@ namespace Collections.Extensions.ToPyString
 
             sb.Append(_bracketPair.ClosingBracket);
 
-            return Prefix + sb.ToString();
+            return sb.ToString();
         }
 
         private string CollectionReferenceLoopToString()

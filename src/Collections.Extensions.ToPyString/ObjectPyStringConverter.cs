@@ -4,14 +4,14 @@ namespace Collections.Extensions.ToPyString
 {
     class ObjectPyStringConverter : BasePyStringConverter<object>
     {
-        internal ObjectPyStringConverter(object source, IEnumerable<object> sourceContainers, string prefix)
-            : base(source, sourceContainers, prefix)
+        internal ObjectPyStringConverter(object source, IEnumerable<object> sourceContainers)
+            : base(source, sourceContainers)
         {
         }
 
         public override string GetConvertedValue()
         {
-            return Prefix + (Source?.ToString() ?? "null");
+            return Source?.ToString() ?? "null";
         }
     }
 }

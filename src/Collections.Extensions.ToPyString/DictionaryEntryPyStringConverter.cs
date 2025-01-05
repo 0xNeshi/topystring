@@ -6,8 +6,8 @@ namespace Collections.Extensions.ToPyString
 {
     class DictionaryEntryPyStringConverter : BasePyStringConverter<DictionaryEntry>
     {
-        internal DictionaryEntryPyStringConverter(DictionaryEntry source, IEnumerable<object> sourceContainers, string prefix)
-            : base(source, sourceContainers, prefix)
+        internal DictionaryEntryPyStringConverter(DictionaryEntry source, IEnumerable<object> sourceContainers)
+            : base(source, sourceContainers)
         {
         }
 
@@ -20,7 +20,7 @@ namespace Collections.Extensions.ToPyString
             var key = keyConverter.GetConvertedValue();
             var value = valueConverter.GetConvertedValue();
 
-            return $"{Prefix}{key}: {value}";
+            return $"{key}: {value}";
         }
     }
 }
