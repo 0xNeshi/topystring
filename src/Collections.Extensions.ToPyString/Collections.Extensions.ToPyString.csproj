@@ -4,9 +4,12 @@
     <TargetFrameworks>netstandard2.0;net6.0</TargetFrameworks>
     <LangVersion>latest</LangVersion>
     <PackageId>Collections.Extensions.ToPyString</PackageId>
-    <Version>1.4.0</Version>
+    <Version>2.0.0</Version>
     <Authors>0xNeshi</Authors>
-    <ReleaseNotes>Add support for Priority Queues</ReleaseNotes>
+    <ReleaseNotes>
+- Added support for Priority Queues (requires .NET 6.0 or higher)
+- Fixed Set collections to use braces {} instead of brackets [] to match Python format
+    </ReleaseNotes>
     <PackageDescription>.NET System.Collections ToString extension for converting collections to a string in the format that is based on the one in Python</PackageDescription>
     <Description>.NET System.Collections ToString extension for converting collections to a string in the format that is based on the one in Python</Description>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
@@ -17,7 +20,6 @@
     <PackageProjectUrl>https://0xNeshi.github.io/topystring/</PackageProjectUrl>
     <PackageIconUrl>https://raw.githubusercontent.com/0xNeshi/topystring/master/src/Collections.Extensions.ToPyString/images/string.png</PackageIconUrl>
     <PackageIcon>string.png</PackageIcon>
-    <PackageReleaseNotes>Add support for Priority Queues</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
