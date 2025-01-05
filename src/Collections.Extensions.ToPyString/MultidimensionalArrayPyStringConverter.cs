@@ -4,6 +4,10 @@ using System.Collections.Generic;
 
 namespace Collections.Extensions.ToPyString
 {
+    /// <summary>
+    /// Class <c>MultidimensionalArrayPyStringConverter</c> is a special handler that converts multidimensional arrays
+    /// like `int[,]` into a format that can be stringified by <c>BaseCollectionPyStringConverter</c>.
+    /// </summary>
     class MultidimensionalArrayPyStringConverter : BaseCollectionPyStringConverter<Array>
     {
         internal MultidimensionalArrayPyStringConverter(Array source, IEnumerable<object> sourceContainers)
@@ -13,12 +17,12 @@ namespace Collections.Extensions.ToPyString
             Source = GetArray(source, 1, enumerator);
         }
 
-        private Array GetArray(Array source, int rank, IEnumerator enumerator)
+        private Array GetArray(Array original, int rank, IEnumerator enumerator)
         {
-            var length = source.GetLength(rank - 1);
+            var length = original.GetLength(rank - 1);
             var array = new object[length];
             
-            if (source.Rank == rank)
+            if (original.Rank == rank)
             {
                 for (var i = 0; i < length; i++)
                 {
@@ -30,7 +34,7 @@ namespace Collections.Extensions.ToPyString
             {
                 for (var i = 0; i < length; i++)
                 {
-                    array[i] = GetArray(source, rank + 1, enumerator);
+                    array[i] = GetArray(original, rank + 1, enumerator);
                 }
             }
 
