@@ -11,7 +11,7 @@ namespace Collections.Extensions.ToPyString.Tests
         public void Prints_Int128()
         {
             Int128 value = 42;
-            var expectedResult = value.ToString(CultureInfo.InvariantCulture);
+            var expectedResult = value.ToString();
 
             var result = value.ToPyString();
 
@@ -22,7 +22,7 @@ namespace Collections.Extensions.ToPyString.Tests
         public void Prints_UInt128()
         {
             UInt128 value = 42;
-            var expectedResult = value.ToString(CultureInfo.InvariantCulture);
+            var expectedResult = value.ToString();
 
             var result = value.ToPyString();
 
