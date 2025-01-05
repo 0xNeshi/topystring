@@ -27,7 +27,7 @@ namespace Collections.Extensions.ToPyString
                     return new DecimalPyStringConverter(doub, sourceContainers, prefix);
 #if NET6_0_OR_GREATER
                 case object pq when IsPriorityQueue(pq):
-                    return CreatePriorityQueueConverter(pq, sourceContainers, prefix);
+                    return new BaseCollectionPyStringConverter<IEnumerable>(ConvertPriorityQueueToList(source), sourceContainers, prefix, BracketType.Square);
 #endif
                 case DictionaryEntry dictEntry:
                     return new DictionaryEntryPyStringConverter(dictEntry, sourceContainers, prefix);
@@ -80,21 +80,20 @@ namespace Collections.Extensions.ToPyString
             var type = source.GetType();
             return type.IsGenericType && type.GetGenericTypeDefinition() == typeof(PriorityQueue<,>);
         }
-
-        private static IPyStringConverter CreatePriorityQueueConverter(object pq, IEnumerable<object> sourceContainers, string prefix)
+        
+        private static IList<TElement> ConvertPriorityQueueToList(PriorityQueue<TElement, TPriority> priorityQueue)
         {
-            var pqType = pq.GetType();
-            var elementType = pqType.GetGenericArguments()[0];
-            var priorityType = pqType.GetGenericArguments()[1];
+            var list = new List<TElement>();
 
-            var converterType = typeof(PriorityQueuePyStringConverter<,>).MakeGenericType(elementType, priorityType);
+            // We need to extract all elements and their priorities
+            while (priorityQueue.Count > 0)
+            {
+                // Dequeue the element with the highest priority
+                var element = priorityQueue.Dequeue();
+                list.Add(element);
+            }
 
-            return (IPyStringConverter)Activator.CreateInstance(
-                converterType,
-                System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic,
-                null,
-                new object[] { pq, sourceContainers, prefix },
-                null);
+            return list;
         }
 #endif
     }
