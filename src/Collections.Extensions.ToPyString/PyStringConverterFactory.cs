@@ -29,7 +29,7 @@ namespace Collections.Extensions.ToPyString
                 // case Array array when array.Rank > 1:
                 //     return new MultidimensionalArrayPyStringConverter(array, sourceContainers, prefix);
                 case IEnumerable enumerable:
-                    return new EnumerablePyStringConverter(enumerable, sourceContainers, prefix);
+                    return new BaseCollectionPyStringConverter<IEnumerable>(enumerable, sourceContainers, prefix, BracketType.Square);
                 default:
                     return new ObjectPyStringConverter(source, sourceContainers, prefix);
             }
