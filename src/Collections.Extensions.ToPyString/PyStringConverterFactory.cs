@@ -26,9 +26,9 @@ namespace Collections.Extensions.ToPyString
                 case DictionaryEntry dictEntry:
                     return new DictionaryEntryPyStringConverter(dictEntry, sourceContainers, prefix);
                 case IDictionary dictionary:
-                    return new BaseCollectionPyStringConverter<IDictionary>(dictionary, sourceContainers, prefix, BracketType.Braces);
+                    return new DictionaryPyStringConverter(dictionary, sourceContainers, prefix);
                 case object set when IsSet(set):
-                    return new BaseCollectionPyStringConverter<IEnumerable>((IEnumerable) set, sourceContainers, prefix, BracketType.Braces);
+                    return CreateSetConverter(set, sourceContainers, prefix);
                 case Array array when array.Rank > 1:
                     return new MultidimensionalArrayPyStringConverter(array, sourceContainers, prefix);
                 case IEnumerable enumerable:
@@ -66,6 +66,21 @@ namespace Collections.Extensions.ToPyString
         {
             var type = source.GetType();
             return type.IsGenericType && type.GetInterface("ISet`1") != null;
+        }
+
+        private static IPyStringConverter CreateSetConverter(object set, IEnumerable<object> sourceContainers, string prefix)
+        {
+            var setType = set.GetType();
+            var elementType = setType.GetGenericArguments()[0];
+
+            var converterType = typeof(SetPyStringConverter<>).MakeGenericType(elementType);
+
+            return (IPyStringConverter)Activator.CreateInstance(
+                converterType,
+                System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic,
+                null,
+                new object[] { set, sourceContainers, prefix },
+                null);
         }
 
 #if NET6_0_OR_GREATER
