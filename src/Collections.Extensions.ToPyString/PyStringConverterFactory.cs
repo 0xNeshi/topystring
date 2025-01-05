@@ -26,8 +26,8 @@ namespace Collections.Extensions.ToPyString
                     return new BaseCollectionPyStringConverter<IDictionary>(dictionary, sourceContainers, prefix, BracketType.Braces);
                 case object set when IsSet(set):
                     return new BaseCollectionPyStringConverter<IEnumerable>((IEnumerable) set, sourceContainers, prefix, BracketType.Braces);
-                case Array array when array.Rank > 1:
-                    return new MultidimensionalArrayPyStringConverter(array, sourceContainers, prefix);
+                // case Array array when array.Rank > 1:
+                //     return new MultidimensionalArrayPyStringConverter(array, sourceContainers, prefix);
                 case IEnumerable enumerable:
                     return new EnumerablePyStringConverter(enumerable, sourceContainers, prefix);
                 default:
