@@ -33,6 +33,7 @@ Now with support for Priority Queues!
     <RepositoryType>git</RepositoryType>
     <PackageProjectUrl>https://0xNeshi.github.io/topystring/</PackageProjectUrl>
     <Copyright>Copyright © 2020-$(Year)</Copyright>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
 
     <!-- Package Tags -->
     <PackageTags>collections;extensions;dotnet;python;stringify;topystring;ToString;formatting</PackageTags>
@@ -44,6 +45,10 @@ Now with support for Priority Queues!
   <ItemGroup>
     <!-- Package Icon -->
     <None Include="images\string.png" Pack="true" PackagePath="images/" />
+  </ItemGroup>
+  
+  <ItemGroup>
+      <None Include="README.md" Pack="true" PackagePath="\"/>
   </ItemGroup>
 
 </Project>
