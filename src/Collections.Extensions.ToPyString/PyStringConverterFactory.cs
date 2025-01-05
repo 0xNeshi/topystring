@@ -77,18 +77,21 @@ namespace Collections.Extensions.ToPyString
         
         private static IEnumerable ConvertPriorityQueueToList(object pq)
         {
-            var priorityQueue = (PriorityQueue<object, object>) pq;
-            var list = new List<object>(priorityQueue.Count);
+            var type = pq.GetType();
+            var count = (int)type.GetProperty("Count").GetValue(pq);
+            var elementType = type.GetGenericArguments()[0];
 
-            // We need to extract all elements and their priorities
-            while (priorityQueue.Count > 0)
+            // Create array with known size and correct element type
+            var array = Array.CreateInstance(elementType, count);
+            var dequeueMethod = type.GetMethod("Dequeue");
+
+            // Dequeue elements into array
+            for (int i = 0; i < count; i++)
             {
-                // Dequeue the element with the highest priority
-                var element = priorityQueue.Dequeue();
-                list.Add(element);
+                array.SetValue(dequeueMethod.Invoke(pq, null), i);
             }
 
-            return list;
+            return array;
         }
 #endif
     }
