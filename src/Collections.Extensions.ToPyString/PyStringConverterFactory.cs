@@ -19,12 +19,6 @@ namespace Collections.Extensions.ToPyString
                     return new StringPyStringConverter(ch, sourceContainers, prefix);
                 case string str:
                     return new StringPyStringConverter(str, sourceContainers, prefix);
-                case decimal dec:
-                    return new DecimalPyStringConverter(dec, sourceContainers, prefix);
-                case float fl:
-                    return new DecimalPyStringConverter(fl, sourceContainers, prefix);
-                case double doub:
-                    return new DecimalPyStringConverter(doub, sourceContainers, prefix);
 #if NET6_0_OR_GREATER
                 case object pq when IsPriorityQueue(pq):
                     return CreatePriorityQueueConverter(pq, sourceContainers, prefix);
