@@ -6,35 +6,34 @@ namespace Collections.Extensions.ToPyString
 {
     static class PyStringConverterFactory
     {
-        internal static IPyStringConverter Create<T>(T source, IEnumerable<object> sourceContainers = default, string prefix = "")
+        internal static IPyStringConverter Create<T>(T source, IEnumerable<object> sourceContainers = default)
         {
-            if (PyStringConverterFactory.TryCastToDictionaryEntry(source, out var dictionaryEntry))
-            {
-                return new DictionaryEntryPyStringConverter(dictionaryEntry, sourceContainers, prefix);
-            }
-
             switch (source)
             {
                 case char ch:
-                    return new StringPyStringConverter(ch, sourceContainers, prefix);
+                    return new StringPyStringConverter(ch.ToString(), sourceContainers);
                 case string str:
-                    return new StringPyStringConverter(str, sourceContainers, prefix);
+                    return new StringPyStringConverter(str, sourceContainers);
 #if NET6_0_OR_GREATER
                 case object pq when IsPriorityQueue(pq):
-                    return CreatePriorityQueueConverter(pq, sourceContainers, prefix);
+                    return new BaseCollectionPyStringConverter<IEnumerable>(ConvertPriorityQueueToList(pq), sourceContainers, BracketType.Square);
 #endif
                 case DictionaryEntry dictEntry:
-                    return new DictionaryEntryPyStringConverter(dictEntry, sourceContainers, prefix);
+                    return new DictionaryEntryPyStringConverter(dictEntry, sourceContainers);
+                case object kvp when TryCastToDictionaryEntry(kvp, out var dictEntry):
+                    return new DictionaryEntryPyStringConverter(dictEntry, sourceContainers);
                 case IDictionary dictionary:
-                    return new DictionaryPyStringConverter(dictionary, sourceContainers, prefix);
+                    return new BaseCollectionPyStringConverter<IDictionary>(dictionary, sourceContainers, BracketType.Braces);
                 case object set when IsSet(set):
-                    return CreateSetConverter(set, sourceContainers, prefix);
+                    return new BaseCollectionPyStringConverter<IEnumerable>((IEnumerable) set, sourceContainers, BracketType.Braces);
+                // NOTE: for some reason handling a multidimensional array like `int[,]` cannot be done with the generic 
+                // `BaseCollectionPyStringConverter` directly, and must have its own converter.
                 case Array array when array.Rank > 1:
-                    return new MultidimensionalArrayPyStringConverter(array, sourceContainers, prefix);
+                    return new MultidimensionalArrayPyStringConverter(array, sourceContainers);
                 case IEnumerable enumerable:
-                    return new EnumerablePyStringConverter(enumerable, sourceContainers, prefix);
+                    return new BaseCollectionPyStringConverter<IEnumerable>(enumerable, sourceContainers, BracketType.Square);
                 default:
-                    return new ObjectPyStringConverter(source, sourceContainers, prefix);
+                    return new ObjectPyStringConverter(source, sourceContainers);
             }
         }
 
@@ -68,42 +67,30 @@ namespace Collections.Extensions.ToPyString
             return type.IsGenericType && type.GetInterface("ISet`1") != null;
         }
 
-        private static IPyStringConverter CreateSetConverter(object set, IEnumerable<object> sourceContainers, string prefix)
-        {
-            var setType = set.GetType();
-            var elementType = setType.GetGenericArguments()[0];
-
-            var converterType = typeof(SetPyStringConverter<>).MakeGenericType(elementType);
-
-            return (IPyStringConverter)Activator.CreateInstance(
-                converterType,
-                System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic,
-                null,
-                new object[] { set, sourceContainers, prefix },
-                null);
-        }
-
 #if NET6_0_OR_GREATER
         private static bool IsPriorityQueue(object source)
         {
             var type = source.GetType();
             return type.IsGenericType && type.GetGenericTypeDefinition() == typeof(PriorityQueue<,>);
         }
-
-        private static IPyStringConverter CreatePriorityQueueConverter(object pq, IEnumerable<object> sourceContainers, string prefix)
+        
+        private static IEnumerable ConvertPriorityQueueToList(object pq)
         {
-            var pqType = pq.GetType();
-            var elementType = pqType.GetGenericArguments()[0];
-            var priorityType = pqType.GetGenericArguments()[1];
+            var type = pq.GetType();
+            var count = (int)type.GetProperty("Count").GetValue(pq);
+            var elementType = type.GetGenericArguments()[0];
 
-            var converterType = typeof(PriorityQueuePyStringConverter<,>).MakeGenericType(elementType, priorityType);
+            // Create array with known size and correct element type
+            var array = Array.CreateInstance(elementType, count);
+            var dequeueMethod = type.GetMethod("Dequeue");
 
-            return (IPyStringConverter)Activator.CreateInstance(
-                converterType,
-                System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic,
-                null,
-                new object[] { pq, sourceContainers, prefix },
-                null);
+            // Dequeue elements into array
+            for (int i = 0; i < count; i++)
+            {
+                array.SetValue(dequeueMethod.Invoke(pq, null), i);
+            }
+
+            return array;
         }
 #endif
     }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Collections.Extensions.ToPyString
 {
-    abstract class BaseCollectionPyStringConverter<T> : BasePyStringConverter<T> where T : IEnumerable
+    class BaseCollectionPyStringConverter<T> : BasePyStringConverter<T> where T : IEnumerable
     {
         private readonly IDictionary<BracketType, BracketPair> _bracketPairsDictionary = new Dictionary<BracketType, BracketPair>
         {
@@ -16,8 +16,8 @@ namespace Collections.Extensions.ToPyString
 
         private readonly BracketPair _bracketPair;
 
-        protected BaseCollectionPyStringConverter(T source, IEnumerable<object> sourceContainers, string prefix, BracketType bracketType)
-            : base(source, sourceContainers, prefix)
+        internal BaseCollectionPyStringConverter(T source, IEnumerable<object> sourceContainers, BracketType bracketType)
+            : base(source, sourceContainers)
         {
             _bracketPair = _bracketPairsDictionary[bracketType];
         }
@@ -26,7 +26,7 @@ namespace Collections.Extensions.ToPyString
         {
             if (SourceContainers.Contains(Source))
             {
-                return Prefix + CollectionReferenceLoopToString();
+                return CollectionReferenceLoopToString();
             }
 
             var en = Source.GetEnumerator();
@@ -34,18 +34,19 @@ namespace Collections.Extensions.ToPyString
             if (en.MoveNext())
             {
                 var newSourceContainers = SourceContainers.Append(Source);
-                var converter = PyStringConverterFactory.Create(en.Current, newSourceContainers);
-                sb.Append(converter.GetConvertedValue());
+                var firstConverter = PyStringConverterFactory.Create(en.Current, newSourceContainers);
+                sb.Append(firstConverter.GetConvertedValue());
                 while (en.MoveNext())
                 {
-                    converter = PyStringConverterFactory.Create(en.Current, newSourceContainers, ", ");
+                    var converter = PyStringConverterFactory.Create(en.Current, newSourceContainers);
+                    sb.Append(", ");
                     sb.Append(converter.GetConvertedValue());
                 }
             }
 
             sb.Append(_bracketPair.ClosingBracket);
 
-            return Prefix + sb.ToString();
+            return sb.ToString();
         }
 
         private string CollectionReferenceLoopToString()
