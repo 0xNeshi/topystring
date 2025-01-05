@@ -8,11 +8,6 @@ namespace Collections.Extensions.ToPyString
     {
         internal static IPyStringConverter Create<T>(T source, IEnumerable<object> sourceContainers = default, string prefix = "")
         {
-            if (PyStringConverterFactory.TryCastToDictionaryEntry(source, out var dictionaryEntry))
-            {
-                return new DictionaryEntryPyStringConverter(dictionaryEntry, sourceContainers, prefix);
-            }
-
             switch (source)
             {
                 case char ch:
@@ -24,6 +19,8 @@ namespace Collections.Extensions.ToPyString
                     return new BaseCollectionPyStringConverter<IEnumerable>(ConvertPriorityQueueToList(pq), sourceContainers, prefix, BracketType.Square);
 #endif
                 case DictionaryEntry dictEntry:
+                    return new DictionaryEntryPyStringConverter(dictEntry, sourceContainers, prefix);
+                case object kvp when TryCastToDictionaryEntry(kvp, dictEntry):
                     return new DictionaryEntryPyStringConverter(dictEntry, sourceContainers, prefix);
                 case IDictionary dictionary:
                     return new BaseCollectionPyStringConverter<IDictionary>(dictionary, sourceContainers, prefix, BracketType.Braces);
