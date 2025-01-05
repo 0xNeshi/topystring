@@ -34,11 +34,11 @@ namespace Collections.Extensions.ToPyString
             if (en.MoveNext())
             {
                 var newSourceContainers = SourceContainers.Append(Source);
-                var converter = PyStringConverterFactory.Create(en.Current, newSourceContainers);
-                sb.Append(converter.GetConvertedValue());
+                var firstConverter = PyStringConverterFactory.Create(en.Current, newSourceContainers);
+                sb.Append(firstConverter.GetConvertedValue());
                 while (en.MoveNext())
                 {
-                    converter = PyStringConverterFactory.Create(en.Current, newSourceContainers, ", ");
+                    var converter = PyStringConverterFactory.Create(en.Current, newSourceContainers, ", ");
                     sb.Append(converter.GetConvertedValue());
                 }
             }
