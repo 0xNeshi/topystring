@@ -20,7 +20,7 @@ namespace Collections.Extensions.ToPyString
 #endif
                 case DictionaryEntry dictEntry:
                     return new DictionaryEntryPyStringConverter(dictEntry, sourceContainers, prefix);
-                case object kvp when TryCastToDictionaryEntry(kvp, dictEntry):
+                case object kvp when TryCastToDictionaryEntry(kvp, out var dictEntry):
                     return new DictionaryEntryPyStringConverter(dictEntry, sourceContainers, prefix);
                 case IDictionary dictionary:
                     return new BaseCollectionPyStringConverter<IDictionary>(dictionary, sourceContainers, prefix, BracketType.Braces);
