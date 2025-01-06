@@ -28,7 +28,7 @@ Now with support for Priority Queues!
 
     <!-- Licensing and Repository -->
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <License>MIT</License>
+    <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
     <RepositoryUrl>https://github.com/0xNeshi/topystring</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageProjectUrl>https://0xNeshi.github.io/topystring/</PackageProjectUrl>
@@ -48,7 +48,8 @@ Now with support for Priority Queues!
   </ItemGroup>
   
   <ItemGroup>
-      <None Include="README.md" Pack="true" PackagePath="\"/>
+    <None Include="../../README.md" Pack="true" PackagePath="/" />
+    <None Include="../../LICENSE.md" Pack="true" PackagePath="/" />
   </ItemGroup>
 
 </Project>
