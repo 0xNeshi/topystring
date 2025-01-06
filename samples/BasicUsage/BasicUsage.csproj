@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Collections.Extensions.ToPyString\Collections.Extensions.ToPyString.csproj" />
+    <ProjectReference Include="..\..\src\Collections.Extensions.ToPyString\Collections.Extensions.ToPyString.csproj" />
   </ItemGroup>
 
 </Project>
