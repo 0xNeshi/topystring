@@ -7,16 +7,12 @@ on:
     branches: [ master, develop ]
     paths:
       - 'src/**'
+      - 'tests/**'
 
 jobs:
   build:
-
     runs-on: ${{ matrix.os }}
     
-    defaults:
-      run:
-        working-directory: src
-
     strategy:
       fail-fast: false
       matrix:
@@ -24,26 +20,6 @@ jobs:
         dotnet: [ '2.1.x', '2.2.x', '3.0.x', '3.1.x', '5.0.x', '6.0.x', '7.0.x', '8.0.x', '9.0.x' ]
         
         exclude:
-          # Ubuntu 16.04 supports < 5.0
-          - os: ubuntu-16.04
-            dotnet: '5.0.x'
-          - os: ubuntu-16.04
-            dotnet: '6.0.x'
-          - os: ubuntu-16.04
-            dotnet: '7.0.x'
-          - os: ubuntu-16.04
-            dotnet: '8.0.x'
-          - os: ubuntu-16.04
-            dotnet: '9.0.x'
-
-          # Ubuntu 18.04 supports only up to 6.0.x
-          - os: ubuntu-18.04
-            dotnet: '7.0.x'
-          - os: ubuntu-18.04
-            dotnet: '8.0.x'
-          - os: ubuntu-18.04
-            dotnet: '9.0.x'
-
           # Ubuntu 20.04 does not support 9.0.x
           - os: ubuntu-20.04
             dotnet: '9.0.x'
@@ -96,9 +72,9 @@ jobs:
           VERSION_DIGITS=$(echo "${{ matrix.dotnet }}" | grep -oE '^[0-9]+\.[0-9]')
           CONCAT_DIGITS=$(echo "$VERSION_DIGITS" | tr -d '.')
           if [ "$CONCAT_DIGITS" -lt 50 ]; then
-            echo "PROJECT=Collections.Extensions.ToPyString.NetCore${CONCAT_DIGITS}.Tests" >> "$GITHUB_ENV"
+            echo "PROJECT=tests/Collections.Extensions.ToPyString.NetCore${CONCAT_DIGITS}.Tests" >> "$GITHUB_ENV"
           else
-            echo "PROJECT=Collections.Extensions.ToPyString.Net${CONCAT_DIGITS}.Tests" >> "$GITHUB_ENV"
+            echo "PROJECT=tests/Collections.Extensions.ToPyString.Net${CONCAT_DIGITS}.Tests" >> "$GITHUB_ENV"
           fi
 
       - name: Setup .NET
@@ -107,15 +83,14 @@ jobs:
           dotnet-version: ${{ matrix.dotnet }}
 
       - name: Build & Pack NuGet Package
-        run: |
-          dotnet pack Collections.Extensions.ToPyString/Collections.Extensions.ToPyString.csproj --configuration Release --output ./local-nuget
-          
+        run: dotnet pack src/Collections.Extensions.ToPyString/Collections.Extensions.ToPyString.csproj --configuration Release --output ./local-nuget
+
       - name: Install Local NuGet Package Source
         shell: bash
-        run: dotnet nuget add source "${GITHUB_WORKSPACE}/src/local-nuget" --name LocalNuGet
+        run: dotnet nuget add source "${GITHUB_WORKSPACE}/local-nuget" --name LocalNuGet
 
       - name: Install Dependencies
         run: dotnet restore ${{ env.PROJECT }}
-      
+
       - name: Run Tests
         run: dotnet test ${{ env.PROJECT }} --no-restore --verbosity normal
